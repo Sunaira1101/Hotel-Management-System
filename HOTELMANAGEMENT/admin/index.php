@@ -1,3 +1,7 @@
+<?php 
+require('extra/connect.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +37,10 @@
             <h2 class="text-white py-3" style="background-color:rgb(95, 16, 16); ">ADMIN LOGIN</h2>
             <div class="p-4">
                 <div class="mb-3">
-                    <input name="admin_name" type="text" class="form-control shadow-none text-center" placeholder="Admin Name">
+                    <input name="admin_name" required type="text" class="form-control shadow-none text-center" placeholder="Admin Name">
                 </div>
                 <div class="mb-3">
-                    <input name="admin_pass" type="password" class="form-control shadow-none text-center" placeholder="Password">
+                    <input name="admin_pass" required type="password" class="form-control shadow-none text-center" placeholder="Password">
                 </div>
                 <button name="login" type="submit" class="btn text-white btn-dark shadow-none pop">LOGIN</button>
             </div>
