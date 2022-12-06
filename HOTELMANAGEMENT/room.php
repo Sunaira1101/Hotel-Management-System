@@ -65,15 +65,189 @@
               <img src="images/rooms/r1.jpg" class="img-fluid rounded-start" >
             </div>
 
-            <div class="col-md-5">
-              <img src="" class="img-fluid rounded-start" >
+            <div class="col-md-5 px-4">
+              <h2 class="mb-2" style="font-size: 28px;">Double Room</h2>
+              <h3 style="font-size: 16px; font-style: italic;">Tk. 16,000 per night</h3>
+
+              <div class="features mb-3">
+                <h6 class="mb-1 mt-4 fw-bold">Features</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>18 m2 room</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>1 toilet</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li><i>Balcony</i></li>
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 sofa</i> </li>
+                </span>
+              </div>
+
+              <div class="facilities mb-3">
+                <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>Flat-Screened TV</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>WiFi</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li><i>Air-conditioner</i></li>
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>Room Heater</i> </li>
+                </span>
+              </div>
+
+              <div class="facilities mb-4">
+                <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 adults</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 children</i></li> 
+                </span>
+              </div>
+
+
+
             </div>
             <div class="col-md-2">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <a href="#" class="btn btn-dark w-100 text-white mb-2  ">BOOK NOW</a>
+                <a href="#" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
+              
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-3">
+          <div class="row g-0 p-4 align-items-center">
+            <div class="col-md-5">
+              <img src="images/rooms/r2.jpg" class="img-fluid rounded-start" >
+            </div>
+
+            <div class="col-md-5 px-4">
+              <h2 class="mb-2" style="font-size: 28px;">Deluxe Room</h2>
+              <h3 style="font-size: 16px; font-style: italic;">Tk. 16,000 per night</h3>
+
+              <div class="features mb-3">
+                <h6 class="mb-1 mt-4 fw-bold">Features</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>18 m2 room</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>1 toilet</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li><i>Balcony</i></li>
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 sofa</i> </li>
+                </span>
               </div>
+
+              <div class="facilities mb-3">
+                <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>Flat-Screened TV</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>WiFi</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li><i>Air-conditioner</i></li>
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>Room Heater</i> </li>
+                </span>
+              </div>
+
+              <div class="facilities mb-4">
+                <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 adults</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 children</i></li> 
+                </span>
+              </div>
+
+
+
+            </div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-dark w-100 text-white mb-2  ">BOOK NOW</a>
+                <a href="#" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
+              
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="card mb-3">
+          <div class="row g-0 p-4 align-items-center">
+            <div class="col-md-5">
+              <img src="images/rooms/r3.jpg" class="img-fluid rounded-start " >
+            </div>
+
+            <div class="col-md-5 px-4">
+              <h2 class="mb-2" style="font-size: 28px;">Suite Room</h2>
+              <h3 style="font-size: 16px; font-style: italic;">Tk. 16,000 per night</h3>
+
+              <div class="features mb-3">
+                <h6 class="mb-1 mt-4 fw-bold">Features</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>18 m2 room</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>1 toilet</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li><i>Balcony</i></li>
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 sofa</i> </li>
+                </span>
+              </div>
+
+              <div class="facilities mb-3">
+                <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>Flat-Screened TV</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>WiFi</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li><i>Air-conditioner</i></li>
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>Room Heater</i> </li>
+                </span>
+              </div>
+
+              <div class="facilities mb-4">
+                <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 adults</i></li> 
+                </span>
+                <span class="text-dark badge rounded-pill bg-light">
+                  <li> <i>2 children</i></li> 
+                </span>
+              </div>
+
+
+
+            </div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-dark w-100 text-white mb-2  ">BOOK NOW</a>
+                <a href="#" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
+              
             </div>
           </div>
         </div>
@@ -87,6 +261,7 @@
 
     </div>
   </div>
+  <br><br><br>
 
   
 
