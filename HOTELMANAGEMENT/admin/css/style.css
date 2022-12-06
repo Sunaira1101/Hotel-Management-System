@@ -1,0 +1,52 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    /* background-color: rgb(250, 246, 240);  */
+}
+
+
+body{
+    
+}
+
+.font-two{
+    font-family: 'Lato', sans-serif;
+}
+
+.font-three{
+    font-family: 'Merriweather', serif;
+    
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+.books{
+    margin-top: 70px;
+    z-index: 7;
+    position: relative;
+    border: 1px solid black;
+    background-color:cadetblue;
+}
+
+.underline{
+    width: 150px;
+    margin: 0 auto;
+    height: 2px;
+}
+
+
+
+
+
+
+
+
+  
