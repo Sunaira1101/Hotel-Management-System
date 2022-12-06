@@ -1,5 +1,5 @@
-<div class="container-fluid bg-light mt-5">
-    <div class="row">
+<div class="container-fluid bg-light mt-5 border-top border-2 border-dark">
+    <div class="row mt-4">
       <div class="col-4">
         <h2 class="h-font fw-bold fs-3 mb-2">HOTEL PARADISE</h2>
         <p style="font-style:italic ;">
