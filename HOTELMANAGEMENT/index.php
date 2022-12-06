@@ -324,7 +324,7 @@
                   </div>   
                   
         <div class="col-12 text-center mt-5">
-            <a href="#" class="btn btn-outline-success fw-bolder shadow fs-4">MORE ROOMS <i class="bi bi-arrow-right-circle"></i></a>
+            <a href="room.php" class="btn btn-outline-success fw-bolder shadow fs-4">MORE ROOMS <i class="bi bi-arrow-right-circle"></i></a>
         </div>
      </div>
     </div>
