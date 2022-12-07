@@ -1,6 +1,11 @@
 <?php 
 require('extra/func.php');
 require('extra/connect.php');
+
+    session_start();
+    if((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true)){
+        redirect('dashboard.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +68,6 @@ require('extra/connect.php');
 
     if($res->num_rows==1){
         $row = mysqli_fetch_assoc($res);
-        session_start();
         $_SESSION['adminLogin'] = true;
         $_SESSION['adminID'] = $row['ID'];
         redirect('dashboard.php');

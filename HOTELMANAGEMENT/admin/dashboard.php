@@ -1,6 +1,7 @@
 <?php
   require('extra/func.php');
   adminLogin();
+  
 ?>
 
 
