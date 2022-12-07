@@ -53,6 +53,19 @@ require('extra/connect.php');
    if(isset($_POST['login']))
    {
     $dt = filteration($_POST);
+
+    $query = "SELECT * FROM `admin_info` WHERE `admin_name`=? AND `admin_pass`=?";
+    $values = [$dt['admin_name'],$dt['admin_pass']];
+
+    // $res = select($query, $values, "ss");
+    // print_r($res);
+
+    if($res->num_rows==1){
+        echo "login done";
+    }
+    else{
+        
+    }
     
    }
 
