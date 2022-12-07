@@ -1,4 +1,5 @@
 <?php 
+require('extra/func.php');
 require('extra/connect.php');
 ?>
 
@@ -57,14 +58,14 @@ require('extra/connect.php');
     $query = "SELECT * FROM `admin_info` WHERE `admin_name`=? AND `admin_pass`=?";
     $values = [$dt['admin_name'],$dt['admin_pass']];
 
-    // $res = select($query, $values, "ss");
-    // print_r($res);
+    $res = select($query, $values, "ss");
+    
 
     if($res->num_rows==1){
         echo "login done";
     }
     else{
-        
+        alert('error', 'Login failed - please try again!');
     }
     
    }
