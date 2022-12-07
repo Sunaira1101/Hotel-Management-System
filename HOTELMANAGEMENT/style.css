@@ -17,17 +17,6 @@ body{
     
 }
 
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
-
 .books{
     margin-top: 70px;
     z-index: 7;
