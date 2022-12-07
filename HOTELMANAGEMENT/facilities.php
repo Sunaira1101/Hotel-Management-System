@@ -49,13 +49,12 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f2.jpg" width="40px">
+            <h2 class="mt-3 text-dark fs-2">Spa</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
+              We welcome you all to use our luxurious spa. Our spa will provide 
+              you the relaxation you need after along hectic day. We also have a sauna.
           </p>
 
         </div>
@@ -63,13 +62,12 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f3.png" width="40px">
+            <h2 class="mt-3 text-dark fs-2">Parking</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
+              We provide free parking services to make your stay more comfortable. Our valet 
+              will park and bring your car for you whenever you need it. 
           </p>
 
         </div>
@@ -77,13 +75,13 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f4.png" width="60px">
+            <h2 class="mt-3 text-dark fs-2">Gym</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
+              We provide free gym services so that you can keep yourself healthy and
+              fit while you stay at our hotel. We also have professional gym instructors
+              for your ease.
           </p>
 
         </div>
@@ -91,13 +89,25 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f5.png" width="50px">
+            <h2 class="mt-2 text-dark fs-2">Convenience Store</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
+              We have a 24 hour convinience store in our lobby, which gives 
+              you the convinience of buying things right from the hotel.          </p>
+
+        </div>
+      </div>
+      <div class="col-4 mb-5 px-4">
+        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
+          <div class="d-flex align-items-center mb-2">
+            <img src="images/facilities/f6.png" width="40px">
+            <h2 class="mt-3 text-dark fs-2">Restaurant</h2>
+          </div>
+          <p class="mb-2 py-2">
+              We provide you with the most delicous dishes from all over 
+              the world. Our breakfast buffet is well known for its variety, with
+              food from different cultures.
           </p>
 
         </div>
@@ -105,13 +115,12 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f7.png" width="70px">
+            <h2 class="mt-3 text-dark fs-2">Bar</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
+              Our bar keeps a variety of all kinds of alchoholic and non-alchoholic beverages,
+              and you are sure to find something suitable to your taste.
           </p>
 
         </div>
@@ -119,13 +128,12 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f8.png" width="60px">
+            <h2 class="mt-3 text-dark fs-2">Swimming Pool</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
+              While your stay with us, you are free to use our Swimming 
+              Pool to relax and cool yourself down.
           </p>
 
         </div>
@@ -133,26 +141,12 @@
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            <img src="images/facilities/f9.png" width="60px">
+            <h2 class="mt-3 text-dark fs-2">Laundry</h2>
           </div>
           <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
+              We  also provide laundry services to make your stay more easier. No need
+              to pack extra clothes, instead just use our washer and dryer and enjoy as 
               long as you are here!
           </p>
 

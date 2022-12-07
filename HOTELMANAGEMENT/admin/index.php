@@ -1,6 +1,6 @@
-<?php 
-require('extra/connect.php');
-?>
+ <?php 
+// require('extra/connect.php');
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
