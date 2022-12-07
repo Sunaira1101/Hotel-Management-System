@@ -35,7 +35,7 @@ require('extra/connect.php');
 
     <div class="logininfo text-center bg-white rounded shadow overflow-hidden">
         <form method="POST">
-            <h2 class="text-white py-3" style="background-color:rgb(95, 16, 16); ">ADMIN LOGIN</h2>
+            <h2 class="text-white py-3" style="background-color:rgb(39, 7, 7); ">ADMIN LOGIN</h2>
             <div class="p-4">
                 <div class="mb-3">
                     <input name="admin_name" required type="text" class="form-control shadow-none text-center" placeholder="Admin Name">
@@ -62,7 +62,12 @@ require('extra/connect.php');
     
 
     if($res->num_rows==1){
-        echo "login done";
+        $row = mysqli_fetch_assoc($res);
+        session_start();
+        $_SESSION['adminLogin'] = true;
+        $_SESSION['adminID'] = $row['ID'];
+        redirect('dashboard.php');
+
     }
     else{
         alert('error', 'Login failed - please try again!');
