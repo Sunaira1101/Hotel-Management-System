@@ -40,6 +40,7 @@ input::-webkit-inner-spin-button {
     width: 150px;
     margin: 0 auto;
     height: 2px;
+    background-color: aliceblue;
 }
 
 .custom-alert{
@@ -48,6 +49,12 @@ input::-webkit-inner-spin-button {
     right: 25px;
     border-width: 3px;
     border-color: rgb(138, 30, 30);
+}
+
+.panel{
+    position: fixed;
+    height: 100%;
+
 }
 
 
