@@ -27,10 +27,10 @@
       </ul>
 
       <div class="d-flex">
-        <button type="button" style="background-color:rgb(199, 254, 236); border-color:black; color:black; margin-right: 5px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#loginmodal">
+        <button type="button" class="btn btn-light shadow-none" style="border-color:black; border-width: 2px; margin-right: 5px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#loginmodal">
             LOGIN
           </button>
-          <button type="button" style="background-color:rgb(199, 254, 236); border-color:black; color:black; margin-right: 2px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#signupmodal">
+          <button type="button" class="btn btn-light shadow-none" style="border-color:black; border-width: 2px; margin-right: 2px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#signupmodal">
             SIGN UP
           </button>
         
