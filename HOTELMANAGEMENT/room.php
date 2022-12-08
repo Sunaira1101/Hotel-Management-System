@@ -26,7 +26,9 @@
 
   <div class="container">
     <div class="row">
+
       <div class="col-3">
+        
       <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
     <div class="container-fluid flex-column align-items-stretch">   <!--to make one after another not sideways-->
     <h2 class="mt-2 text-center">Options</h2>
