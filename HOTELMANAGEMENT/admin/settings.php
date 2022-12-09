@@ -24,7 +24,7 @@
       <div class="col-10 ms-auto p-4 overflow-hidden">
         <h2 class="mb-2 fs-3">SETTINGS</h2>
 
-        <div class="card">
+        <div class="card shadow mb-4">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-3">
               <h2 class="title  fs-5">General Settings</h2>
@@ -34,10 +34,10 @@
             </div>
             
             <h6 class="card-subtitle mb-2 fw-bold">Title</h6>
-            <p class="card-text">content</p>
+            <p class="card-text" id="site_title"></p>
 
             <h6 class="card-subtitle mb-2 fw-bold">About Us</h6>
-            <p class="card-text">content</p>
+            <p class="card-text" id="site_about"></p>
             
           </div>
         </div>
@@ -53,17 +53,17 @@
                 <div class="modal-body">
                   <div class="mb-3">
                     <label class="form-label">Title</label>
-                    <input type="text" name="site_title" class="form-control shadow-none">
+                    <input type="text" name="site_title" id="site_title_inp" class="form-control shadow-none">
                   </div>
                   <div class="mb-3"> 
                     <label class="form-label">About Us</label>
-                    <textarea name="site_about" class="form-control shadow-none" rows="6"></textarea>
+                    <textarea name="site_about" id="site_about_inp" class="form-control shadow-none" rows="6"></textarea>
                 </div>
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
-                  <button type="button" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" onclick="upd_general(site_title.value, site_about.value)" class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
+                  <button type="button" onclick="site_title.value = general_data.site_title, site_about.value = general_data.site_about" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </form>
@@ -80,12 +80,69 @@
   </div>
  
 
-
-
-
-
-
-
 <?php require('extra/scripts.php'); ?>
+
+<script>
+  let general_data;
+
+   function get_general(){
+    let site_title = document.getElementById('site_title');
+    let site_about=  document.getElementById('site_about');
+    let site_title_inp = document.getElementById('site_title_inp');
+    let site_about_inp =  document.getElementById('site_about_inp');
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      general_data = JSON.parse(this.responseText);
+
+      site_title.innerText = general_data.site_title;
+      site_about.innerText = general_data.site_about;
+      site_title_inp.value = general_data.site_title;
+      site_about_inp.value = general_data.site_about;
+    }
+
+    xhr.send('get_general');
+   }
+
+   function upd_general(site_title_val, site_about_val){
+    
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","fetch/settings_crud.php",true);
+      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+      xhr.onload = function(){
+
+        var myModal = document.getElementById('gSettings')
+        var modal = bootstrap.Modal.getInstance(myModal) 
+        modal.hide();
+
+        if(this.responseText == 1){
+          console.log('data updated');
+          get_general(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
+        }
+        else{
+          console.log("no changes made");
+        }
+      }
+
+      xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
+   }
+
+   window.onload = function(){
+    get_general();
+   }
+
+
+
+</script>
+
+
+
+
+
+
 </body>
 </html>

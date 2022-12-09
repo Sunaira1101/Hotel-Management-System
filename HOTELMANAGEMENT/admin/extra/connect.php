@@ -41,6 +41,29 @@
         }
     }
 
+    function update($sql, $values, $datatypes){
+
+        $db = $GLOBALS['db'];
+        if($stmt = mysqli_prepare($db, $sql)){
+            
+            mysqli_stmt_bind_param($stmt, $datatypes,...$values);
+            if(mysqli_stmt_execute($stmt)){
+                $res = mysqli_stmt_affected_rows($stmt);  //either 0/1 as we have 1 row in settings
+                mysqli_stmt_close($stmt);
+                return $res;
+            }
+            else{
+                mysqli_stmt_close($stmt);
+                die("Query cannot be executed - Update");
+            }
+        }
+        else{
+            die("Query cannot be prepared - Update");
+        }
+    }
+
+    
+
 
    
 
