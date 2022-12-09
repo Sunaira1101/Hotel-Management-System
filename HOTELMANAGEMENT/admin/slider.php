@@ -1,0 +1,328 @@
+<?php
+  require('extra/func.php');
+  adminLogin();
+  
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sliders</title>
+    <?php require('extra/links.php'); ?>
+
+</head>
+<body style="color:rgb(37, 22, 4) ; background-color:rgb(243, 228, 210);">
+
+ <?php require('extra/header.php'); ?>
+ 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-10 ms-auto p-4 ">
+        <h2 class="mb-2 fs-3">SLIDERS</h2>
+
+
+        <!-- Slider Settings -->
+        
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h2 class="title  fs-5">Images Settings</h2>
+              <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#sliderSettings">
+              <i class="bi bi-person-plus-fill"></i> Add
+              </button>
+            </div>
+
+            <div class="row" id="slider-data">
+            </div>
+          </div>
+        </div>
+
+
+         <!-- Slider/Image Add -->
+
+         <div class="modal fade" id="sliderSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+
+            <form id="sliderSettings_form">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Images to Slider</h5>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label class="form-label fw-bolder">Name</label>
+                    <input type="text" name="member_name" id="member_name_inp" class="form-control shadow-none" required>
+                  </div>
+                  <div class="mb-3"> 
+                    <label class="form-label fw-bolder">Picture</label>
+                    <input type="file" name="member_pic" id="member_pic_inp" accept=".jpg, .jpeg, .png, .svg" class="form-control shadow-none" required>
+                </div>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
+                  <button type="button" onclick="member_name.value='',member_pic.value=''" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </form>
+           
+          </div>
+        </div>
+    
+    
+    
+    
+    
+    
+      </div>
+  </div>
+</div>
+ 
+
+<?php require('extra/scripts.php'); ?>
+
+<script>
+  let general_data, contacts_data;
+  let gSettings_form = document.getElementById('gSettings_form');
+  let site_title_inp = document.getElementById('site_title_inp');
+  let site_about_inp =  document.getElementById('site_about_inp');
+
+  let contactSettings_form = document.getElementById('contactSettings_form');
+
+  let teamSettings_form = document.getElementById('teamSettings_form');
+  let member_name_inp = document.getElementById('member_name_inp');
+  let member_pic_inp = document.getElementById('member_pic_inp');
+
+   function get_general(){
+    let site_title = document.getElementById('site_title');
+    let site_about=  document.getElementById('site_about');
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      general_data = JSON.parse(this.responseText);
+
+      site_title.innerText = general_data.site_title;
+      site_about.innerText = general_data.site_about;
+      site_title_inp.value = general_data.site_title;
+      site_about_inp.value = general_data.site_about;
+    }
+
+    xhr.send('get_general');
+   }
+
+   gSettings_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    upd_general(site_title_inp.value, site_about_inp.value);
+   });
+
+   function upd_general(site_title_val, site_about_val){
+    
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","fetch/settings_crud.php",true);
+      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+      xhr.onload = function(){
+
+        var myModal = document.getElementById('gSettings')
+        var modal = bootstrap.Modal.getInstance(myModal) 
+        modal.hide();
+
+        if(this.responseText == 1){
+          console.log('data updated');
+          get_general(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
+        }
+        else{
+          console.log("no changes made");
+        }
+      }
+
+      xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
+   }
+
+  // Settings Fetch
+
+   function get_contacts(){
+
+    let contacts_p_id = ['address','gmap','phone1','phone2','phone3','email','fb','insta','tw']; //.innertext id are these all
+    let iframe = document.getElementById('iframe');
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      contacts_data = JSON.parse(this.responseText);
+      contacts_data = Object.values(contacts_data);  //object values stored in array form
+      // console.log(contacts_data);
+      
+      for(i=0;i<contacts_p_id.length;i++){
+        document.getElementById(contacts_p_id[i]).innerText = contacts_data[i+1];
+      }
+      iframe.src = contacts_data[10];
+      contacts_inp(contacts_data); 
+   
+    }
+
+    xhr.send('get_contacts');
+   }
+
+   function contacts_inp(contacts_data){
+     let contacts_inp_id = ['address_inp','gmap_inp','phone1_inp','phone2_inp','phone3_inp','email_inp','fb_inp','insta_inp','tw_inp','iframe_inp'];
+
+     for(i=0;i<contacts_inp_id.length;i++){
+      document.getElementById(contacts_inp_id[i]).value = contacts_data[i+1];
+     }
+
+   }
+
+   contactSettings_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    upd_contacts();
+   })
+
+   function upd_contacts(){
+    let index = ['address','gmap','phone1','phone2','phone3','email','fb','insta','tw','iframe'];
+    let contacts_inp_id = ['address_inp','gmap_inp','phone1_inp','phone2_inp','phone3_inp','email_inp','fb_inp','insta_inp','tw_inp','iframe_inp'];
+
+    let data_str="";
+
+    for(i=0;i<index.length;i++){
+      data_str += index[i] + "=" + document.getElementById(contacts_inp_id[i]).value + '&';
+    }
+
+    data_str += "upd_contacts";
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      
+        var myModal = document.getElementById('contactSettings')
+        var modal = bootstrap.Modal.getInstance(myModal) 
+        modal.hide();
+
+        if(this.responseText == 1){
+          console.log('data updated');
+          get_contacts(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
+        }
+        else{
+          console.log("no changes made");
+        }
+    }
+
+    xhr.send(data_str);
+
+
+   
+  
+  }
+
+  // Management Team Fetch
+
+  teamSettings_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    add_member();
+   });
+
+   function add_member(){
+    let data = new FormData(); //multipart data send = required for images
+    data.append('name',member_name_inp.value); //value of member name combine with name and add in data variable
+    data.append('picture',member_pic_inp.files[0]); //files[0] = only first file chosen is taken, cannot take later choosen files
+    data.append('add_member',''); //pass index value
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    
+
+    xhr.onload = function(){
+
+      console.log(this.responseText)
+      var myModal = document.getElementById('teamSettings')
+      var modal = bootstrap.Modal.getInstance(myModal) 
+      modal.hide();
+
+      if(this.responseText == 'inv_img'){
+        console.log("inv_img");
+        }
+        else{
+          console.log('members added');
+          member_name_inp.value='';
+          member_pic_inp.value='';
+          get_members();
+        }
+
+
+
+      
+    }
+
+    xhr.send(data);
+
+    
+
+   }
+
+   function get_members(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      document.getElementById('team-data').innerHTML = this.responseText;
+     
+    }
+
+    xhr.send('get_members');
+
+   }
+
+   function remove_mem(val){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      if(this.responseText == 1){
+        get_members();
+      }
+      else{
+        console.log('Error in deleting');
+      }
+     
+    }
+
+    xhr.send('remove_mem='+val);
+
+   }
+
+
+
+
+
+
+   window.onload = function(){
+    get_general();
+    get_contacts();
+    get_members();
+   }
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
