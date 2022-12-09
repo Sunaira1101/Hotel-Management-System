@@ -43,5 +43,14 @@
     $res = update($q, $values, 'ssssssssssi');
     echo $res;
   }
+
+  if(isset($_POST['add_member'])){
+    
+    $frm_data = filteration($_POST);
+
+   
+  }
+
+
   
 ?>

@@ -303,7 +303,7 @@
 
   let teamSettings_form = document.getElementById('teamSettings_form');
   let member_name_inp = document.getElementById('member_name_inp');
-  let member_name_pic = document.getElementById('member_name_pic');
+  let member_pic_inp = document.getElementById('member_pic_inp');
 
    function get_general(){
     let site_title = document.getElementById('site_title');
@@ -442,6 +442,33 @@
    });
 
    function add_member(){
+    let data = new FormData(); //multipart data send = required for images
+    data.append('name',member_name_inp.value); //value of member name combine with name and add in data variable
+    data.append('pic',member_pic_inp.files[0]); //files[0] = only first file chosen is taken, cannot take later choosen files
+    data.append('add_member',''); //pass index value
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    
+
+    xhr.onload = function(){
+
+      var myModal = document.getElementById('gSettings')
+      var modal = bootstrap.Modal.getInstance(myModal) 
+      modal.hide();
+
+      if(this.responseText == 1){
+        console.log('data updated');
+        get_general(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
+      }
+      else{
+        console.log("no changes made");
+      }
+    }
+
+    xhr.send(data);
+
+    
 
    }
 
