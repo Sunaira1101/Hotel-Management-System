@@ -84,18 +84,22 @@
   <div class="container px-4 mt-4">
     <div class="swiper swiper-about">
       <div class="swiper-wrapper mb-5">
-        <div class="swiper-slide  text-center overflow-hidden rounded">
-          <img src="images/about/a3.jpeg" width="100%">
-          <h2 class="mt-2 fw-bold fs-4">Fahrin Hossain Sunaira</h2>
-        </div>
-        <div class="swiper-slide  text-center overflow-hidden rounded">
-          <img src="images/about/a3.jpeg" width="100%">
-          <h2 class="mt-2 fw-bold fs-4">Farasha Shamma Youssouf</h2>
-        </div>
-        <div class="swiper-slide  text-center overflow-hidden rounded">
-          <img src="images/about/a3.jpeg" width="100%">
-          <h2 class="mt-2 fw-bold fs-4">Tahiatun Nasa Taha</h2>
-        </div>    
+
+      <?php
+
+        $about_res = selectAll('team_details');
+        $path = ABOUT_IMG_PATH;
+        while($row = mysqli_fetch_assoc($about_res)){
+          echo<<<data
+            <div class="swiper-slide  text-center overflow-hidden rounded">
+            <img src="$path$row[picture]" width="70%">
+            <h2 class="mt-2 fw-bold fs-4">$row[name]</h2>
+          </div>
+          data;
+        }
+
+      ?>
+
       </div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
