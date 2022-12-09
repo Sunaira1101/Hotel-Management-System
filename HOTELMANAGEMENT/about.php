@@ -28,7 +28,7 @@
       <div class="col-6 mb-4">
         <h2 class="mb-3 fw-bolder fs-3">Fahrin Hossain Sunaira</h2>
         <p>
-          In the early 2010s, Fahrin Hossain Sunaira founded the Hampton Inn hotels, which was a 
+          In the early 2010s, Fahrin Hossain Sunaira founded the Hotel Paradise, which was a 
           company in the Holiday Inn Corporation. This type of hotel was tagged as limited - service, 
           meeting the needs of cost - conscious business travelers and pleasure travelers 
           alike. Her pioneering efforts in developing a product and service for these market
