@@ -141,9 +141,9 @@
 
    }
 
-   function remove_mem(val){
+   function remove_img(val){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/slider_crud.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
@@ -156,7 +156,7 @@
      
     }
 
-    xhr.send('remove_mem='+val);
+    xhr.send('remove_img='+val);
 
    }
 
