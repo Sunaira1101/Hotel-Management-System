@@ -18,27 +18,20 @@
   <div class="container-fluid px-4 ">
   <div class="swiper mainswiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="images/firstslider/1.jpg" class="w-100 d-block">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/firstslider/2.jpg" class="w-100 d-block">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/firstslider/3.jpg" class="w-100 d-block">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/firstslider/4.jpg" class="w-100 d-block">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/firstslider/5.jpg" class="w-100 d-block">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/firstslider/6.jpg" class="w-100 d-block">
-        </div>
-        <div class="swiper-slide">
-          <img src="images/firstslider/7.jpg" class="w-100 d-block">
-        </div>
+
+      <?php
+
+        $res = selectAll('slider');
+        while($row = mysqli_fetch_assoc($res)){
+          $path = SLIDER_IMG_PATH;
+          echo <<<data
+           
+            <div class="swiper-slide">
+              <img src="$path$row[image]" class="w-100 d-block">
+            </div>
+          data;
+        }
+      ?>
       </div>
     </div>
   </div>
