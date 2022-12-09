@@ -6,7 +6,7 @@
           <br> Located in the prestigious downtown business district,
          Hotel Paradise is the foremost name of luxury. The hotel is beautifully designed 
          boasted with Millennium modern outlook with a touch of local culture. Featuring 226 luxury
-          rooms and suites, a selection of restaurants offering exquisite cuisines.
+         rooms and suites, and restaurants offering exquisite cuisines.
         </p>
 
       </div>
