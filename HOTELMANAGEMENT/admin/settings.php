@@ -178,11 +178,11 @@
                           </div>
                           <div class="input-group mb-3">
                             <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                            <input type="text" name="phone2" id="phone2_inp" class="form-control shadow-none">
+                            <input type="text" name="phone2" id="phone2_inp" class="form-control shadow-none" required>
                           </div>
                           <div class="input-group mb-3">
                             <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                            <input type="text" name="phone3" id="phone3_inp" class="form-control shadow-none">
+                            <input type="text" name="phone3" id="phone3_inp" class="form-control shadow-none" required>
                           </div>
                         </div>
                         <div class="mb-3">
@@ -442,7 +442,7 @@
    });
 
    function add_member(){
-    
+
    }
 
 

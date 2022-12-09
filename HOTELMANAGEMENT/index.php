@@ -450,46 +450,50 @@
 
      <!-- CONTACT US-->
 
+     <?php 
+       $contact_q = "SELECT * FROM `contact_info` WHERE `C_ID`=?";
+       $values = [1];
+       $contact_res = mysqli_fetch_assoc(select($contact_q,$values,'i'));
+       
+     ?>
+
      <h2 class="mt-5 pt-3 mb-4 fw-bolder text-center font-two "><br> <u>CONTACT US</u>  <br> <br></h2>
   
      
      <div class="container">
       <div class="row justify-content-between align-items-center">
         <div class="col-8 p-4 mb-3 px-4 bg-white rounded">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29212.19411227074!2d90.46399274960936!3d23.76433850325562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7a0f70deb73%3A0x30c36498f90fe23!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1670082979368!5m2!1sen!2sbd" width="700" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe class="w-100 rounded" height="600px" src="<?php echo $contact_res['iframe']?>" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         
         <div class="col-4">
         <div class="bg-white p-4 rounded mb-4 shadow">
           <h3 style="color:brown; margin-bottom: 15px;"> <u>Call Us</u>  </h3>
-          <a href="tel: +215677981566" class="d-inline-block mb-2 text-dark text-decoration-none"> 
-            <i class="bi bi-telephone-fill"></i>  +215677981566    
+          <a href="tel: +<?php echo $contact_res['phone1'] ?>" class="d-inline-block mb-2 text-dark text-decoration-none"> 
+            <i class="bi bi-telephone-fill"></i>  +<?php echo $contact_res['phone1'] ?>   
           </a>
           <br>
-          <a href="tel: +818577982566" class="d-inline-block mb-2 text-dark text-decoration-none"> 
-            <i class="bi bi-telephone-fill"></i>  +818577982566    
+          <a href="tel: +<?php echo $contact_res['phone2'] ?> " class="d-inline-block mb-2 text-dark text-decoration-none"> 
+            <i class="bi bi-telephone-fill"></i>  +<?php echo $contact_res['phone2'] ?>    
           </a>
           <br>
-          <a href="tel: +418577983566" class="d-inline-block mb-2 text-dark text-decoration-none"> 
-            <i class="bi bi-telephone-fill"></i>  +418577983566    
+          <a href="tel: +<?php echo $contact_res['phone3'] ?> " class="d-inline-block mb-2 text-dark text-decoration-none"> 
+            <i class="bi bi-telephone-fill"></i>  +<?php echo $contact_res['phone3'] ?>    
           </a>
         </div>
 
         <div class="bg-white p-4 rounded mb-4 shadow">
           <h3 style="color:brown; margin-top: 4px; margin-bottom: 15px;"> <u>Social Media</u>  </h3>
-          <a href="mailto: fhsunaira@gmail.com" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
-            <i class="bi bi-twitter me-2"></i> Email    
-          </a>
-          <br>
-          <a href="https://www.facebook.com/The.Westin.Dhaka/" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
+          
+          <a href="<?php echo $contact_res['fb'] ?> " target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
             <i class="bi bi-facebook me-2"></i> FaceBook    
           </a>
           <br>
-          <a href="https://www.instagram.com/westindhaka/" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
+          <a href="<?php echo $contact_res['insta'] ?>" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
             <i class="bi bi-instagram me-2"></i> Instagram    
           </a>
           <br>
-          <a href="https://twitter.com/thewestindhaka?lang=en" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
+          <a href="<?php echo $contact_res['tw'] ?>" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
             <i class="bi bi-twitter me-2"></i> Twitter    
           </a>
           <br>

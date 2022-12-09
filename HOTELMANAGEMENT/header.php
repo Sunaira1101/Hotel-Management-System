@@ -1,3 +1,12 @@
+<?php 
+
+require('admin/extra/connect.php');
+require('admin/extra/func.php');
+
+?>
+
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-2 py-3 shadow-lg sticky-top border-bottom border-3 border-outline">
   <div class="container-fluid">
      <a class="navbar-brand me-4 fw-bolder fs-1 font-three " href="index.php">HOTEL PARADISE</a>     <!-- return to index.php whenever click on hotel name -->

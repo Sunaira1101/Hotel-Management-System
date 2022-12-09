@@ -1,3 +1,11 @@
+<?php 
+       $contact_q = "SELECT * FROM `contact_info` WHERE `C_ID`=?";
+       $values = [1];
+       $contact_res = mysqli_fetch_assoc(select($contact_q,$values,'i'));
+      
+  ?>
+
+
 <div class="container-fluid bg-light mt-5 border-top border-2 border-dark">
     <div class="row mt-4">
       <div class="col-4">
@@ -13,30 +21,26 @@
 
       <div class="col-4">
         <h2 class="mb-3 px-5">LINKS</h2>
-        <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Home</a> <br>
-        <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Rooms Book</a> <br>
-        <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Facilities</a> <br>
-        <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Contact Us</a> <br>
-        <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">About</a> <br>
+        <a href="index.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Home</a> <br>
+        <a href="room.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Rooms Book</a> <br>
+        <a href="facilities.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Facilities</a> <br>
+        <a href="contact.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Contact Us</a> <br>
+        <a href="about.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">About</a> <br>
         <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Help</a> 
 
       </div>
 
       <div class="col-4">
         <h2 class="mb-3">Follow Us</h2>
-        <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none"> 
+        <a href="<?php echo $contact_res['fb']?>" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
           <i class="bi bi-facebook me-2"></i> FaceBook    
         </a>
         <br>
-        <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none"> 
-          <i class="bi bi-whatsapp me-2"></i> WhatsApp    
-        </a>
-        <br>
-        <a href="#" class="d-inline-block mb-2 text-dark text-decoration-none"> 
+        <a href="<?php echo $contact_res['insta']?>" target="_blank" class="d-inline-block mb-2 text-dark text-decoration-none"> 
           <i class="bi bi-instagram me-2"></i> Instagram    
         </a>
         <br>
-        <a href="#" class="d-inline-block  text-dark text-decoration-none"> 
+        <a href="<?php echo $contact_res['tw']?>" target="_blank" class="d-inline-block  text-dark text-decoration-none"> 
           <i class="bi bi-twitter me-2"></i> Twitter    
         </a>
         
