@@ -62,9 +62,27 @@
       $res = insert($q,$values,'ss');
       echo $res;
     }
+  }
 
+  if(isset($_POST['get_members'])){
+    $res = selectAll('team_details'); //database table selected
 
-   
+    while($row = mysqli_fetch_assoc($res)){
+      $path = ABOUT_IMG_PATH;
+      echo <<<data
+      <div class="col-2 mb-3">
+        <div class="card bg-dark text-white">
+          <img src="$path$row[picture]" class="card-img">
+          <div class="card-img-overlay text-end">
+            <button type="button" onclick="remove_mem($row[T_ID])" class="btn btn-danger btn-small shadow-none fs-6">
+            <i class="bi bi-trash3-fill"></i> Delete
+            </button>
+          </div>
+          <p class="card-text text-center p-4 py-2">$row[name]</p>
+        </div>
+      </div>
+      data;
+    }
   }
 
 

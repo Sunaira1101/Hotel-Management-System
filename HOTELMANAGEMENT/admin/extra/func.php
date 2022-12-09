@@ -1,5 +1,9 @@
 <?php
 
+define('SITE_URL','http://127.0.0.1/CSE311_PROJECT/HOTELMANAGEMENT/');
+define('ABOUT_IMG_PATH', SITE_URL.'images/about/');
+
+
 define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/CSE311_PROJECT/HOTELMANAGEMENT/images/');
 define('ABOUT_FOLDER','about/');
 

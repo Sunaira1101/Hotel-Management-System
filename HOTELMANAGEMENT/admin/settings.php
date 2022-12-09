@@ -243,20 +243,7 @@
               </button>
             </div>
 
-            <div class="row" id="team_data">
-              <div class="col-2 mb-3">
-                <div class="card bg-dark text-white">
-                  <img src="../images/about/sunaira.jpg" class="card-img">
-                  <div class="card-img-overlay text-end">
-                    <button type="button" class="btn btn-danger btn-small shadow-none fs-6">
-                    <i class="bi bi-trash3-fill"></i> Delete
-                    </button>
-                  </div>
-                  <p class="card-text text-center p-4 py-2">Fahrin Sunaira</p>
-                </div>
-
-              </div>
-
+            <div class="row" id="team-data">
             </div>
           </div>
         </div>
@@ -477,6 +464,7 @@
           console.log('members added');
           member_name_inp.value='';
           member_pic_inp.value='';
+          get_members();
         }
 
 
@@ -490,6 +478,39 @@
 
    }
 
+   function get_members(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      document.getElementById('team-data').innerHTML = this.responseText;
+     
+    }
+
+    xhr.send('get_members');
+
+   }
+
+   function remove_mem(val){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      if(this.responseText == 1){
+        get_members();
+      }
+      else{
+        console.log('Error in deleting');
+      }
+     
+    }
+
+    xhr.send('remove_mem='+val);
+
+   }
+
 
 
 
@@ -498,6 +519,7 @@
    window.onload = function(){
     get_general();
     get_contacts();
+    get_members();
    }
 
 

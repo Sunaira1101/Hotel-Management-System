@@ -41,6 +41,12 @@
         }
     }
 
+    function selectAll($table){
+        $db = $GLOBALS['db'];
+        $res = mysqli_query($db, "SELECT * FROM $table");
+        return $res;
+    }
+
     function update($sql, $values, $datatypes){
 
         $db = $GLOBALS['db'];
@@ -82,6 +88,8 @@
             die("Query cannot be prepared - Insert");
         }
     }
+
+
 
     
 
