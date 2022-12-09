@@ -272,7 +272,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
-                  <button type="button" onclick="" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" onclick="member_name.value='',member_pic.value=''" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </form>
