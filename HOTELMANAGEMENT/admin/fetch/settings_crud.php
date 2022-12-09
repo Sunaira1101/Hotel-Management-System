@@ -23,5 +23,15 @@
     $res = update($q, $values, 'ssi');
     echo $res;
   }
+
+  if(isset($_POST['get_contacts'])){
+   
+    $q = "SELECT * FROM `contact_info` WHERE `C_ID`=?";
+    $values = [1]; // as one value entry
+    $res = select($q, $values, "i"); //s_id datatype = integer = i
+    $data = mysqli_fetch_assoc($res);
+    $json_data = json_encode($data);
+    echo $json_data;
+  }
   
 ?>

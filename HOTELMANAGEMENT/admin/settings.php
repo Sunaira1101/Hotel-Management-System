@@ -78,7 +78,7 @@
         <div class="card shadow mb-4">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-3">
-              <h2 class="title  fs-5">Contacts Settings</h2>
+              <h2 class="title  fs-5">Contact Us Settings</h2>
               <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#contactSettings">
                 <i class="bi bi-pencil-square"></i> Edit
               </button>
@@ -88,11 +88,11 @@
               <div class="col-6">
                 <div class="mb-4">
                   <h2 class="card-subtitle mb-2 fw-bold fs-6">Address</h2>
-                  <p class="card-text" id="address"></p>
+                  <p class="card-text fs-6" id="address"></p>
                 </div>
                 <div class="mb-4">
                   <h2 class="card-subtitle mb-2 fw-bold fs-6">Google Map</h2>
-                  <p class="card-text" id="gmap"></p>
+                  <p class="card-text fs-6" id="gmap"></p>
                 </div>
                 <div class="mb-4">
                   <h2 class="card-subtitle mb-2 fw-bold fs-6">Phone No.</h2>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="mb-4">
                   <h2 class="card-subtitle mb-2 fw-bold fs-6">Email</h2>
-                  <p class="card-text" id="email"></p>
+                  <p class="card-text fs-6" id="email"></p>
                 </div>
               </div>
 
@@ -159,7 +159,7 @@
 <?php require('extra/scripts.php'); ?>
 
 <script>
-  let general_data;
+  let general_data, contacts_data;
   let gSettings_form = document.getElementById('gSettings_form');
   let site_title_inp = document.getElementById('site_title_inp');
   let site_about_inp =  document.getElementById('site_about_inp');
@@ -167,7 +167,6 @@
    function get_general(){
     let site_title = document.getElementById('site_title');
     let site_about=  document.getElementById('site_about');
-    
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST","fetch/settings_crud.php",true);
@@ -214,8 +213,44 @@
       xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
    }
 
+  // Settings Fetch
+
+   function get_contacts(){
+
+    let contacts_p_id = ['address','gmap','phone1','phone2','phone3','email','fb','insta','tw']; //.innertext id are these all
+    let iframe = document.getElementById('iframe');
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      contacts_data = JSON.parse(this.responseText);
+      contacts_data = Object.values(contacts_data);
+      // console.log(contacts_data);
+      
+      for(i=0;i<contacts_p_id.length;i++){
+        document.getElementById(contacts_p_id[i]).innerText = contacts_data[i+1];
+      }
+      iframe.src = contacts_data[10]; //in video [9] why?
+      
+
+
+
+    }
+
+    xhr.send('get_contacts');
+   }
+
+
+
+
+
+
    window.onload = function(){
     get_general();
+    get_contacts();
    }
 
 

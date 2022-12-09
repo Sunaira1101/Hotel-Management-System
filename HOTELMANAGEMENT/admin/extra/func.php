@@ -6,14 +6,16 @@ function adminLogin(){
         echo "<script>
           window.location.href = 'index.php';
         </script>";
+        exit;
     }
-    session_regenerate_id(true); // old sessions removed, creates new session
+    // session_regenerate_id(true); // old sessions removed, creates new session
 }
 
 function redirect($url){
     echo "<script>
     window.location.href = '$url';
     </script>";
+    exit;
 }
 
 
