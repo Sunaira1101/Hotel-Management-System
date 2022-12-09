@@ -53,19 +53,16 @@
                   <h5 class="modal-title">Add Images to Slider</h5>
                 </div>
                 <div class="modal-body">
-                  <div class="mb-3">
-                    <label class="form-label fw-bolder">Name</label>
-                    <input type="text" name="member_name" id="member_name_inp" class="form-control shadow-none" required>
-                  </div>
+
                   <div class="mb-3"> 
                     <label class="form-label fw-bolder">Picture</label>
-                    <input type="file" name="member_pic" id="member_pic_inp" accept=".jpg, .jpeg, .png, .svg" class="form-control shadow-none" required>
+                    <input type="file" name="slider_pic" id="slider_pic_inp" accept=".jpg, .jpeg, .png, .svg" class="form-control shadow-none" required>
                 </div>
                   
                 </div>
                 <div class="modal-footer">
                   <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
-                  <button type="button" onclick="member_name.value='',member_pic.value=''" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" onclick="slider_pic.value=''" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </form>
@@ -86,202 +83,61 @@
 <?php require('extra/scripts.php'); ?>
 
 <script>
-  let general_data, contacts_data;
-  let gSettings_form = document.getElementById('gSettings_form');
-  let site_title_inp = document.getElementById('site_title_inp');
-  let site_about_inp =  document.getElementById('site_about_inp');
 
-  let contactSettings_form = document.getElementById('contactSettings_form');
-
-  let teamSettings_form = document.getElementById('teamSettings_form');
-  let member_name_inp = document.getElementById('member_name_inp');
-  let member_pic_inp = document.getElementById('member_pic_inp');
-
-   function get_general(){
-    let site_title = document.getElementById('site_title');
-    let site_about=  document.getElementById('site_about');
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
-    xhr.onload = function(){
-      general_data = JSON.parse(this.responseText);
-
-      site_title.innerText = general_data.site_title;
-      site_about.innerText = general_data.site_about;
-      site_title_inp.value = general_data.site_title;
-      site_about_inp.value = general_data.site_about;
-    }
-
-    xhr.send('get_general');
-   }
-
-   gSettings_form.addEventListener('submit',function(e){
-    e.preventDefault();
-    upd_general(site_title_inp.value, site_about_inp.value);
-   });
-
-   function upd_general(site_title_val, site_about_val){
-    
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST","fetch/settings_crud.php",true);
-      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
-      xhr.onload = function(){
-
-        var myModal = document.getElementById('gSettings')
-        var modal = bootstrap.Modal.getInstance(myModal) 
-        modal.hide();
-
-        if(this.responseText == 1){
-          console.log('data updated');
-          get_general(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
-        }
-        else{
-          console.log("no changes made");
-        }
-      }
-
-      xhr.send('site_title='+site_title_val+'&site_about='+site_about_val+'&upd_general');
-   }
-
-  // Settings Fetch
-
-   function get_contacts(){
-
-    let contacts_p_id = ['address','gmap','phone1','phone2','phone3','email','fb','insta','tw']; //.innertext id are these all
-    let iframe = document.getElementById('iframe');
-
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
-    xhr.onload = function(){
-      contacts_data = JSON.parse(this.responseText);
-      contacts_data = Object.values(contacts_data);  //object values stored in array form
-      // console.log(contacts_data);
-      
-      for(i=0;i<contacts_p_id.length;i++){
-        document.getElementById(contacts_p_id[i]).innerText = contacts_data[i+1];
-      }
-      iframe.src = contacts_data[10];
-      contacts_inp(contacts_data); 
-   
-    }
-
-    xhr.send('get_contacts');
-   }
-
-   function contacts_inp(contacts_data){
-     let contacts_inp_id = ['address_inp','gmap_inp','phone1_inp','phone2_inp','phone3_inp','email_inp','fb_inp','insta_inp','tw_inp','iframe_inp'];
-
-     for(i=0;i<contacts_inp_id.length;i++){
-      document.getElementById(contacts_inp_id[i]).value = contacts_data[i+1];
-     }
-
-   }
-
-   contactSettings_form.addEventListener('submit',function(e){
-    e.preventDefault();
-    upd_contacts();
-   })
-
-   function upd_contacts(){
-    let index = ['address','gmap','phone1','phone2','phone3','email','fb','insta','tw','iframe'];
-    let contacts_inp_id = ['address_inp','gmap_inp','phone1_inp','phone2_inp','phone3_inp','email_inp','fb_inp','insta_inp','tw_inp','iframe_inp'];
-
-    let data_str="";
-
-    for(i=0;i<index.length;i++){
-      data_str += index[i] + "=" + document.getElementById(contacts_inp_id[i]).value + '&';
-    }
-
-    data_str += "upd_contacts";
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
-    xhr.onload = function(){
-      
-        var myModal = document.getElementById('contactSettings')
-        var modal = bootstrap.Modal.getInstance(myModal) 
-        modal.hide();
-
-        if(this.responseText == 1){
-          console.log('data updated');
-          get_contacts(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
-        }
-        else{
-          console.log("no changes made");
-        }
-    }
-
-    xhr.send(data_str);
-
-
-   
+  let sliderSettings_form = document.getElementById('sliderSettings_form');
   
-  }
+  let slider_pic_inp = document.getElementById('slider_pic_inp');
 
+  
   // Management Team Fetch
 
-  teamSettings_form.addEventListener('submit',function(e){
+  sliderSettings_form.addEventListener('submit',function(e){
     e.preventDefault();
-    add_member();
+    add_image();
    });
 
-   function add_member(){
+   function add_image(){
     let data = new FormData(); //multipart data send = required for images
-    data.append('name',member_name_inp.value); //value of member name combine with name and add in data variable
-    data.append('picture',member_pic_inp.files[0]); //files[0] = only first file chosen is taken, cannot take later choosen files
-    data.append('add_member',''); //pass index value
+    data.append('picture',slider_pic_inp.files[0]); //files[0] = only first file chosen is taken, cannot take later choosen files
+    data.append('add_image',''); //pass index value
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/slider_crud.php",true);
     
 
     xhr.onload = function(){
 
       console.log(this.responseText)
-      var myModal = document.getElementById('teamSettings')
-      var modal = bootstrap.Modal.getInstance(myModal) 
+      var myModal = document.getElementById('sliderSettings');
+      var modal = bootstrap.Modal.getInstance(myModal); 
       modal.hide();
 
       if(this.responseText == 'inv_img'){
         console.log("inv_img");
         }
         else{
-          console.log('members added');
-          member_name_inp.value='';
-          member_pic_inp.value='';
-          get_members();
-        }
-
-
-
-      
+          console.log('Image added');
+          slider_pic_inp.value='';
+          get_image();
+        }   
     }
-
     xhr.send(data);
 
     
 
    }
 
-   function get_members(){
+   function get_image(){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/slider_crud.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
-      document.getElementById('team-data').innerHTML = this.responseText;
+      document.getElementById('slider-data').innerHTML = this.responseText;
      
     }
 
-    xhr.send('get_members');
+    xhr.send('get_image');
 
    }
 
@@ -292,7 +148,7 @@
 
     xhr.onload = function(){
       if(this.responseText == 1){
-        get_members();
+        get_image();
       }
       else{
         console.log('Error in deleting');
@@ -310,9 +166,7 @@
 
 
    window.onload = function(){
-    get_general();
-    get_contacts();
-    get_members();
+    get_image();
    }
 
 
