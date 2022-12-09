@@ -24,6 +24,8 @@
       <div class="col-10 ms-auto p-4 ">
         <h2 class="mb-2 fs-3">SETTINGS</h2>
 
+        <!-- General Seetings -->
+        
         <div class="card shadow mb-4">
           <div class="card-body">
             <div class="d-flex align-items-center justify-content-between mb-3">
@@ -68,6 +70,80 @@
               </div>
             </form>
            
+          </div>
+        </div>
+
+        <!-- Contact Us Settings -->
+
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h2 class="title  fs-5">Contacts Settings</h2>
+              <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#contactSettings">
+                <i class="bi bi-pencil-square"></i> Edit
+              </button>
+            </div>
+
+            <div class="row fs-4">
+              <div class="col-6">
+                <div class="mb-4">
+                  <h2 class="card-subtitle mb-2 fw-bold fs-6">Address</h2>
+                  <p class="card-text" id="address"></p>
+                </div>
+                <div class="mb-4">
+                  <h2 class="card-subtitle mb-2 fw-bold fs-6">Google Map</h2>
+                  <p class="card-text" id="gmap"></p>
+                </div>
+                <div class="mb-4">
+                  <h2 class="card-subtitle mb-2 fw-bold fs-6">Phone No.</h2>
+                  <p class="card-text fs-6 mb-1">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span id="phone1"></span>
+                  </p>
+                  <p class="card-text fs-6 mb-1">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span id="phone2"></span>
+                  </p>
+                  <p class="card-text fs-6">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span id="phone3"></span>
+                  </p>
+                </div>
+                <div class="mb-4">
+                  <h2 class="card-subtitle mb-2 fw-bold fs-6">Email</h2>
+                  <p class="card-text" id="email"></p>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-4">
+                  <h2 class="card-subtitle mb-2 fw-bold fs-6">Social Media</h2>
+                  <p class="card-text fs-6 mb-1">
+                    <i class="bi bi-facebook me-2"></i>
+                      <span id="fb"></span>
+                  </p>
+                  <p class="card-text fs-6 mb-1">
+                  <i class="bi bi-instagram me-2"></i>
+                    <span id="insta"></span>
+                  </p>
+                  <p class="card-text fs-6">
+                  <i class="bi bi-twitter me-2"></i>
+                    <span id="tw"></span>
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <h2 class="card-subtitle mb-2 fw-bold fs-6">iFrame</h2>
+                  <iframe id="iframe" class="border p-2 w-100" loading="lazy"></iframe>
+                  
+                </div>
+              </div>
+
+            </div>
+            
+            
+
+            
           </div>
         </div>
     
