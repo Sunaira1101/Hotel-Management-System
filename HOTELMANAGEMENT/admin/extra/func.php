@@ -36,6 +36,26 @@ function alert($type, $msg){
 }
 
 function uploadImage($image,$folder){
+  $valid_mime = ['image/jpg','image/jpeg'.'image/png','image/svg'];
+  $img_mime = $image['type'];
+
+  if(!in_array($img_mime,$valid_mime)){
+    return 'inv_img'; //invalid image, can also be 0/1
+  }
+  else{
+    $ext = pathinfo($image['name'],PATHINFO_EXTENSION); //extract extension of image(jpg,png...)
+    $rname = 'IMG_'.random_int(11111,99999)."$ext"; //generate random name , .$ext concatenate
+    //e.g. IMG_92345.png
+    $img_path = UPLOAD_IMAGE_PATH.$folder.$rname; //after folder(about) what name image is stored as(rname)
+    
+    if(move_uploaded_file($image['tmp_name'],$img_path)){ //move img from temporary location and moved to $img_path destination 
+       return $rname;
+    }
+    else{
+      return 'upd_failed';
+    }
+  }
+
 
 }
 

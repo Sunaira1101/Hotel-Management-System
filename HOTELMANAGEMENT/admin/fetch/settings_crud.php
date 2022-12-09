@@ -48,6 +48,16 @@
     
     $frm_data = filteration($_POST);
 
+    $img_res = uploadImage($_FILES['picture'],ABOUT_FOLDER);
+
+    if($img_res == 'inv_img'){
+      echo $img_res;
+    }
+    else if($img_res == 'upd_failed'){
+      echo $img_res;
+    }
+
+
    
   }
 
