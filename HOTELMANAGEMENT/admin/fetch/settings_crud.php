@@ -85,6 +85,26 @@
     }
   }
 
+  if(isset($_POST['remove_mem'])){
+    $frm_data = filteration($_POST);
+    $values = [$frm_data['remove_mem']];
+
+    $pre_q = "SELECT * FROM `team_details` WHERE `T_ID`=?"; //pre query
+    $res = select($pre_q,$values,'i');
+    $img = mysqli_fetch_assoc($res);
+
+    if(deleteImage($img, ABOUT_FOLDER)){
+      $q = "DELETE FROM `team_details` WHERE `T_ID`=?";
+      $res = delete($q, $values,'i');
+      echo $res;
+
+    }
+    else{
+      echo 0;
+    }
+   
+  }
+
 
   
 ?>
