@@ -1,5 +1,8 @@
 <?php
 
+define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/CSE311_PROJECT/HOTELMANAGEMENT/images/');
+define('ABOUT_FOLDER','about/');
+
 function adminLogin(){
     session_start();
     if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true)){
@@ -30,6 +33,10 @@ function alert($type, $msg){
            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>
     alert;
+}
+
+function uploadImage($image,$folder){
+
 }
 
 ?>

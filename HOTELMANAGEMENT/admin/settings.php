@@ -444,7 +444,7 @@
    function add_member(){
     let data = new FormData(); //multipart data send = required for images
     data.append('name',member_name_inp.value); //value of member name combine with name and add in data variable
-    data.append('pic',member_pic_inp.files[0]); //files[0] = only first file chosen is taken, cannot take later choosen files
+    data.append('picture',member_pic_inp.files[0]); //files[0] = only first file chosen is taken, cannot take later choosen files
     data.append('add_member',''); //pass index value
 
     let xhr = new XMLHttpRequest();
