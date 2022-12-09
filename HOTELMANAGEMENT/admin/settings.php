@@ -243,7 +243,19 @@
               </button>
             </div>
 
-            <div class="row">
+            <div class="row" id="team_data">
+              <div class="col-2 mb-3">
+                <div class="card bg-dark text-white">
+                  <img src="../images/about/sunaira.jpg" class="card-img">
+                  <div class="card-img-overlay text-end">
+                    <button type="button" class="btn btn-danger btn-small shadow-none fs-6">
+                    <i class="bi bi-trash3-fill"></i> Delete
+                    </button>
+                  </div>
+                  <p class="card-text text-center p-4 py-2">Fahrin Sunaira</p>
+                </div>
+
+              </div>
 
             </div>
           </div>
@@ -453,17 +465,23 @@
 
     xhr.onload = function(){
 
-      var myModal = document.getElementById('gSettings')
+      console.log(this.responseText)
+      var myModal = document.getElementById('teamSettings')
       var modal = bootstrap.Modal.getInstance(myModal) 
       modal.hide();
 
-      if(this.responseText == 1){
-        console.log('data updated');
-        get_general(); //fetch data asynchronously, fetch data from database and store in modal and edit modal
-      }
-      else{
-        console.log("no changes made");
-      }
+      if(this.responseText == 'inv_img'){
+        console.log("inv_img");
+        }
+        else{
+          console.log('members added');
+          member_name_inp.value='';
+          member_pic_inp.value='';
+        }
+
+
+
+      
     }
 
     xhr.send(data);

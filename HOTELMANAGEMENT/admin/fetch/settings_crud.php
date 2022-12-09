@@ -48,13 +48,19 @@
     
     $frm_data = filteration($_POST);
 
-    $img_res = uploadImage($_FILES['picture'],ABOUT_FOLDER);
+    $img_res = uploadImage($_FILES['picture'],ABOUT_FOLDER); //rname created in func.php
 
     if($img_res == 'inv_img'){
       echo $img_res;
     }
     else if($img_res == 'upd_failed'){
       echo $img_res;
+    }
+    else{
+      $q = "INSERT INTO `team_details`(`name`, `picture`) VALUES (?,?)";
+      $values = [$frm_data['name'],$img_res];
+      $res = insert($q,$values,'ss');
+      echo $res;
     }
 
 
