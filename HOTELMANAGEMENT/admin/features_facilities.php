@@ -95,7 +95,7 @@ table, th,td {
                       <th scope="col">No.</th>
                       <th scope="col">Icon</th>
                       <th scope="col">Name</th>
-                      <th scope="col">Description</th>
+                      <th scope="col" width="40%">Description</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -265,7 +265,7 @@ table, th,td {
     let data = new FormData(); //formdata = object
     data.append('name',facilitiesSettings_form.elements['facilities_name'].value); 
     data.append('icon',facilitiesSettings_form.elements['facilities_icon'].files[0]);
-    data.append('desc',facilitiesSettings_form.elements['facilities_desc'].value);
+    data.append('description',facilitiesSettings_form.elements['facilities_desc'].value);
     data.append('add_facilities',''); //pass index value
 
     let xhr = new XMLHttpRequest();
@@ -283,15 +283,12 @@ table, th,td {
       else{
         console.log('Facilities added');
         facilitiesSettings_form.reset();
-        // get_members();
+        get_facilities();
       }
 
     }
 
     xhr.send(data);
-
-    
-
    }
 
    function get_facilities(){
@@ -306,17 +303,28 @@ table, th,td {
     xhr.send('get_facilities');
    }
 
+   function remove_facilities(val){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/features_facilities_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
+    xhr.onload = function(){
+      if(this.responseText == 1){
+        get_facilities();
+      }
+      else{
+        console.log('Error in deleting');
+      }
+     
+    }
 
+    xhr.send('remove_facilities='+val); //val=id which wants to remove
 
-
-
-
-
-
+   }
 
    window.onload = function(){
     get_features();
+    get_facilities();
    }
 
 
