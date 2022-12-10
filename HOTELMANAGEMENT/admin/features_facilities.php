@@ -161,24 +161,22 @@ table, th,td {
     data.append('add_features',''); //pass index value
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/features_facilities_fetch.php",true);
     
 
     xhr.onload = function(){
 
-      console.log(this.responseText)
-      var myModal = document.getElementById('teamSettings')
-      var modal = bootstrap.Modal.getInstance(myModal) 
+      var myModal = document.getElementById('featuresSettings');
+      var modal = bootstrap.Modal.getInstance(myModal); 
       modal.hide();
 
-      if(this.responseText == 'inv_img'){
-        console.log("inv_img");
+      if(this.responseText == 1){
+          console.log('New Features added');
+          featuresSettings_form.elements['features_name'].value='';
+          get_members();
         }
         else{
-          console.log('members added');
-          member_name_inp.value='';
-          member_pic_inp.value='';
-          get_members();
+          console.log('New Features adding failed!');
         }
 
 
