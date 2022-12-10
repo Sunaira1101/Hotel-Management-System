@@ -33,19 +33,38 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+
+    <?php
+
+      $res = selectAll('facilities');      
+      $path = FACILITIES_IMG_PATH; 
+      
+      while($row = mysqli_fetch_assoc($res)){
+        echo<<<data
+          <div class="col-4 mb-5 px-4">
+          <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
+            <div class="d-flex align-items-center mb-2">
+              <img src="images/facilities/f1.jpg" width="40px">
+              <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+            </div>
+            <p class="mb-2 py-2">
+                We provide free WiFi to make your stay more comfortable. No need
+                to go through all the trouble to access roaming data and enjoy as 
+                long as you are here!
+            </p>
           </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
         </div>
-      </div>
+
+        data;
+      }
+      
+
+
+    ?>
+
+
+
+      
       <div class="col-4 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
           <div class="d-flex align-items-center mb-2">
