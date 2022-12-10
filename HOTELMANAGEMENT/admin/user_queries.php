@@ -21,13 +21,7 @@
     $res = update($q,$values,'i');
     echo $res;
   }
-
-
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +33,13 @@
     <?php require('extra/links.php'); ?>
 
 </head>
+
+<style>
+table, th,td {
+  border:4px solid light;
+}
+</style>
+
 <body style="color:rgb(37, 22, 4) ; background-color:rgb(243, 228, 210);">
 
  <?php require('extra/header.php'); ?>
@@ -69,7 +70,6 @@
                   </thead>
                   <tbody>
                     <?php
-                      
                       $q = "SELECT * FROM `user_reach` ORDER BY `reach_ID` DESC"; //so that newer msgs at top
                       $data = mysqli_query($db, $q);
                       $no=1;
@@ -95,19 +95,11 @@
                         query;
                         $no++;
                       }
-
-
-
                     ?>
-                    
-                    
                   </tbody>
                 </table>
             </div>   
-            
-
-            
-            </div>
+          </div>
         </div>
     
     
