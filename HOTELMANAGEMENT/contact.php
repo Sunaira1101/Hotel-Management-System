@@ -83,25 +83,25 @@
 
       <div class="col-6 mb-5 px-4">
         <div class="bg-white rounded shadow p-4">
-          <form>
+          <form method="POST">
             <h2>Reach Us</h2>
             <div class="mt-3">
                     <label class="form-label" style="font-weight: 500;">Name<br></label>
-                    <input type="text" class="form-control shadow-none">
+                    <input name="name" required type="text" class="form-control shadow-none">
             </div>
             <div class="mt-3">
                     <label class="form-label" style="font-weight: 500;">Email<br></label>
-                    <input type="email" class="form-control shadow-none">
+                    <input name="email" required type="email" class="form-control shadow-none">
             </div>
             <div class="mt-3">
                     <label class="form-label" style="font-weight: 500;">Phone Number<br></label>
-                    <input type="number" class="form-control shadow-none">
+                    <input name="phone" required type="number" class="form-control shadow-none">
             </div>
             <div class="mt-3">
                     <label class="form-label" style="font-weight: 500;">Message<br></label>
-                    <textarea class="form-control" rows="6" style="resize: none;"></textarea>
+                    <textarea name="message" required class="form-control" rows="6" style="resize: none;"></textarea>
             </div>
-            <button type="submit" class="btn  bg-secondary text-white mt-4">Submit</button>
+            <button type="submit" name="send" class="btn  bg-secondary text-white mt-4">Submit</button>
             
           </form>
         </div>
