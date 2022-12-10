@@ -9,7 +9,7 @@
     $q = "UPDATE `user_reach` SET `seen`=? WHERE `reach_ID`=?";
     $values = [1,$frm_data['seen']];
     $res = update($q,$values,'ii');
-    echo $res;
+    
   }
 
   
@@ -19,7 +19,7 @@
     $q = "DELETE FROM `user_reach` WHERE `reach_ID`=?";
     $values = [$frm_data['del']];
     $res = update($q,$values,'i');
-    echo $res;
+    
   }
 ?>
 
