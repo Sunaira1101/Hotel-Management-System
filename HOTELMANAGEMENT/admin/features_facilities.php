@@ -50,7 +50,7 @@ table, th,td {
         <h2 class="mb-2 fs-3">FEATURES & FACILITIES</h2>
 
 
-        <!-- Feautures Settings -->
+        <!-- Features Settings -->
         
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
@@ -63,7 +63,7 @@ table, th,td {
 
             <div class="table" style="height: 300px;overflow-y:scroll;">
                 <table class="table table-hover border border-4 border-light">
-                  <thead class="sticky-top">
+                  <thead>
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
                       <th scope="col">Name</th>
@@ -90,7 +90,7 @@ table, th,td {
 
             <div class="table" style="height: 400px;overflow-y:scroll;">
                 <table class="table table-hover border border-4 border-light">
-                  <thead class="sticky-top">
+                  <thead>
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
                       <th scope="col">Icon</th>
@@ -292,6 +292,18 @@ table, th,td {
 
     
 
+   }
+
+   function get_facilities(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/features_facilities_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      document.getElementById('facilities-data').innerHTML = this.responseText;
+    }
+
+    xhr.send('get_facilities');
    }
 
 

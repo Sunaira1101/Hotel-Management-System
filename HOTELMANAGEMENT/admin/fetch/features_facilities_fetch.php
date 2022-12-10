@@ -69,6 +69,27 @@
     }
   }
 
+  if(isset($_POST['get_features'])){
+    $res = selectAll('features'); //database table selected
+    $no=1;
+
+    while($row = mysqli_fetch_assoc($res)){
+     
+      echo <<<data
+       <tr>
+        <td>$no</td>
+        <td>$row[name]</td>
+        <td>
+          <button type="button" onclick="remove_features($row[feature_ID])" class="btn btn-danger btn-small shadow-none fs-6">
+          <i class="bi bi-trash3-fill"></i> Delete
+          </button>
+        </td>   
+       </tr>
+      data;
+      $no++;
+    }
+  }
+
 
   
 ?>
