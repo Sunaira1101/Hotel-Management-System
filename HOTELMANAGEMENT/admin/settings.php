@@ -309,7 +309,7 @@
     let site_about=  document.getElementById('site_about');
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/settings_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
@@ -332,7 +332,7 @@
    function upd_general(site_title_val, site_about_val){
     
       let xhr = new XMLHttpRequest();
-      xhr.open("POST","fetch/settings_crud.php",true);
+      xhr.open("POST","fetch/settings_fetch.php",true);
       xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
       xhr.onload = function(){
@@ -362,7 +362,7 @@
 
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/settings_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
@@ -408,7 +408,7 @@
     data_str += "upd_contacts";
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/settings_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
@@ -447,7 +447,7 @@
     data.append('add_member',''); //pass index value
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/settings_fetch.php",true);
     
 
     xhr.onload = function(){
@@ -480,7 +480,7 @@
 
    function get_members(){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/settings_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
@@ -494,7 +494,7 @@
 
    function remove_mem(val){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/settings_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){

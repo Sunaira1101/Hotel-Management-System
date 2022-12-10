@@ -29,7 +29,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - User Queries</title>
+    <title>Admin Panel - Features & Facilities</title>
     <?php require('extra/links.php'); ?>
 
 </head>
@@ -47,13 +47,19 @@ table, th,td {
   <div class="container-fluid">
     <div class="row">
       <div class="col-10 ms-auto p-4 ">
-        <h2 class="mb-2 fs-3">USER QUERIES</h2>
+        <h2 class="mb-2 fs-3">FEATURES & FACILITIES</h2>
 
 
-        <!-- User Queries Settings -->
+        <!-- Feautures Settings -->
         
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h2 class="title  fs-5">Features</h2>
+                <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#featuresSettings">
+                <i class="bi bi-person-plus-fill"></i> Add
+                </button>
+              </div>
 
             <div class="table" style="height: 400px;overflow-y:scroll;overflow-x:scroll;">
                 <table class="table table-hover border border-4 border-light">
@@ -107,8 +113,132 @@ table, th,td {
   </div>
 </div>
  
+<!-- Features Add -->
+
+<div class="modal fade" id="featuresSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+
+            <form id="featuresSettings_form">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Features</h5>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label class="form-label fw-bolder">Name</label>
+                    <input type="text" name="features_name" class="form-control shadow-none" required>
+                  </div>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
+                  <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </form>
+           
+          </div>
+        </div>
 
 <?php require('extra/scripts.php'); ?>
+
+<script>
+  
+
+  let featuresSettings_form = document.getElementById('featuresSettings_form');
+  
+
+  // Features Fetch
+
+  featuresSettings_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    add_features();
+   });
+
+   function add_features(){   // add data
+    let data = new FormData(); //formdata = object
+    data.append('name',featuresSettings_form.elements['features_name'].value); //form has one element(name), access value of that name
+    data.append('add_features',''); //pass index value
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    
+
+    xhr.onload = function(){
+
+      console.log(this.responseText)
+      var myModal = document.getElementById('teamSettings')
+      var modal = bootstrap.Modal.getInstance(myModal) 
+      modal.hide();
+
+      if(this.responseText == 'inv_img'){
+        console.log("inv_img");
+        }
+        else{
+          console.log('members added');
+          member_name_inp.value='';
+          member_pic_inp.value='';
+          get_members();
+        }
+
+
+
+      
+    }
+
+    xhr.send(data);
+
+    
+
+   }
+
+   function get_members(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      document.getElementById('team-data').innerHTML = this.responseText;
+     
+    }
+
+    xhr.send('get_members');
+
+   }
+
+   function remove_mem(val){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      if(this.responseText == 1){
+        get_members();
+      }
+      else{
+        console.log('Error in deleting');
+      }
+     
+    }
+
+    xhr.send('remove_mem='+val);
+
+   }
+
+
+
+
+
+
+   window.onload = function(){
+    get_general();
+    get_contacts();
+    get_members();
+   }
+
+
+
+</script>
 
 </body>
 </html>

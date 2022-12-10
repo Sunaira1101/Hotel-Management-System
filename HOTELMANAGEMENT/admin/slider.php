@@ -102,7 +102,7 @@
     data.append('add_image',''); //pass index value
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/slider_crud.php",true);
+    xhr.open("POST","fetch/slider_fetch.php",true);
     
 
     xhr.onload = function(){
@@ -129,7 +129,7 @@
 
    function get_image(){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/slider_crud.php",true);
+    xhr.open("POST","fetch/slider_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
@@ -143,7 +143,7 @@
 
    function remove_img(val){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/slider_crud.php",true);
+    xhr.open("POST","fetch/slider_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
