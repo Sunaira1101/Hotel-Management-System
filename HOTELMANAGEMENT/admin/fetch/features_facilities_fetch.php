@@ -47,5 +47,28 @@
   }
 
 
+  // Facilities section fetch
+
+  if(isset($_POST['add_facilities'])){
+    
+    $frm_data = filteration($_POST);
+
+    $img_res = uploadImage($_FILES['icon'],FACILITIES_FOLDER); //rname created in func.php
+
+    if($img_res == 'inv_img'){
+      echo $img_res;
+    }
+    else if($img_res == 'upd_failed'){
+      echo $img_res;
+    }
+    else{
+      $q = "INSERT INTO `facilities`(`icon`, `name`, `description`) VALUES (?,?,?)";
+      $values = [$img_res,$frm_data['name'],$frm_data['desc']];
+      $res = insert($q,$values,'sss');
+      echo $res;
+    }
+  }
+
+
   
 ?>

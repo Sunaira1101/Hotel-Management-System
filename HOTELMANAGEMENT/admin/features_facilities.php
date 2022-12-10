@@ -67,17 +67,17 @@ table, th,td {
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
                       <th scope="col">Name</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Name</th>
                       <th scope="col" width="20%">Action</th>
                     </tr>
                   </thead>
-                  <tbody id="facilities-data">
+                  <tbody id="features-data">
                   </tbody>
                 </table>
             </div>   
           </div>
         </div>
+
+        <!-- Facilities Settings -->
 
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
@@ -88,16 +88,18 @@ table, th,td {
                 </button>
               </div>
 
-            <div class="table" style="height: 400px;overflow-y:scroll;overflow-x:scroll;">
+            <div class="table" style="height: 400px;overflow-y:scroll;">
                 <table class="table table-hover border border-4 border-light">
                   <thead class="sticky-top">
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
+                      <th scope="col">Icon</th>
                       <th scope="col">Name</th>
-                      <th scope="col" width="20%">Action</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  <tbody id="features-data">
+                  <tbody id="facilities-data">
                     
                   </tbody>
                 </table>
@@ -135,7 +137,43 @@ table, th,td {
             </form>
            
           </div>
-        </div>
+</div>
+
+<!-- Facilities Add -->
+<div class="modal fade" id="facilitiesSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+
+            <form id="facilitiesSettings_form">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Facilities</h5>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label class="form-label fw-bolder">Name</label>
+                    <input type="text" name="facilities_name" class="form-control shadow-none" required>
+                  </div>
+                  <div class="mb-3"> 
+                    <label class="form-label fw-bolder">Icon</label>
+                    <input type="file" name="facilities_icon" id="member_pic_inp" accept=".jpg, .jpeg, .png, .svg" class="form-control shadow-none" required>
+                  </div>
+                  <div class="mb-3"> 
+                    <label class="form-label fw-bolder">Description</label>
+                    <textarea name="facilities_desc" class="form-control shadow-none" rows="4"></textarea>
+                  </div>
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
+                  <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </form>
+           
+          </div>
+         </div>
+
+
 
 <?php require('extra/scripts.php'); ?>
 
@@ -143,13 +181,13 @@ table, th,td {
   
 
   let featuresSettings_form = document.getElementById('featuresSettings_form');
+  let facilitiesSettings_form = document.getElementById('facilitiesSettings_form');
   
-
   // Features Fetch
 
   featuresSettings_form.addEventListener('submit',function(e){
-    e.preventDefault();
-    add_features();
+      e.preventDefault();
+      add_features();
    });
 
    function add_features(){   // add data
@@ -212,6 +250,53 @@ table, th,td {
     xhr.send('remove_features='+val); //val=id which wants to remove
 
    }
+
+
+
+
+   // Facilities Fetch
+
+   facilitiesSettings_form.addEventListener('submit',function(e){
+      e.preventDefault();
+      add_facilities();
+   });
+
+   function add_facilities(){   // add data
+    let data = new FormData(); //formdata = object
+    data.append('name',facilitiesSettings_form.elements['facilities_name'].value); 
+    data.append('icon',facilitiesSettings_form.elements['facilities_icon'].files[0]);
+    data.append('desc',facilitiesSettings_form.elements['facilities_desc'].value);
+    data.append('add_facilities',''); //pass index value
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/features_facilities_fetch.php",true);
+
+    xhr.onload = function(){
+
+      var myModal = document.getElementById('facilitiesSettings');
+      var modal = bootstrap.Modal.getInstance(myModal); 
+      modal.hide();
+
+      if(this.responseText == 'inv_img'){
+        console.log("inv_img");
+        }
+      else{
+        console.log('Facilities added');
+        facilitiesSettings_form.reset();
+        // get_members();
+      }
+
+    }
+
+    xhr.send(data);
+
+    
+
+   }
+
+
+
+
 
 
 
