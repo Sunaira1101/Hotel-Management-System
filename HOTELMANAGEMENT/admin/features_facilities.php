@@ -2,25 +2,6 @@
   require('extra/func.php');
   require('extra/connect.php');
   adminLogin();
-
-  if(isset($_GET['seen'])){
-    $frm_data = filteration($_GET);
-
-    $q = "UPDATE `user_reach` SET `seen`=? WHERE `reach_ID`=?";
-    $values = [1,$frm_data['seen']];
-    $res = update($q,$values,'ii');
-    
-  }
-
-  
-  if(isset($_GET['del'])){
-    $frm_data = filteration($_GET);
-
-    $q = "DELETE FROM `user_reach` WHERE `reach_ID`=?";
-    $values = [$frm_data['del']];
-    $res = update($q,$values,'i');
-    
-  }
 ?>
 
 <!DOCTYPE html>

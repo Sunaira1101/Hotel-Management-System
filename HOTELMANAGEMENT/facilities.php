@@ -41,17 +41,13 @@
       
       while($row = mysqli_fetch_assoc($res)){
         echo<<<data
-          <div class="col-4 mb-5 px-4">
+          <div class="col-4 mb-5 px-4" style="height:200px;">
           <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
             <div class="d-flex align-items-center mb-2">
-              <img src="images/facilities/f1.jpg" width="40px">
-              <h2 class="mt-3 text-dark fs-2">WiFi</h2>
+              <img src="$path$row[icon]" width="40px">
+              <h2 class="mt-3 text-dark fs-2">$row[name]</h2>
             </div>
-            <p class="mb-2 py-2">
-                We provide free WiFi to make your stay more comfortable. No need
-                to go through all the trouble to access roaming data and enjoy as 
-                long as you are here!
-            </p>
+            <p class="mb-2 py-2">$row[description]</p>
           </div>
         </div>
 
@@ -62,126 +58,7 @@
 
     ?>
 
-
-
-      
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-      <div class="col-4 mb-5 px-4">
-        <div class="bg-white rounded shadow p-4 border border-2 border-dark pop">
-          <div class="d-flex align-items-center mb-2">
-            <img src="images/facilities/f1.jpg" width="40px">
-            <h2 class="mt-3 text-dark fs-2">WiFi</h2>
-          </div>
-          <p class="mb-2 py-2">
-              We provide free WiFi to make your stay more comfortable. No need
-              to go through all the trouble to access roaming data and enjoy as 
-              long as you are here!
-          </p>
-
-        </div>
-      </div>
-
     </div>
-
-
-
   </div>
 
   <br><br><br>
