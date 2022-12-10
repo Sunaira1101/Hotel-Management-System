@@ -2,8 +2,31 @@
   require('extra/func.php');
   require('extra/connect.php');
   adminLogin();
+
+  if(isset($_GET['seen'])){
+    $frm_data = filteration($_GET);
+
+    $q = "UPDATE `user_reach` SET `seen`=? WHERE `reach_ID`=?";
+    $values = [1,$frm_data['seen']];
+    $res = update($q,$values,'ii');
+    echo $res;
+  }
+
   
+  if(isset($_GET['del'])){
+    $frm_data = filteration($_GET);
+
+    $q = "DELETE FROM `user_reach` WHERE `reach_ID`=?";
+    $values = [$frm_data['del']];
+    $res = update($q,$values,'i');
+    echo $res;
+  }
+
+
+
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -52,6 +75,12 @@
                       $no=1;
 
                       while($row = mysqli_fetch_assoc($data)){
+                        $seen='';
+                        if($row['seen']!=1){
+                          $seen="<a href='?seen=$row[reach_ID]' class='btn btn-sm rounded-pill btn-secondary'>MARK AS READ</a>";
+                        }
+                        $seen.="<a href='?del=$row[reach_ID]' class='btn btn-sm rounded-pill btn-danger mt-2'>DELETE</a>";
+
                         echo<<<query
                          <tr>
                            <td>$no</td>
@@ -60,6 +89,7 @@
                            <td>$row[phone]</td>
                            <td>$row[message]</td>
                            <td>$row[date]</td>
+                           <td>$seen</td>
                          </tr>
 
                         query;
