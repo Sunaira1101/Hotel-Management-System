@@ -61,54 +61,51 @@ table, th,td {
                 </button>
               </div>
 
+            <div class="table" style="height: 300px;overflow-y:scroll;">
+                <table class="table table-hover border border-4 border-light">
+                  <thead class="sticky-top">
+                    <tr class="bg-dark text-white">
+                      <th scope="col">No.</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Name</th>
+                      <th scope="col" width="20%">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="facilities-data">
+                  </tbody>
+                </table>
+            </div>   
+          </div>
+        </div>
+
+        <div class="card shadow border-0 mb-4">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h2 class="title  fs-5">Facilities</h2>
+                <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#facilitiesSettings">
+                <i class="bi bi-person-plus-fill"></i> Add
+                </button>
+              </div>
+
             <div class="table" style="height: 400px;overflow-y:scroll;overflow-x:scroll;">
                 <table class="table table-hover border border-4 border-light">
                   <thead class="sticky-top">
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
                       <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Phone No.</th>
-                      <th scope="col" width="30%">Message</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Action</th>
+                      <th scope="col" width="20%">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <?php
-                      $q = "SELECT * FROM `user_reach` ORDER BY `reach_ID` DESC"; //so that newer msgs at top
-                      $data = mysqli_query($db, $q);
-                      $no=1;
-
-                      while($row = mysqli_fetch_assoc($data)){
-                        $seen='';
-                        if($row['seen']!=1){
-                          $seen="<a href='?seen=$row[reach_ID]' class='btn btn-sm rounded-pill btn-secondary'>MARK AS READ</a>";
-                        }
-                        $seen.="<a href='?del=$row[reach_ID]' class='btn btn-sm rounded-pill btn-danger mt-2'>DELETE</a>";
-
-                        echo<<<query
-                         <tr>
-                           <td>$no</td>
-                           <td>$row[name]</td>
-                           <td>$row[email]</td>
-                           <td>$row[phone]</td>
-                           <td>$row[message]</td>
-                           <td>$row[date]</td>
-                           <td>$seen</td>
-                         </tr>
-
-                        query;
-                        $no++;
-                      }
-                    ?>
+                  <tbody id="features-data">
+                    
                   </tbody>
                 </table>
             </div>   
           </div>
         </div>
-    
-    
+
+
       </div>
   </div>
 </div>
@@ -162,7 +159,6 @@ table, th,td {
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST","fetch/features_facilities_fetch.php",true);
-    
 
     xhr.onload = function(){
 
@@ -173,15 +169,11 @@ table, th,td {
       if(this.responseText == 1){
           console.log('New Features added');
           featuresSettings_form.elements['features_name'].value='';
-          get_members();
+          get_features();
         }
         else{
           console.log('New Features adding failed!');
-        }
-
-
-
-      
+        }   
     }
 
     xhr.send(data);
@@ -190,28 +182,26 @@ table, th,td {
 
    }
 
-   function get_members(){
+   function get_features(){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/features_facilities_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
-      document.getElementById('team-data').innerHTML = this.responseText;
-     
+      document.getElementById('features-data').innerHTML = this.responseText;
     }
 
-    xhr.send('get_members');
-
+    xhr.send('get_features');
    }
 
-   function remove_mem(val){
+   function remove_features(val){
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/settings_crud.php",true);
+    xhr.open("POST","fetch/features_facilities_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
       if(this.responseText == 1){
-        get_members();
+        get_features();
       }
       else{
         console.log('Error in deleting');
@@ -219,7 +209,7 @@ table, th,td {
      
     }
 
-    xhr.send('remove_mem='+val);
+    xhr.send('remove_features='+val); //val=id which wants to remove
 
    }
 
@@ -229,9 +219,7 @@ table, th,td {
 
 
    window.onload = function(){
-    get_general();
-    get_contacts();
-    get_members();
+    get_features();
    }
 
 
