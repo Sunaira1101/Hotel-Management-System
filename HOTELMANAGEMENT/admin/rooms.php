@@ -10,16 +10,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Features & Facilities</title>
+    <title>Admin Panel - Rooms</title>
     <?php require('extra/links.php'); ?>
 
 </head>
 
-<style>
-table, th,td {
-  border:4px solid light;
-}
-</style>
 
 <body style="color:rgb(37, 22, 4) ; background-color:rgb(243, 228, 210);">
 
@@ -28,30 +23,34 @@ table, th,td {
   <div class="container-fluid">
     <div class="row">
       <div class="col-10 ms-auto p-4 ">
-        <h2 class="mb-2 fs-3">FEATURES & FACILITIES</h2>
+        <h2 class="mb-2 fs-3">ROOMS</h2>
 
 
-        <!-- Features Settings -->
+        <!-- Rooms Settings -->
         
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h2 class="title  fs-5">Features</h2>
-                <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#featuresSettings">
+            <div class="align-end mb-3">
+                <!-- <h2 class="title  fs-5">Features</h2> -->
+                <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#roomsSettings">
                 <i class="bi bi-person-plus-fill"></i> Add
                 </button>
               </div>
 
-            <div class="table" style="height: 300px;overflow-y:scroll;">
+            <div class="table-responsive" style="height: 500px;overflow-y:scroll;">
                 <table class="table table-hover border border-4 border-light">
                   <thead>
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
                       <th scope="col">Name</th>
-                      <th scope="col" width="20%">Action</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Guests</th>
+                      <th scope="col">Quantity</th> <!-- how many rooms of each type available -->
+                      <th scope="col">Availibility</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  <tbody id="features-data">
+                  <tbody id="rooms-data">
                   </tbody>
                 </table>
             </div>   
