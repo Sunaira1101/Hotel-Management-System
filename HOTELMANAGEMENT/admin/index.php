@@ -1,6 +1,6 @@
  <?php 
 // require('extra/connect.php');
-?> 
+?>    
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
 <body style="color:rgb(37, 22, 4) ; background-color:rgb(243, 228, 210);">
 
     <div class="logininfo text-center bg-white rounded shadow overflow-hidden">
-        <form>
+        <form method="POST">
             <h2 class="text-white py-3" style="background-color:rgb(95, 16, 16); ">ADMIN LOGIN</h2>
             <div class="p-4">
                 <div class="mb-3">
@@ -51,6 +51,14 @@
 
 
     </div>
+    <?php
+    if(isset($_POST['login']))
+    {
+        $frm_data = filter($_POST);
+        print_r($frm_data);
+    }
+
+    ?>
     
 
 
