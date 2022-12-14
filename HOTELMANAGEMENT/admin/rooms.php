@@ -57,7 +57,7 @@
           </div>
         </div>
 
-        <!-- Facilities Settings -->
+        <!-- Room Settings -->
 
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
