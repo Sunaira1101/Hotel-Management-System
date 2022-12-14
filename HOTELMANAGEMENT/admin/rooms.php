@@ -180,19 +180,38 @@
     data.append('desc',roomsSettings_form.elements['desc'].value); 
     data.append('add_rooms',''); 
 
+    let features = [];
+
+    roomsSettings_form.elements['features'].forEach(opt =>{ //foreach traverses array
+      if(opt.checked){
+        features.push(opt.value);
+      }
+    });
+
+    let facilities = [];
+
+    roomsSettings_form.elements['facilities'].forEach(opt =>{ //foreach traverses array
+      if(opt.checked){
+        facilities.push(opt.value);
+      }
+    });
+
+    data.append('features',JSON.stringify(features)); //convert to array
+    data.append('facilities',JSON.stringify(facilities));
+
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/features_facilities_fetch.php",true);
+    xhr.open("POST","fetch/rooms_fetch.php",true);
 
     xhr.onload = function(){
 
-      var myModal = document.getElementById('featuresSettings');
+      var myModal = document.getElementById('roomsSettings');
       var modal = bootstrap.Modal.getInstance(myModal); 
       modal.hide();
 
       if(this.responseText == 1){
           console.log('New Features added');
-          featuresSettings_form.elements['features_name'].value='';
-          get_features();
+          roomsSettings_form.reset();
+          // get_features();
         }
         else{
           console.log('New Features adding failed!');
