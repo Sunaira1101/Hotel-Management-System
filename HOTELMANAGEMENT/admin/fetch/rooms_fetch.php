@@ -12,9 +12,9 @@
     $facilities = filteration(json_decode($_POST['facilities']));
 
 
-    $q = "INSERT INTO `features`(`name`) VALUES (?)";
-    $values = [$frm_data['name']];
-    $res = insert($q,$values,'s');
+    $q1 = "INSERT INTO `rooms`(`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
+    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['description']];
+    $res = insert($q,$values,'ssiiiis');
     echo $res; //row added, echo 1
 
   }
