@@ -30,8 +30,7 @@
         
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
-            <div class="align-end mb-3">
-                <!-- <h2 class="title  fs-5">Features</h2> -->
+            <div class="text-end mb-3">
                 <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#roomsSettings">
                 <i class="bi bi-person-plus-fill"></i> Add
                 </button>
@@ -43,9 +42,10 @@
                     <tr class="bg-dark text-white">
                       <th scope="col">No.</th>
                       <th scope="col">Name</th>
+                      <th scope="col">Area</th>
                       <th scope="col">Price</th>
-                      <th scope="col">Guests</th>
                       <th scope="col">Quantity</th> <!-- how many rooms of each type available -->
+                      <th scope="col">Guests</th>
                       <th scope="col">Availibility</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -56,59 +56,90 @@
             </div>   
           </div>
         </div>
-
-        <!-- Room Settings -->
-
-        <div class="card shadow border-0 mb-4">
-          <div class="card-body">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h2 class="title  fs-5">Facilities</h2>
-                <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#facilitiesSettings">
-                <i class="bi bi-person-plus-fill"></i> Add
-                </button>
-              </div>
-
-            <div class="table" style="height: 400px;overflow-y:scroll;">
-                <table class="table table-hover border border-4 border-light">
-                  <thead>
-                    <tr class="bg-dark text-white">
-                      <th scope="col">No.</th>
-                      <th scope="col">Icon</th>
-                      <th scope="col">Name</th>
-                      <th scope="col" width="40%">Description</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="facilities-data">
-                    
-                  </tbody>
-                </table>
-            </div>   
-          </div>
-        </div>
-
-
       </div>
   </div>
 </div>
  
-<!-- Features Add -->
+<!-- Rooms Add -->
 
-<div class="modal fade" id="featuresSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
+<div class="modal fade" id="roomsSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
 
-            <form id="featuresSettings_form">
+            <form id="roomsSettings_form">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Add Features</h5>
+                  <h5 class="modal-title fw-bolder">Add Rooms</h5>
                 </div>
+
                 <div class="modal-body">
-                  <div class="mb-3">
-                    <label class="form-label fw-bolder">Name</label>
-                    <input type="text" name="features_name" class="form-control shadow-none" required>
+                  <div class="row">
+                    <div class="col-6 mb-3">
+                      <label class="form-label fw-bolder">Name</label>
+                      <input type="text" name="name" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label class="form-label fw-bolder">Area</label>
+                      <input type="number" name="area" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label class="form-label fw-bolder">Price</label>
+                      <input type="number" name="price" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label class="form-label fw-bolder">Quantity</label>
+                      <input type="number" name="quantity" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label class="form-label fw-bolder">Adults(Max)</label>
+                      <input type="number" name="adult" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label class="form-label fw-bolder">Children(Max)</label>
+                      <input type="number" name="children" class="form-control shadow-none" required>
+                    </div>
+                    <div class="col-12 mb-4">
+                      <label class="form-label fw-bolder">Features</label>
+                      <div class="row">
+                        <?php 
+                          $res = selectAll('features');
+                          while($opt = mysqli_fetch_assoc($res)){
+                            echo"
+                              <div class='col-3 mb-1'>
+                                <label> 
+                                  <input type='checkbox' name='features' value='$opt[feature_ID]' class='form-check-input shadow-none'>
+                                  $opt[name]
+                                </label>
+                              </div>
+                            ";
+                          }
+                        ?>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-4">
+                      <label class="form-label fw-bolder">Facilities</label>
+                      <div class="row">
+                        <?php 
+                          $res = selectAll('facilities');
+                          while($opt = mysqli_fetch_assoc($res)){
+                            echo"
+                              <div class='col-3 mb-1'>
+                                <label> 
+                                  <input type='checkbox' name='facilities' value='$opt[facilities_ID]' class='form-check-input shadow-none'>
+                                  $opt[name]
+                                </label>
+                              </div>
+                            ";
+                          }
+                        ?>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                      <label class="form-label fw-bolder">About Room</label>
+                      <textarea name="desc" rows="4" class="form-control shadow-none" required></textarea>
+                    </div>
                   </div>
-                  
                 </div>
+                
                 <div class="modal-footer">
                   <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
                   <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
@@ -117,41 +148,9 @@
             </form>
            
           </div>
-</div>
+ </div>
 
-<!-- Facilities Add -->
-<div class="modal fade" id="facilitiesSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
 
-            <form id="facilitiesSettings_form">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Add Facilities</h5>
-                </div>
-                <div class="modal-body">
-                  <div class="mb-3">
-                    <label class="form-label fw-bolder">Name</label>
-                    <input type="text" name="facilities_name" class="form-control shadow-none" required>
-                  </div>
-                  <div class="mb-3"> 
-                    <label class="form-label fw-bolder">Icon</label>
-                    <input type="file" name="facilities_icon" id="member_pic_inp" accept=".jpg, .jpeg, .png, .svg" class="form-control shadow-none" required>
-                  </div>
-                  <div class="mb-3"> 
-                    <label class="form-label fw-bolder">Description</label>
-                    <textarea name="facilities_desc" class="form-control shadow-none" rows="4"></textarea>
-                  </div>
-                  
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
-                  <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
-                </div>
-              </div>
-            </form>
-           
-          </div>
-         </div>
 
 
 
@@ -160,20 +159,26 @@
 <script>
   
 
-  let featuresSettings_form = document.getElementById('featuresSettings_form');
-  let facilitiesSettings_form = document.getElementById('facilitiesSettings_form');
+  let roomsSettings_form = document.getElementById('roomsSettings_form');
   
-  // Features Fetch
+  
+  // Rooms Fetch
 
-  featuresSettings_form.addEventListener('submit',function(e){
+  roomsSettings_form.addEventListener('submit',function(e){
       e.preventDefault();
-      add_features();
+      add_rooms();
    });
 
-   function add_features(){   // add data
-    let data = new FormData(); //formdata = object
-    data.append('name',featuresSettings_form.elements['features_name'].value); //form has one element(name), access value of that name
-    data.append('add_features',''); //pass index value
+   function add_rooms(){   
+    let data = new FormData(); 
+    data.append('name',roomsSettings_form.elements['name'].value); 
+    data.append('area',roomsSettings_form.elements['area'].value); 
+    data.append('price',roomsSettings_form.elements['price'].value); 
+    data.append('quatity',roomsSettings_form.elements['quatity'].value); 
+    data.append('adult',roomsSettings_form.elements['adult'].value); 
+    data.append('children',roomsSettings_form.elements['children'].value); 
+    data.append('desc',roomsSettings_form.elements['desc'].value); 
+    data.append('add_rooms',''); 
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST","fetch/features_facilities_fetch.php",true);
