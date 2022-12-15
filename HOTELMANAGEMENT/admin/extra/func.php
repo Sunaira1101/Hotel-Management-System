@@ -5,12 +5,14 @@ define('SITE_URL','http://127.0.0.1/CSE311_PROJECT/HOTELMANAGEMENT/');
 define('ABOUT_IMG_PATH', SITE_URL.'images/about/');
 define('SLIDER_IMG_PATH', SITE_URL.'images/firstslider/');
 define('FACILITIES_IMG_PATH', SITE_URL.'images/facilities/');
+define('ROOMS_IMG_PATH', SITE_URL.'images/rooms/');
 
 //BACKEND
 define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/CSE311_PROJECT/HOTELMANAGEMENT/images/');
 define('ABOUT_FOLDER','about/');
 define('SLIDER_FOLDER','firstslider/');
 define('FACILITIES_FOLDER','facilities/');
+define('ROOMS_FOLDER','rooms/');
 
 function adminLogin(){
     session_start();

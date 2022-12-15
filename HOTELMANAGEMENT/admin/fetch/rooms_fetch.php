@@ -92,6 +92,9 @@
             <button type='button' onclick='edit_rooms($row[R_ID])' class='btn btn-secondary btn-sm shadow-none' data-bs-toggle='modal' data-bs-target='#editRoom'>
               <i class='bi bi-pencil-square'></i>
             </button>
+            <button type='button' onclick=\"room_images($row[R_ID],'$row[name]')\" class='btn btn-info btn-sm shadow-none' data-bs-toggle='modal' data-bs-target='#room-images'>
+              <i class='bi bi-images'></i>
+            </button>
           </td>
         </tr>
       ";
@@ -212,6 +215,26 @@
 
 
 
+  }
+
+  if(isset($_POST['add_image'])){
+    
+    $frm_data = filteration($_POST);
+
+    $img_res = uploadImage($_FILES['image'], ROOMS_FOLDER); //rname created in func.php
+
+    if($img_res == 'inv_img'){
+      echo $img_res;
+    }
+    else if($img_res == 'upd_failed'){
+      echo $img_res;
+    }
+    else{
+      $q = "INSERT INTO `room_images`(`room_ID`, `image`) VALUES (?,?)";
+      $values = [$frm_data['room_ID'],$img_res];
+      $res = insert($q,$values,'is');
+      echo $res;
+    }
   }
 
   

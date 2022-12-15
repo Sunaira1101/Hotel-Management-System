@@ -241,6 +241,44 @@
     </div>
 </div>
 
+<!-- Rooms Images -->
+
+<div class="modal fade" id="room-images" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Room Images</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="pb-3 mb-3">
+          <form id="add_image_form">
+            <label class="form-label fw-bolder">Add Image</label>
+            <input type="file" name="image" accept=".jpg, .jpeg, .png, .svg" class="form-control shadow-none mb-3" required>
+            <button class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">ADD</button>
+            <input type="hidden" name="room_id">
+          </form>
+        </div>
+
+        <div class="table-responsive" style="height: 350px;overflow-y:scroll;">
+                <table class="table table-hover border border-4 border-light">
+                  <thead>
+                    <tr class="bg-dark text-white sticky-top">
+                      <th scope="col" width="60%">Image</th>
+                      <th scope="col">Delete</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody id="room-image-data">
+                  </tbody>
+                </table>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 
@@ -429,11 +467,6 @@
     xhr.send(data);
    }
 
-  
-
-
-
-
    function toggle_status(id,val){
     
     let xhr = new XMLHttpRequest();
@@ -453,95 +486,60 @@
     xhr.send('toggle_status='+id+'&value='+val);
    }
 
-  //  function remove_features(val){
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
-  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+   let add_image_form = document.getElementById('add_image_form');
 
-  //   xhr.onload = function(){
-  //     if(this.responseText == 1){
-  //       get_features();
-  //     }
-  //     else{
-  //       console.log('Error in deleting');
-  //     }
-     
-  //   }
+   add_image_form.addEventListener('submit',function(e){
+      e.preventDefault();
+      add_image();
+   });
 
-  //   xhr.send('remove_features='+val); //val=id which wants to remove
+   function add_image(){
 
-  //  }
+    let data = new FormData(); 
+    data.append('image',add_image_form.elements['image'].files[0]);
+    data.append('room_id',add_image_form.elements['room_id'].value); 
+    data.append('add_image',''); 
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/rooms_fetch",true);
+    
+
+    xhr.onload = function(){
+
+      if(this.responseText == 'inv_img'){
+        console.log("inv_img");
+        }
+        else{
+         console.log('Image added');
+         add_image_form.reset();
+        }   
+    }
+   
+     xhr.send(data);
+
+   }
+
+   function room_images(id,rname){
+    document.querySelector("#room-images .modal-title").innerText = rname;
+    add_image_form.elements['room_id'].value = id;
+   }
+
+  
 
 
 
 
-  //  // Facilities Fetch
 
-  //  facilitiesSettings_form.addEventListener('submit',function(e){
-  //     e.preventDefault();
-  //     add_facilities();
-  //  });
 
-  //  function add_facilities(){   // add data
-  //   let data = new FormData(); //formdata = object
-  //   data.append('name',facilitiesSettings_form.elements['facilities_name'].value); 
-  //   data.append('icon',facilitiesSettings_form.elements['facilities_icon'].files[0]);
-  //   data.append('description',facilitiesSettings_form.elements['facilities_desc'].value);
-  //   data.append('add_facilities',''); //pass index value
 
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
 
-  //   xhr.onload = function(){
 
-  //     var myModal = document.getElementById('facilitiesSettings');
-  //     var modal = bootstrap.Modal.getInstance(myModal); 
-  //     modal.hide();
 
-  //     if(this.responseText == 'inv_img'){
-  //       console.log("inv_img");
-  //       }
-  //     else{
-  //       console.log('Facilities added');
-  //       facilitiesSettings_form.reset();
-  //       get_facilities();
-  //     }
 
-  //   }
 
-  //   xhr.send(data);
-  //  }
 
-  //  function get_facilities(){
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
-  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-  //   xhr.onload = function(){
-  //     document.getElementById('facilities-data').innerHTML = this.responseText;
-  //   }
 
-  //   xhr.send('get_facilities');
-  //  }
-
-  //  function remove_facilities(val){
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
-  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-
-  //   xhr.onload = function(){
-  //     if(this.responseText == 1){
-  //       get_facilities();
-  //     }
-  //     else{
-  //       console.log('Error in deleting');
-  //     }
-     
-  //   }
-
-  //   xhr.send('remove_facilities='+val); //val=id which wants to remove
-
-  //  }
 
    window.onload = function(){
     get_rooms();
