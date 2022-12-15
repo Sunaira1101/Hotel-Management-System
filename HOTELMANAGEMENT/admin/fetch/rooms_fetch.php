@@ -12,9 +12,6 @@
    
     $flag=0;
 
-    
-
-
     $q1 = "INSERT INTO `rooms`(`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
     $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
     
@@ -59,35 +56,48 @@
       echo 0;
     }
 
-
-
-
-
-
-
-
   }
 
-  // if(isset($_POST['get_features'])){
-  //   $res = selectAll('features'); //database table selected
-  //   $no=1;
+  if(isset($_POST['get_rooms'])){
+    $res = selectAll('rooms'); //database table selected
+    $no=1;
 
-  //   while($row = mysqli_fetch_assoc($res)){
-     
-  //     echo <<<data
-  //      <tr>
-  //       <td>$no</td>
-  //       <td>$row[name]</td>
-  //       <td>
-  //         <button type="button" onclick="remove_features($row[feature_ID])" class="btn btn-danger btn-small shadow-none fs-6">
-  //         <i class="bi bi-trash3-fill"></i> Delete
-  //         </button>
-  //       </td>   
-  //      </tr>
-  //     data;
-  //     $no++;
-  //   }
-  // }
+    $data = "";
+    
+    while($row = mysqli_fetch_assoc($res)){
+      if($row['status']==1){
+        $status = "<button class='btn btn-dark btn-sm shadow-none'>ACTIVE</button>";
+      }
+      else{
+        $status = "<button class='btn btn-danger btn-sm shadow-none'>INACTIVE</button>";
+      }
+      
+      
+      
+      
+      $data.="
+        <tr class='align-middle'>
+          <td>$no</td>
+          <td>$row[name]</td>
+          <td>$row[area] sq.ft.</td>
+          <td>Tk. $row[price]</td>
+          <td>$row[quantity]</td>
+          <td>
+            <span class='badge rounded-pill bg-light text-dark'>
+              Adult: $row[adult]
+            </span><br>
+            <span class='badge rounded-pill bg-light text-dark'>
+              Children: $row[children]
+            </span><br>
+          </td>
+          <td>$status</td>
+          <td>buttons</td>
+        </tr>
+      ";
+      $no++;
+    }
+    echo $data;
+  }
 
   // if(isset($_POST['remove_features'])){
   //   $frm_data = filteration($_POST);

@@ -46,7 +46,7 @@
                       <th scope="col">Price</th>
                       <th scope="col">Quantity</th> <!-- how many rooms of each type available -->
                       <th scope="col">Guests</th>
-                      <th scope="col">Availibility</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -227,14 +227,14 @@
    function get_rooms(){
     
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/features_facilities_fetch.php",true);
+    xhr.open("POST","fetch/rooms_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
-      document.getElementById('features-data').innerHTML = this.responseText;
+      document.getElementById('rooms-data').innerHTML = this.responseText;
     }
 
-    xhr.send('get_features');
+    xhr.send('get_rooms');
    }
 
   //  function remove_features(val){
@@ -327,10 +327,9 @@
 
   //  }
 
-  //  window.onload = function(){
-  //   get_features();
-  //   get_facilities();
-  //  }
+   window.onload = function(){
+    get_rooms();
+   }
 
 
 
