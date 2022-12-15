@@ -7,6 +7,7 @@
   if(isset($_POST['add_rooms'])){
     
     $frm_data = filteration($_POST);
+    $flag=0;
 
     $features = filteration(json_decode($_POST['features']));
     $facilities = filteration(json_decode($_POST['facilities']));
