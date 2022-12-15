@@ -88,7 +88,11 @@
             </span><br>
           </td>
           <td>$status</td>
-          <td>buttons</td>
+          <td>
+            <button type='button' onclick='edit_rooms($row[R_ID])' class='btn btn-secondary btn-sm shadow-none' data-bs-toggle='modal' data-bs-target='#editRoom'>
+              <i class='bi bi-pencil-square'></i>
+            </button>
+          </td>
         </tr>
       ";
       $no++;
@@ -110,6 +114,40 @@
       echo 0;
     }
   }
+
+  if(isset($_POST['get_one_room'])){
+    
+    $frm_data = filteration($_POST);
+
+    $res1 = select("SELECT * FROM `rooms` WHERE `R_ID`=?",[$frm_data['get_one_room']],'i');
+    $res2 = select("SELECT * FROM `room_features` WHERE `room_ID`=?",[$frm_data['get_one_room']],'i');
+    $res3 = select("SELECT * FROM `room_facilities` WHERE `room_ID`=?",[$frm_data['get_one_room']],'i');
+
+    $roomdata = mysqli_fetch_assoc($res1);
+    $features = [];
+    $facilities = [];
+
+    if(mysqli_num_rows($res2)>0){
+      while($row = mysqli_fetch_assoc($res2)){
+        array_push($features,$row['features_ID']);
+      }
+    }
+
+    if(mysqli_num_rows($res3)>0){
+      while($row = mysqli_fetch_assoc($res3)){
+        array_push($facilities,$row['fac_ID']);
+      }
+    }
+
+    $data = ["roomdata" => $roomdata, "features" => $features, "facilities" => $facilities];
+    $data = json_encode($data);
+    
+    echo $data;
+    
+    
+  }
+
+  if(isset($_POST['editRoom']))
 
   
 

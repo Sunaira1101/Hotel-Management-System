@@ -63,92 +63,183 @@
 <!-- Rooms Add -->
 
 <div class="modal fade" id="roomsSettings" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg">
 
-            <form id="roomsSettings_form">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title fw-bolder">Add Rooms</h5>
-                </div>
+      <form id="roomsSettings_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bolder">Add Rooms</h5>
+          </div>
 
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-6 mb-3">
-                      <label class="form-label fw-bolder">Name</label>
-                      <input type="text" name="name" class="form-control shadow-none" required>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label class="form-label fw-bolder">Area</label>
-                      <input type="number" name="area" class="form-control shadow-none" required>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label class="form-label fw-bolder">Price</label>
-                      <input type="number" name="price" class="form-control shadow-none" required>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label class="form-label fw-bolder">Quantity</label>
-                      <input type="number" name="quantity" class="form-control shadow-none" required>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label class="form-label fw-bolder">Adults(Max)</label>
-                      <input type="number" name="adult" class="form-control shadow-none" required>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label class="form-label fw-bolder">Children(Max)</label>
-                      <input type="number" name="children" class="form-control shadow-none" required>
-                    </div>
-                    <div class="col-12 mb-4">
-                      <label class="form-label fw-bolder">Features</label>
-                      <div class="row">
-                        <?php 
-                          $res = selectAll('features');
-                          while($opt = mysqli_fetch_assoc($res)){
-                            echo"
-                              <div class='col-3 mb-1'>
-                                <label> 
-                                  <input type='checkbox' name='features' value='$opt[feature_ID]' class='form-check-input shadow-none'>
-                                  $opt[name]
-                                </label>
-                              </div>
-                            ";
-                          }
-                        ?>
-                      </div>
-                    </div>
-                    <div class="col-12 mb-4">
-                      <label class="form-label fw-bolder">Facilities</label>
-                      <div class="row">
-                        <?php 
-                          $res = selectAll('facilities');
-                          while($opt = mysqli_fetch_assoc($res)){
-                            echo"
-                              <div class='col-3 mb-1'>
-                                <label> 
-                                  <input type='checkbox' name='facilities' value='$opt[facilities_ID]' class='form-check-input shadow-none'>
-                                  $opt[name]
-                                </label>
-                              </div>
-                            ";
-                          }
-                        ?>
-                      </div>
-                    </div>
-                    <div class="col-12 mb-3">
-                      <label class="form-label fw-bolder">About Room</label>
-                      <textarea name="desc" rows="4" class="form-control shadow-none" required></textarea>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="modal-footer">
-                  <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
-                  <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Name</label>
+                <input type="text" name="name" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Area</label>
+                <input type="number" name="area" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Price</label>
+                <input type="number" name="price" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Quantity</label>
+                <input type="number" name="quantity" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Adults(Max)</label>
+                <input type="number" name="adult" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Children(Max)</label>
+                <input type="number" name="children" class="form-control shadow-none" required>
+              </div>
+              <div class="col-12 mb-4">
+                <label class="form-label fw-bolder">Features</label>
+                <div class="row">
+                  <?php 
+                    $res = selectAll('features');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-3 mb-1'>
+                          <label> 
+                            <input type='checkbox' name='features' value='$opt[feature_ID]' class='form-check-input shadow-none'>
+                            $opt[name]
+                          </label>
+                        </div>
+                      ";
+                    }
+                  ?>
                 </div>
               </div>
-            </form>
-           
+              <div class="col-12 mb-4">
+                <label class="form-label fw-bolder">Facilities</label>
+                <div class="row">
+                  <?php 
+                    $res = selectAll('facilities');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-3 mb-1'>
+                          <label> 
+                            <input type='checkbox' name='facilities' value='$opt[facilities_ID]' class='form-check-input shadow-none'>
+                            $opt[name]
+                          </label>
+                        </div>
+                      ";
+                    }
+                  ?>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <label class="form-label fw-bolder">About Room</label>
+                <textarea name="desc" rows="4" class="form-control shadow-none" required></textarea>
+              </div>
+            </div>
           </div>
- </div>
+          
+          <div class="modal-footer">
+            <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
+            <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+</div>
+
+<!-- Rooms Edit -->
+
+<div class="modal fade" id="editRoom" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+      <form id="editRooms_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bolder">Edit Rooms</h5>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Name</label>
+                <input type="text" name="name" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Area</label>
+                <input type="number" name="area" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Price</label>
+                <input type="number" name="price" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Quantity</label>
+                <input type="number" name="quantity" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Adults(Max)</label>
+                <input type="number" name="adult" class="form-control shadow-none" required>
+              </div>
+              <div class="col-6 mb-3">
+                <label class="form-label fw-bolder">Children(Max)</label>
+                <input type="number" name="children" class="form-control shadow-none" required>
+              </div>
+              <div class="col-12 mb-4">
+                <label class="form-label fw-bolder">Features</label>
+                <div class="row">
+                  <?php 
+                    $res = selectAll('features');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-3 mb-1'>
+                          <label> 
+                            <input type='checkbox' name='features' value='$opt[feature_ID]' class='form-check-input shadow-none'>
+                            $opt[name]
+                          </label>
+                        </div>
+                      ";
+                    }
+                  ?>
+                </div>
+              </div>
+              <div class="col-12 mb-4">
+                <label class="form-label fw-bolder">Facilities</label>
+                <div class="row">
+                  <?php 
+                    $res = selectAll('facilities');
+                    while($opt = mysqli_fetch_assoc($res)){
+                      echo"
+                        <div class='col-3 mb-1'>
+                          <label> 
+                            <input type='checkbox' name='facilities' value='$opt[facilities_ID]' class='form-check-input shadow-none'>
+                            $opt[name]
+                          </label>
+                        </div>
+                      ";
+                    }
+                  ?>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <label class="form-label fw-bolder">About Room</label>
+                <textarea name="desc" rows="4" class="form-control shadow-none" required></textarea>
+              </div>
+              <input type="hidden" name="room_ID">
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="submit"  class="btn btn-light shadow-none" style="background-color: rgb(97, 226, 183);">Submit</button>
+            <button type="reset" class="btn btn-danger shadow-none" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+</div>
 
 
 
@@ -236,6 +327,109 @@
 
     xhr.send('get_rooms');
    }
+
+   let editRooms_form = document.getElementById('editRooms_form');
+   
+   function edit_rooms(id){
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/rooms_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      let data = JSON.parse(this.responseText);
+
+      editRooms_form.elements['name'].value = data.roomdata.name;
+      editRooms_form.elements['area'].value = data.roomdata.area;
+      editRooms_form.elements['price'].value = data.roomdata.price;
+      editRooms_form.elements['quantity'].value = data.roomdata.quantity;
+      editRooms_form.elements['adult'].value = data.roomdata.adult;
+      editRooms_form.elements['children'].value = data.roomdata.children;
+      editRooms_form.elements['desc'].value = data.roomdata.description;
+      editRooms_form.elements['room_ID'].value = data.roomdata.id;
+
+      editRooms_form.elements['features'].forEach(el =>{
+        if(data.features.includes(Number(el.value))){
+          el.checked = true;
+        }
+      });
+      
+      editRooms_form.elements['facilities'].forEach(el =>{
+        if(data.facilities.includes(Number(el.value))){
+          el.checked = true;
+        }
+      });
+
+        
+    }
+
+    xhr.send('get_one_room='+id);
+
+   }
+
+   editRooms_form.addEventListener('submit',function(e){
+      e.preventDefault();
+      submit_edit_room();
+   });
+
+   function submit_edit_room(){   
+    let data = new FormData(); 
+
+    data.append('editRoom','');
+    data.append('room_ID',editRooms_form.elements['room_ID'].value);
+    data.append('name',editRooms_form.elements['name'].value); 
+    data.append('area',editRooms_form.elements['area'].value); 
+    data.append('price',editRooms_form.elements['price'].value); 
+    data.append('quantity',editRooms_form.elements['quantity'].value); 
+    data.append('adult',editRooms_form.elements['adult'].value); 
+    data.append('children',editRooms_form.elements['children'].value); 
+    data.append('desc',editRooms_form.elements['desc'].value); 
+     
+    let features = [];
+
+    editRooms_form.elements['features'].forEach(el =>{ //foreach traverses array
+      if(el.checked){
+        console.log(el.value);
+        features.push(el.value);
+      }
+    });
+
+    let facilities = [];
+
+    editRooms_form.elements['facilities'].forEach(el =>{ //foreach traverses array
+      if(el.checked){
+        console.log(el.value);
+        facilities.push(el.value);
+      }
+    });
+
+    data.append('features',JSON.stringify(features)); //convert to array
+    data.append('facilities',JSON.stringify(facilities));
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/rooms_fetch.php",true);
+
+    xhr.onload = function(){
+
+      var myModal = document.getElementById('editRoom');
+      var modal = bootstrap.Modal.getInstance(myModal); 
+      modal.hide();
+
+      if(this.responseText == 1){
+          console.log('Room edited!');
+          editRooms_form.reset();
+          get_rooms();
+        }
+        else{
+          console.log('Room editing failed!');
+        }   
+    }
+
+    xhr.send(data);
+   }
+
+
+
 
    function toggle_status(id,val){
     
