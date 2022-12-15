@@ -15,8 +15,54 @@
 
     $q1 = "INSERT INTO `rooms`(`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
     $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['description']];
-    $res = insert($q,$values,'ssiiiis');
-    echo $res; //row added, echo 1
+    
+    if(insert($q1,$values,'ssiiiis')){
+      $flag=1;
+    }
+
+  $room_ID = mysqli_insert_id($db);
+    
+    $q2 = "INSERT INTO `room_facilities`(`room_ID`, `fac_ID`) VALUES (?,?)";
+
+    if($stmt = mysqli_prepare($db,$q2)){
+      foreach($facilities as $f){
+        mysqli_stmt_bind_param($stmt,'ii',$room_ID,$f);
+        mysqli_stmt_execute($stmt);
+      }
+      mysqli_stmt_close($stmt);
+    }
+    else{
+      $flag=0;
+      die('Query cannot be prepared - Insert');
+    }
+
+    $q3 = "INSERT INTO `room_features`(room_ID`, `feat_ID`) VALUES (?,?)";
+
+    if($stmt = mysqli_prepare($db,$q3)){
+      foreach($features as $f){
+        mysqli_stmt_bind_param($stmt,'ii',$room_ID,$f);
+        mysqli_stmt_execute($stmt);
+      }
+      mysqli_stmt_close($stmt);
+    }
+    else{
+      $flag=0;
+      die('Query cannot be prepared - Insert');
+    }
+
+    if($flag){
+      echo 1;
+    }
+    else{
+      echo 0;
+    }
+
+
+
+
+
+
+
 
   }
 
