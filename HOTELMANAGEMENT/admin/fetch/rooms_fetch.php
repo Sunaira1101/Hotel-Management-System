@@ -6,21 +6,23 @@
 
   if(isset($_POST['add_rooms'])){
     
-    $frm_data = filteration($_POST);
-    $flag=0;
-
     $features = filteration(json_decode($_POST['features']));
     $facilities = filteration(json_decode($_POST['facilities']));
+    $frm_data = filteration($_POST);
+   
+    $flag=0;
+
+    
 
 
     $q1 = "INSERT INTO `rooms`(`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
-    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['description']];
+    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
     
-    if(insert($q1,$values,'ssiiiis')){
+    if(insert($q1,$values,'siiiiis')){
       $flag=1;
     }
 
-  $room_ID = mysqli_insert_id($db);
+    $room_ID = mysqli_insert_id($db);
     
     $q2 = "INSERT INTO `room_facilities`(`room_ID`, `fac_ID`) VALUES (?,?)";
 
@@ -36,7 +38,7 @@
       die('Query cannot be prepared - Insert');
     }
 
-    $q3 = "INSERT INTO `room_features`(room_ID`, `feat_ID`) VALUES (?,?)";
+    $q3 = "INSERT INTO `room_features`(`room_ID`, `features_ID`) VALUES (?,?)";
 
     if($stmt = mysqli_prepare($db,$q3)){
       foreach($features as $f){

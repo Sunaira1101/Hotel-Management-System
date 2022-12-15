@@ -171,28 +171,31 @@
 
    function add_rooms(){   
     let data = new FormData(); 
+
+    data.append('add_rooms','');
     data.append('name',roomsSettings_form.elements['name'].value); 
     data.append('area',roomsSettings_form.elements['area'].value); 
     data.append('price',roomsSettings_form.elements['price'].value); 
-    data.append('quatity',roomsSettings_form.elements['quatity'].value); 
+    data.append('quantity',roomsSettings_form.elements['quantity'].value); 
     data.append('adult',roomsSettings_form.elements['adult'].value); 
     data.append('children',roomsSettings_form.elements['children'].value); 
     data.append('desc',roomsSettings_form.elements['desc'].value); 
-    data.append('add_rooms',''); 
-
+     
     let features = [];
 
-    roomsSettings_form.elements['features'].forEach(opt =>{ //foreach traverses array
-      if(opt.checked){
-        features.push(opt.value);
+    roomsSettings_form.elements['features'].forEach(el =>{ //foreach traverses array
+      if(el.checked){
+        console.log(el.value);
+        features.push(el.value);
       }
     });
 
     let facilities = [];
 
-    roomsSettings_form.elements['facilities'].forEach(opt =>{ //foreach traverses array
-      if(opt.checked){
-        facilities.push(opt.value);
+    roomsSettings_form.elements['facilities'].forEach(el =>{ //foreach traverses array
+      if(el.checked){
+        console.log(el.value);
+        facilities.push(el.value);
       }
     });
 
@@ -209,22 +212,20 @@
       modal.hide();
 
       if(this.responseText == 1){
-          console.log('New Features added');
+          console.log('New room added');
           roomsSettings_form.reset();
           // get_features();
         }
         else{
-          console.log('New Features adding failed!');
+          console.log('Room adding failed!');
         }   
     }
 
     xhr.send(data);
-
-    
-
    }
 
-   function get_features(){
+   function get_rooms(){
+    
     let xhr = new XMLHttpRequest();
     xhr.open("POST","fetch/features_facilities_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
@@ -236,100 +237,100 @@
     xhr.send('get_features');
    }
 
-   function remove_features(val){
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/features_facilities_fetch.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+  //  function remove_features(val){
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
+  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-    xhr.onload = function(){
-      if(this.responseText == 1){
-        get_features();
-      }
-      else{
-        console.log('Error in deleting');
-      }
+  //   xhr.onload = function(){
+  //     if(this.responseText == 1){
+  //       get_features();
+  //     }
+  //     else{
+  //       console.log('Error in deleting');
+  //     }
      
-    }
+  //   }
 
-    xhr.send('remove_features='+val); //val=id which wants to remove
+  //   xhr.send('remove_features='+val); //val=id which wants to remove
 
-   }
-
-
+  //  }
 
 
-   // Facilities Fetch
 
-   facilitiesSettings_form.addEventListener('submit',function(e){
-      e.preventDefault();
-      add_facilities();
-   });
 
-   function add_facilities(){   // add data
-    let data = new FormData(); //formdata = object
-    data.append('name',facilitiesSettings_form.elements['facilities_name'].value); 
-    data.append('icon',facilitiesSettings_form.elements['facilities_icon'].files[0]);
-    data.append('description',facilitiesSettings_form.elements['facilities_desc'].value);
-    data.append('add_facilities',''); //pass index value
+  //  // Facilities Fetch
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/features_facilities_fetch.php",true);
+  //  facilitiesSettings_form.addEventListener('submit',function(e){
+  //     e.preventDefault();
+  //     add_facilities();
+  //  });
 
-    xhr.onload = function(){
+  //  function add_facilities(){   // add data
+  //   let data = new FormData(); //formdata = object
+  //   data.append('name',facilitiesSettings_form.elements['facilities_name'].value); 
+  //   data.append('icon',facilitiesSettings_form.elements['facilities_icon'].files[0]);
+  //   data.append('description',facilitiesSettings_form.elements['facilities_desc'].value);
+  //   data.append('add_facilities',''); //pass index value
 
-      var myModal = document.getElementById('facilitiesSettings');
-      var modal = bootstrap.Modal.getInstance(myModal); 
-      modal.hide();
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
 
-      if(this.responseText == 'inv_img'){
-        console.log("inv_img");
-        }
-      else{
-        console.log('Facilities added');
-        facilitiesSettings_form.reset();
-        get_facilities();
-      }
+  //   xhr.onload = function(){
 
-    }
+  //     var myModal = document.getElementById('facilitiesSettings');
+  //     var modal = bootstrap.Modal.getInstance(myModal); 
+  //     modal.hide();
 
-    xhr.send(data);
-   }
+  //     if(this.responseText == 'inv_img'){
+  //       console.log("inv_img");
+  //       }
+  //     else{
+  //       console.log('Facilities added');
+  //       facilitiesSettings_form.reset();
+  //       get_facilities();
+  //     }
 
-   function get_facilities(){
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/features_facilities_fetch.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+  //   }
 
-    xhr.onload = function(){
-      document.getElementById('facilities-data').innerHTML = this.responseText;
-    }
+  //   xhr.send(data);
+  //  }
 
-    xhr.send('get_facilities');
-   }
+  //  function get_facilities(){
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
+  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-   function remove_facilities(val){
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/features_facilities_fetch.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+  //   xhr.onload = function(){
+  //     document.getElementById('facilities-data').innerHTML = this.responseText;
+  //   }
 
-    xhr.onload = function(){
-      if(this.responseText == 1){
-        get_facilities();
-      }
-      else{
-        console.log('Error in deleting');
-      }
+  //   xhr.send('get_facilities');
+  //  }
+
+  //  function remove_facilities(val){
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.open("POST","fetch/features_facilities_fetch.php",true);
+  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+  //   xhr.onload = function(){
+  //     if(this.responseText == 1){
+  //       get_facilities();
+  //     }
+  //     else{
+  //       console.log('Error in deleting');
+  //     }
      
-    }
+  //   }
 
-    xhr.send('remove_facilities='+val); //val=id which wants to remove
+  //   xhr.send('remove_facilities='+val); //val=id which wants to remove
 
-   }
+  //  }
 
-   window.onload = function(){
-    get_features();
-    get_facilities();
-   }
+  //  window.onload = function(){
+  //   get_features();
+  //   get_facilities();
+  //  }
 
 
 
