@@ -375,7 +375,7 @@
    function submit_edit_room(){   
     let data = new FormData(); 
 
-    data.append('editRoom','');
+    data.append('submit_edit_room','');
     data.append('room_ID',editRooms_form.elements['room_ID'].value);
     data.append('name',editRooms_form.elements['name'].value); 
     data.append('area',editRooms_form.elements['area'].value); 
@@ -408,6 +408,7 @@
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST","fetch/rooms_fetch.php",true);
+    
 
     xhr.onload = function(){
 
@@ -427,6 +428,8 @@
 
     xhr.send(data);
    }
+
+  
 
 
 
