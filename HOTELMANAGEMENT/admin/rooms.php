@@ -214,7 +214,7 @@
       if(this.responseText == 1){
           console.log('New room added');
           roomsSettings_form.reset();
-          // get_features();
+          get_rooms();
         }
         else{
           console.log('Room adding failed!');
@@ -235,6 +235,25 @@
     }
 
     xhr.send('get_rooms');
+   }
+
+   function toggle_status(id,val){
+    
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/rooms_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      if(this.responseText == 1){
+          console.log('Status Changed');
+          get_rooms();
+        }
+        else{
+          console.log('Status Changing Failed!');
+        }  
+    }
+
+    xhr.send('toggle_status='+id+'&value='+val);
    }
 
   //  function remove_features(val){

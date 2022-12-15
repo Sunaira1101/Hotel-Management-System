@@ -66,14 +66,11 @@
     
     while($row = mysqli_fetch_assoc($res)){
       if($row['status']==1){
-        $status = "<button class='btn btn-dark btn-sm shadow-none'>ACTIVE</button>";
+        $status = "<button onclick='toggle_status($row[R_ID],0)' class='btn btn-dark btn-sm shadow-none'>ACTIVE</button>";
       }
       else{
-        $status = "<button class='btn btn-danger btn-sm shadow-none'>INACTIVE</button>";
+        $status = "<button onclick='toggle_status($row[R_ID],1)' class='btn btn-danger btn-sm shadow-none'>INACTIVE</button>";
       }
-      
-      
-      
       
       $data.="
         <tr class='align-middle'>
@@ -98,6 +95,28 @@
     }
     echo $data;
   }
+
+  if(isset($_POST['toggle_status'])){
+    
+    $frm_data = filteration($_POST);
+
+    $q = "UPDATE `rooms` SET `status`=? WHERE `R_ID`=?";
+    $v =  [$frm_data['value'],$frm_data['toggle_status']];
+
+    if(update($q,$v,'ii')){
+      echo 1;
+    }
+    else{
+      echo 0;
+    }
+   
+   
+
+  }
+
+  
+
+
 
   // if(isset($_POST['remove_features'])){
   //   $frm_data = filteration($_POST);
