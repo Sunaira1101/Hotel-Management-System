@@ -562,6 +562,33 @@
 
    }
 
+   function remove_room(room_id){
+    if(confirm("Do you want to delete this room?")){
+      let data = new FormData();
+      data.append('room_id',room_id); 
+      data.append('remove_room',''); 
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","fetch/rooms_fetch.php",true);
+      
+
+      xhr.onload = function(){
+
+      if(this.responseText == 1){
+        console.log('Room deleted');
+        get_rooms();
+        }
+        else{
+          console.log('Room not deleted');
+        }   
+      }
+      
+        xhr.send(data);
+
+    }
+   }
+
+
   
 
 
