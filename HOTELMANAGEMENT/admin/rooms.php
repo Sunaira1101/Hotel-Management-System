@@ -501,7 +501,7 @@
     data.append('add_image',''); 
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/rooms_fetch",true);
+    xhr.open("POST","fetch/rooms_fetch.php",true);
     
 
     xhr.onload = function(){

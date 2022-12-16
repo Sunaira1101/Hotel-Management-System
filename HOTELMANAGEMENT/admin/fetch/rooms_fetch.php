@@ -221,7 +221,7 @@
     
     $frm_data = filteration($_POST);
 
-    $img_res = uploadImage($_FILES['image'], ROOMS_FOLDER); //rname created in func.php
+    $img_res = uploadImage($_FILES['image'],ROOMS_FOLDER); //rname created in func.php
 
     if($img_res == 'inv_img'){
       echo $img_res;
@@ -230,8 +230,8 @@
       echo $img_res;
     }
     else{
-      $q = "INSERT INTO `room_images`(`room_ID`, `image`) VALUES (?,?)";
-      $values = [$frm_data['room_ID'],$img_res];
+      $q = "INSERT INTO `room_images`(`room_id`, `image`) VALUES (?,?)";
+      $values = [$frm_data['room_id'],$img_res];
       $res = insert($q,$values,'is');
       echo $res;
     }
