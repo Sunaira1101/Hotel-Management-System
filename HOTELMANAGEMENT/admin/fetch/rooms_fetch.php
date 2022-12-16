@@ -249,9 +249,20 @@
     
     while($row = mysqli_fetch_assoc($res)){
       
+      if($row['thumb']==1){
+        $thumb_btn = "<i class='bi bi-check-lg text-light bg-success px-2 py-1 rounded fs-5'></i>";
+      }
+      else{
+        $thumb_btn = "<button onclick='thumb_image($row[sr_no],$row[room_id])' class='btn btn-secondary btn-sm shadow-none'>
+        <i class='bi bi-check-lg'></i>
+        </button>";
+      }
+      
+      
       echo <<<data
         <tr class='align-middle'>
           <td><img src='$path$row[image]' class='img-fluid'></td>
+          <td>$thumb_btn</td>
           <td>
           <button onclick='rem_image($row[sr_no],$row[room_id])' class='btn btn-danger btn-sm shadow-none'>
             <i class='bi bi-trash'></i>DELETE
@@ -282,6 +293,16 @@
       echo 0;
     }
    
+  }
+
+  if(isset($_POST['thumb_image'])){
+    $frm_data = filteration($_POST);
+    
+    $pre_q = "UPDATE `room_images` SET `thumb`=? WHERE `room_id`=?";
+
+
+
+
   }
 
   if(isset($_POST['remove_room'])){
