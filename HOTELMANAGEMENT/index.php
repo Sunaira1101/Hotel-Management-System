@@ -331,23 +331,22 @@
 
     <div class="container">
       <div class="row justify-content-evenly px-5">
-        <div class="col-2 text-center bg-white shadow rounded py-4 my-3">
-          <img src="images/facilities/f1.jpg" width="80px">
-          <h2 class="mt-3 text-secondary fs-3">WiFi</h2>
-        </div>
-        <div class="col-2 text-center bg-white shadow rounded py-4 my-3">
-          <img src="images/facilities/f2.jpg" width="80px">
-          <h2 class="mt-3 text-secondary fs-3">Spa</h2>
-        </div>
-        <div class="col-2 text-center bg-white shadow rounded py-4 my-3">
-          <img src="images/facilities/f3.png" width="80px">
-          <h2 class="mt-3 text-secondary fs-3">Parking</h2>
-        </div>
-        <div class="col-2 text-center bg-white shadow rounded py-4 my-3">
-          <img src="images/facilities/f4.png" width="80px">
-          <h2 class="mt-3 text-secondary fs-3">Gym</h2>
-        </div>
-      </div>
+      <?php
+
+        $res = mysqli_query($db,"SELECT * FROM `facilities` ORDER BY `facilities_ID` ASC LIMIT 4");      
+        $path = FACILITIES_IMG_PATH; 
+
+        while($row = mysqli_fetch_assoc($res)){
+          echo<<<data
+          
+            <div class="col-2 text-center bg-white shadow rounded py-4 my-3">
+              <img src="$path$row[icon]" width="80px">
+              <h2 class="mt-3 text-secondary fs-3">$row[name]</h2>
+            </div>
+
+          data;
+        }
+      ?>
 
       <div class="col-12 text-center mt-5">
         <a href="facilities.php" class="btn btn-outline-success fw-bolder shadow fs-4">MORE FACILITIES <i class="bi bi-arrow-right-circle"></i></a>
