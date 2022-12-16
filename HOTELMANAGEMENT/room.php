@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOTEL PARADISE - CONTACT</title>
+    <title>HOTEL PARADISE - ROOM</title>
     <?php require('links.php'); ?>
 
 
@@ -92,7 +92,7 @@
 
           //get thumbnail
 
-          $room_thumb = ROOMS_IMG_PATH."thumbnail.jpg";
+          $room_thumb = ROOMS_IMG_PATH."r1.jpg";
           $thumb_q = mysqli_query($db, "SELECT * FROM `room_images` 
             WHERE `room_id`='$room_data[R_ID]' AND `thumb`='1'");
 
@@ -121,7 +121,7 @@
                     $facilities_data
                   </div>
 
-                  <div class="facilities mb-4">
+                  <div class="guests mb-4">
                     <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
                     <span class="text-dark badge rounded-pill bg-light">
                       <li> <i>$room_data[adult] adults</i></li> 
@@ -130,15 +130,13 @@
                       <li> <i>$room_data[children] children</i></li> 
                     </span>
                   </div>
-
-
-
                 </div>
+
                 <div class="col-md-2">
                     <a href="#" class="btn btn-dark w-100 text-white mb-2  ">BOOK NOW</a>
-                    <a href="#" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
-                  
+                    <a href="room_details.php?id=$room_data[R_ID]" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
                 </div>
+
               </div>
           </div>
 
