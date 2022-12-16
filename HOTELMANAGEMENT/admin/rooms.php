@@ -511,6 +511,7 @@
         }
         else{
          console.log('Image added');
+         room_images(add_image_form.elements['room_id'].value,document.querySelector("#room-images .modal-title").innerText);
          add_image_form.reset();
         }   
     }
@@ -522,6 +523,17 @@
    function room_images(id,rname){
     document.querySelector("#room-images .modal-title").innerText = rname;
     add_image_form.elements['room_id'].value = id;
+    add_image_form.elements['image'].value = '';
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/rooms_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      document.getElementById('room-image-data').innerHTML = this.responseText;
+    }
+
+    xhr.send('get_room_images='+id);
    }
 
   
