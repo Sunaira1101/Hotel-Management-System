@@ -536,6 +536,32 @@
     xhr.send('get_room_images='+id);
    }
 
+   function rem_image(img_id,room_id){
+    let data = new FormData(); 
+    data.append('image_id',img_id);
+    data.append('room_id',room_id); 
+    data.append('rem_image',''); 
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/rooms_fetch.php",true);
+    
+
+    xhr.onload = function(){
+
+      if(this.responseText == 1){
+        console.log('Image deleted');
+        room_images(room_id,document.querySelector("#room-images .modal-title").innerText);
+        }
+        else{
+          console.log('Image not deleted');
+        }   
+    }
+   
+     xhr.send(data);
+
+
+   }
+
   
 
 
