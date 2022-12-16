@@ -24,44 +24,145 @@
     </p>
   </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
 
-      <div class="col-3">
-        
+    <div class="col-3 mb-4 ps-4">    
       <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
-    <div class="container-fluid flex-column align-items-stretch">   <!--to make one after another not sideways-->
-    <h2 class="mt-2 text-center">Options</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#optionsDropdown" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse flex-column mt-3 align-items-stretch" id="optionsDropdown">
-      <div class="border bg-light p-4 mb-3 rounded">
-        <h3 class="mb-3" style="font-size:16px;">CHECK AVAILABILITY</h3>
-        <label class="form-label">CHECK-IN</label>
-            <input type="date" class="form-control">
-        <label class="form-label">CHECK-OUT</label>
-            <input type="date" class="form-control">
-         
-      </div>
+        <div class="container-fluid flex-column align-items-stretch">   <!--to make one after another not sideways-->
+          <h2 class="mt-2 text-center">Options</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#optionsDropdown" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+              <div class="collapse navbar-collapse flex-column mt-3 align-items-stretch" id="optionsDropdown">
+                <div class="border bg-light p-4 mb-3 rounded">
+                  <h3 class="mb-3" style="font-size:16px;">CHECK AVAILABILITY</h3>
+                  <label class="form-label">CHECK-IN</label>
+                      <input type="date" class="form-control">
+                  <label class="form-label">CHECK-OUT</label>
+                      <input type="date" class="form-control">
+                
+                 </div>
 
-      <div class="border bg-light p-4 mb-3 rounded">
-        <h3 class="mb-3" style="font-size:16px;">GUESTS</h3>
-        <label class="form-label">Adults</label>
-            <input type="number" class="form-control shadow-none">
-        <label class="form-label">Children</label>
-            <input type="number" class="form-control shadow-none">
-         
-      </div>
-
-     
+                    <div class="border bg-light p-4 mb-3 rounded">
+                      <h3 class="mb-3" style="font-size:16px;">GUESTS</h3>
+                      <label class="form-label">Adults</label>
+                          <input type="number" class="form-control shadow-none">
+                      <label class="form-label">Children</label>
+                          <input type="number" class="form-control shadow-none">
+                      
+                    </div>
+               </div>
+         </div>
+      </nav>
     </div>
-  </div>
-</nav>
-      </div>
 
       <div class="col-9 px-4">
-        <div class="card mb-3">
+
+       <?php
+         $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=?",[1,0],'ii');
+
+         while($room_data = mysqli_fetch_assoc($room_res)){
+
+          $fea_q = mysqli_query($db,"SELECT f.name FROM `features` f 
+            INNER JOIN `room_features` rfea ON f.feature_ID = rfea.features_ID
+            WHERE rfea.room_ID = '$room_data[R_ID]'");
+
+          $features_data = "";
+          while($fea_row = mysqli_fetch_assoc($fea_q)){
+            $features_data .="<span class='text-dark badge rounded-pill bg-light'>
+              <li> <i>$fea_row[name]</i></li> 
+            </span>";
+          }
+
+          $fac_q = mysqli_query($db,"SELECT f.name FROM `facilities` f 
+              INNER JOIN `room_facilities` rfac ON f.facilities_ID = rfac.fac_ID
+              WHERE rfac.room_ID = '$room_data[R_ID]'");
+
+          $facilities_data = "";
+          while($fac_row = mysqli_fetch_assoc($fac_q)){
+            $facilities_data .="<span class='text-dark badge rounded-pill bg-light'>
+              <li> <i>$fac_row[name]</i></li> 
+            </span>";
+          }
+
+          echo <<<data
+            <div class="card mb-3">
+              <div class="row g-0 p-4 align-items-center">
+                <div class="col-md-5">
+                  <img src="images/rooms/r1.jpg" class="img-fluid rounded-start" >
+                </div>
+                <div class="col-md-5 px-4">
+                  <h2 class="mb-2" style="font-size: 28px;">Double Room</h2>
+                  <h3 style="font-size: 16px; font-style: italic;">Tk. 16,000 per night</h3>
+
+                  <div class="features mb-3">
+                    <h6 class="mb-1 mt-4 fw-bold">Features</h6>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>18 m2 room</i></li> 
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>1 toilet</i></li> 
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li><i>Balcony</i></li>
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>2 sofa</i> </li>
+                    </span>
+                  </div>
+
+                  <div class="facilities mb-3">
+                    <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>Flat-Screened TV</i></li> 
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>WiFi</i></li> 
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li><i>Air-conditioner</i></li>
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>Room Heater</i> </li>
+                    </span>
+                  </div>
+
+                  <div class="facilities mb-4">
+                    <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>2 adults</i></li> 
+                    </span>
+                    <span class="text-dark badge rounded-pill bg-light">
+                      <li> <i>2 children</i></li> 
+                    </span>
+                  </div>
+
+
+
+                </div>
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-dark w-100 text-white mb-2  ">BOOK NOW</a>
+                    <a href="#" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
+                  
+                </div>
+              </div>
+          </div>
+
+
+          data;
+
+
+
+
+
+         }
+
+
+       ?>
+
+
+        <!-- <div class="card mb-3">
           <div class="row g-0 p-4 align-items-center">
             <div class="col-md-5">
               <img src="images/rooms/r1.jpg" class="img-fluid rounded-start" >
@@ -122,11 +223,11 @@
               
             </div>
           </div>
-        </div>
+        </div> -->
 
 
 
-        <div class="card mb-3">
+        <!-- <div class="card mb-3">
           <div class="row g-0 p-4 align-items-center">
             <div class="col-md-5">
               <img src="images/rooms/r2.jpg" class="img-fluid rounded-start" >
@@ -252,14 +353,12 @@
               
             </div>
           </div>
-        </div>
+        </div> -->
 
 
 
 
       </div>
-
-
 
     </div>
   </div>
