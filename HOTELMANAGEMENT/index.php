@@ -138,184 +138,93 @@
     <p style="color: brown;"><i class="bi bi-star-fill"></i><b>MOST POPULAR</b> <i class="bi bi-star-fill"></i></p>
   </h3>
  
-  <!-- ROOM 1 -->
+ 
 
    <div class="container">
     <div class="row justify-content-center">
-        <div class="col-3 my-3 mx-2">
-            <div class="card shadow" style="max-width: 350px; margin: auto;">
-                <img src="images/rooms/r1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="fw-bolder mt-2">Double Room</h5>
-                  <h6> Tk. 16,000 per night</h6>
-                <div class="features mb-4">
-                  <h6 class="mb-1 mt-4 fw-bold">Features</h6>
-                  <span class="text-dark badge rounded-pill bg-light">
-                    <li> <i>18 m2 room</i></li> 
-                  </span>
-                  <span class="text-dark badge rounded-pill bg-light">
-                    <li> <i>1 toilet</i></li> 
-                  </span>
-                  <span class="text-dark badge rounded-pill bg-light">
-                    <li><i>Balcony</i></li>
-                  </span>
-                  <span class="text-dark badge rounded-pill bg-light">
-                    <li> <i>2 sofa</i> </li>
-                  </span>
-                </div>
 
-                <div class="facilities mb-4">
-                    <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>Flat-Screened TV</i></li> 
-                    </span>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>WiFi</i></li> 
-                    </span>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li><i>Air-conditioner</i></li>
-                    </span>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>Room Heater</i> </li>
-                    </span>
-                  </div>
+      <?php
+          $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=? ORDER BY `R_ID` ASC LIMIT 3 ",[1,0],'ii');
 
-                  <div class="facilities mb-4">
-                    <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>2 adults</i></li> 
-                    </span>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>2 children</i></li> 
-                    </span>
-                  </div>
+          while($room_data = mysqli_fetch_assoc($room_res)){
 
-                  <div class="d-flex justify-content-between mb-3">
-                    <a href="#" class="btn btn-dark text-white  ">BOOK NOW</a>
-                    <a href="#" class="btn btn-outline-success text-black shadow ">More Details...</a>
+            //get features
+            
+            $fea_q = mysqli_query($db,"SELECT f.name FROM `features` f 
+              INNER JOIN `room_features` rfea ON f.feature_ID = rfea.features_ID
+              WHERE rfea.room_ID = '$room_data[R_ID]'");
 
-                  </div>
-                </div>
-                </div>
-              </div>
+            $features_data = "";
+            while($fea_row = mysqli_fetch_assoc($fea_q)){
+              $features_data .="<span class='text-dark badge rounded-pill bg-light'>
+                <li> <i>$fea_row[name]</i></li> 
+              </span>";
+            }
 
-  <!-- ROOM 2 -->
+            //get facilities
 
-        <div class="col-3 my-3 mx-2">
+            $fac_q = mysqli_query($db,"SELECT f.name FROM `facilities` f 
+                INNER JOIN `room_facilities` rfac ON f.facilities_ID = rfac.fac_ID
+                WHERE rfac.room_ID = '$room_data[R_ID]'");
+
+            $facilities_data = "";
+            while($fac_row = mysqli_fetch_assoc($fac_q)){
+              $facilities_data .="<span class='text-dark badge rounded-pill bg-light'>
+                <li> <i>$fac_row[name]</i></li> 
+              </span>";
+            }
+
+            //get thumbnail
+
+            $room_thumb = ROOMS_IMG_PATH."r1.jpg";
+            $thumb_q = mysqli_query($db, "SELECT * FROM `room_images` 
+              WHERE `room_id`='$room_data[R_ID]' AND `thumb`='1'");
+
+            if(mysqli_num_rows($thumb_q)>0){
+              $thumb_res = mysqli_fetch_assoc($thumb_q);
+              $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
+            }
+
+            echo <<<data
+
+                <div class="col-3 my-3 mx-2">
                 <div class="card shadow" style="max-width: 350px; margin: auto;">
-                    <img src="images/rooms/r2.jpg" class="card-img-top" alt="...">
+                    <img src="$room_thumb" class="card-img-top">
                     <div class="card-body">
-                      <h5 class="fw-bolder mt-2">Deluxe Room</h5>
-                      <h6> Tk. 24,000 per night</h6>
+                      <h5 class="fw-bolder mt-2">$room_data[name]</h5>
+                      <h6 style="font-size: 16px; font-style: italic;">Tk. $room_data[price] per night</h6>
+                    
                     <div class="features mb-4">
-                      <h6 class="mb-1 mt-4 fw-bold">Features</h6>
-                      <span class="text-dark badge rounded-pill bg-light">
-                        <li> <i>26 m2 room</i></li> 
-                      </span>
-                      <span class="text-dark badge rounded-pill bg-light">
-                        <li> <i>2 rooms</i></li> 
-                      </span>
-                      <span class="text-dark badge rounded-pill bg-light">
-                        <li><i>Balcony</i></li>
-                      </span>
-                      <span class="text-dark badge rounded-pill bg-light">
-                        <li> <i>1 table</i> </li>
-                      </span>
+                      <h6 class="mb-1 mt-4 fw-bold">Features</h6>                    
+                        $features_data
                     </div>
-    
+
                     <div class="facilities mb-4">
-                        <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
-                        <span class="text-dark badge rounded-pill bg-light">
-                          <li> <i>Flat-Screened TV</i></li> 
-                        </span>
-                        <span class="text-dark badge rounded-pill bg-light">
-                          <li> <i>WiFi</i></li> 
-                        </span>
-                        <span class="text-dark badge rounded-pill bg-light">
-                          <li><i>Air-conditioner</i></li>
-                        </span>
-                        <span class="text-dark badge rounded-pill bg-light">
-                          <li> <i>Room Heater</i> </li>
-                        </span>
+                        <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>                       
+                          $facilities_data
                       </div>
 
-                      <div class="facilities mb-4">
+                      <div class="guests mb-4">
                         <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
                         <span class="text-dark badge rounded-pill bg-light">
-                          <li> <i>3 adults</i></li> 
+                          <li> <i>$room_data[adult] adults</i></li> 
                         </span>
                         <span class="text-dark badge rounded-pill bg-light">
-                          <li> <i>2 children</i></li> 
+                          <li> <i>$room_data[children] adults</i></li> 
                         </span>
                       </div>
-    
+
                       <div class="d-flex justify-content-between mb-3">
-                        <a href="#" class="btn btn-dark text-white ">BOOK NOW</a>
-                        <a href="#" class="btn btn-outline-success text-black shadow">More Details...</a>
-    
+                        <a href="#" class="btn btn-dark text-white  ">BOOK NOW</a>
+                        <a href="room_details.php?id=$room_data[R_ID]" class="btn btn-outline-success text-black shadow ">More Details...</a>
+
                       </div>
                     </div>
                     </div>
-                  </div>
- <!-- ROOM 3-->
-
-      
-        <div class="col-3 my-3 mx-2">
-                    <div class="card shadow" style="max-width: 350px; margin: auto;">
-                        <img src="images/rooms/r3.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="fw-bolder mt-2">Suite Room</h5>
-                          <h6> Tk. 29,000 per night</h6>
-                        <div class="features mb-4">
-                          <h6 class="mb-1 mt-4 fw-bold">Features</h6>
-                          <span class="text-dark badge rounded-pill bg-light">
-                            <li> <i>34 m2 room</i></li> 
-                          </span>
-                          <span class="text-dark badge rounded-pill bg-light">
-                            <li> <i>2 rooms</i></li> 
-                          </span>
-                          <span class="text-dark badge rounded-pill bg-light">
-                            <li><i>Balcony</i></li>
-                          </span>
-                          <span class="text-dark badge rounded-pill bg-light">
-                            <li> <i>Tiled Floor</i> </li>
-                          </span>
-                        </div>
-        
-                        <div class="facilities mb-4">
-                            <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
-                            <span class="text-dark badge rounded-pill bg-light">
-                              <li> <i>Flat-Screened TV</i></li> 
-                            </span>
-                            <span class="text-dark badge rounded-pill bg-light">
-                              <li> <i> WiFi</i></li> 
-                            </span>
-                            <span class="text-dark badge rounded-pill bg-light">
-                              <li><i>Air-conditioner</i></li>
-                            </span>
-                            <span class="text-dark badge rounded-pill bg-light">
-                              <li> <i>Room Heater</i> </li>
-                            </span>
-                          </div>
-
-                          <div class="facilities mb-4">
-                            <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
-                            <span class="text-dark badge rounded-pill bg-light">
-                              <li> <i>3 adults</i></li> 
-                            </span>
-                            <span class="text-dark badge rounded-pill bg-light">
-                              <li> <i>4 children</i></li> 
-                            </span>
-                          </div>
-        
-                          <div class="d-flex justify-content-between-evenly mb-3">
-                            <a href="#" class="btn btn-dark text-white ">BOOK NOW</a>
-                            <a href="#" class="btn btn-outline-success text-black shadow">More Details...</a>
-        
-                          </div>
-                        </div>
-                        </div>
-                  </div>   
+              </div>
+            data;
+          }
+        ?>
                   
         <div class="col-12 text-center mt-5">
             <a href="room.php" class="btn btn-outline-success fw-bolder shadow fs-4">MORE ROOMS <i class="bi bi-arrow-right-circle"></i></a>
