@@ -77,7 +77,7 @@ require('admin/extra/func.php');
         </form>
       </div>
     </div>
-  </div>
+</div>
 
   <div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
