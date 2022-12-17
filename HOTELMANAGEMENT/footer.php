@@ -43,14 +43,48 @@
         <a href="<?php echo $contact_res['tw']?>" target="_blank" class="d-inline-block  text-dark text-decoration-none"> 
           <i class="bi bi-twitter me-2"></i> Twitter    
         </a>
-        
-
-
       </div>
-
     </div>
-
-
   </div>
 
   <h3 class="text-center bg-dark text-white p-1 m-0 fs-6">© 2022 HOTEL PARADISE. All rights reserved.</h3>
+
+  <script>
+
+    let signup_form = document.getElementById('signup-form');
+
+    signup_form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+
+      let data = new FormData();
+
+      data.append('name',signup_form.elements['name'].value);
+      data.append('email',signup_form.elements['email'].value);
+      data.append('phonenum',signup_form.elements['phonenum'].value);
+      data.append('dob',signup_form.elements['dob'].value);
+      data.append('address',signup_form.elements['address'].value);
+      data.append('pass',signup_form.elements['pass'].value);
+      data.append('cpass',signup_form.elements['cpass'].value);
+      data.append('signup','');
+
+      var myModal = document.getElementById('signupmodal');
+      var modal = bootstrap.Modal.getInstance(myModal); 
+      modal.hide();
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","login_signup.php",true);
+
+      xhr.onload = function(){
+        
+      }
+
+      xhr.send(data);
+
+      
+
+
+   });
+
+
+
+  </script>
