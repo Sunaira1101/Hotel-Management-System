@@ -83,7 +83,7 @@ require('admin/extra/func.php');
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
-        <form>
+        <form id="signup-form">
             <div class="modal-header">
                 <h5 class="modal-title align-items-center d-flex">
                     <i class="bi bi-person-fill-add fs-3 me-2 "></i></i> USER SIGN UP
@@ -94,36 +94,32 @@ require('admin/extra/func.php');
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 ps-0 mb-3">
-                            <label class="form-label">First Name</label>
-                            <input type="text" class="form-control">
+                            <label class="form-label">Name</label>
+                            <input name="name" type="text" class="form-control shadow-none" required>
                         </div>
-                    <div class="col-md-6 p-0 mb-3">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control">
-                    </div>
                     <div class="col-md-6 ps-0 mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control">
+                        <input name="email" type="email" class="form-control shadow-none" required>
                     </div>
-                    <div class="col-md-6 p-0 mb-3">
+                    <div class="col-md-6 ps-0 mb-3">
                         <label class="form-label">Phone Number</label>
-                        <input type="number" class="form-control">
-                    </div>
-                    <div class="col-md-12 ps-0 mb-3"> 
-                        <label class="form-label">Address</label>
-                        <textarea class="form-control" rows="1"></textarea>
+                        <input name="phonenum" type="number" class="form-control shadow-none" required>
                     </div>
                     <div class="col-md-6 ps-0 mb-3 ">
                         <label class="form-label">Date Of Birth</label>
-                        <input type="date" class="form-control">
+                        <input name="dob" type="date" class="form-control shadow-none" required>
                     </div>
+                    <div class="col-md-12 ps-0 mb-3"> 
+                        <label class="form-label">Address</label>
+                        <textarea name="address" class="form-control shadow-none" rows="3" required></textarea>
+                    </div>                  
                     <div class="col-md-6 ps-0 mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control">
+                        <input name="pass" type="password" class="form-control shadow-none" required>
                     </div>
                     <div class="col-md-6 p-0 mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control">
+                        <input name="cpass" type="password" class="form-control shadow-none" required>
                     </div>
                     </div>
 
