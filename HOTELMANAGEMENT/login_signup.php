@@ -4,16 +4,25 @@
   require('admin/extra/connect.php');
   require("sendgrid/sendgrid-php.php");
 
-  function send_mail(){
+  function send_mail($email,$name,$token){
       
       $email = new \SendGrid\Mail\Mail(); 
-      $email->setFrom("test@example.com", "Example User");
-      $email->setSubject("Sending with SendGrid is Fun");
-      $email->addTo("test@example.com", "Example User");
+      $email->setFrom("fahrin.sunaira@northsouth.edu", "HOTEL MANAGEMENT");
+      $email->setSubject("Account Verification Link");
+
+      $email->addTo($email,$name);
+
       $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
       $email->addContent(
-          "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
+          "text/html", 
+          "<strong>Click the link to confirm your email: </strong>
+          <br>
+          <a href='".SITE_URL."email_confirm.php?email=$email&token=$token"."'>
+            CLICK
+          </a>
+          "
       );
+      
       $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
       try {
           $response = $sendgrid->send($email);
@@ -23,7 +32,7 @@
       } catch (Exception $e) {
           echo 'Caught exception: '. $e->getMessage() ."\n";
       }
-      
+
     }
 
 
@@ -48,6 +57,9 @@
     }
 
     //send confirmation link
+
+    $token = bin2hex(random_bytes(16));
+    send_mail($data['email'],$data['name'],$token);
 
 
 

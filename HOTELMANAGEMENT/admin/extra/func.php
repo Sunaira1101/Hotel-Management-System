@@ -14,6 +14,10 @@ define('SLIDER_FOLDER','firstslider/');
 define('FACILITIES_FOLDER','facilities/');
 define('ROOMS_FOLDER','rooms/');
 
+//sendgrid API KEY
+
+define('SENDGRID_API_KEY',"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");
+
 function adminLogin(){
     session_start();
     if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true)){
