@@ -72,7 +72,7 @@
                     <input type="email" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Password : <br> </label>
+                    <label class="form-label">Password <br> </label>
                     <input type="password" class="form-control">
                   </div>
                   <br> 
