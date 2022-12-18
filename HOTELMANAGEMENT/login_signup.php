@@ -22,7 +22,9 @@
         exit;
     }
 
-    //
+    //send confirmation link
+
+    
 
 
 
