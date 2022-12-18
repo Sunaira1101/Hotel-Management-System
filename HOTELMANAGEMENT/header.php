@@ -1,15 +1,22 @@
 <?php 
 
-require('admin/extra/connect.php');
-require('admin/extra/func.php');
+  require('admin/extra/connect.php');
+  require('admin/extra/func.php');
+
+  $settings_q = "SELECT * FROM `settings` WHERE `S_ID`=?";
+  $values = [1];
+  $settings_r = mysqli_fetch_assoc(select($settings_q,$values,'i'));
+
 
 ?>
 
 
 
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary px-2 py-3 shadow-lg sticky-top border-bottom border-3 border-outline">
   <div class="container-fluid">
-     <a class="navbar-brand me-4 fw-bolder fs-1 font-three " href="index.php">HOTEL PARADISE</a>     <!-- return to index.php whenever click on hotel name -->
+     <a class="navbar-brand me-4 fw-bolder fs-1 font-three " href="index.php"><?php echo $settings_r['site_title'] ?></a>     <!-- return to index.php whenever click on hotel name -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

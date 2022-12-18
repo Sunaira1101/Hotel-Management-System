@@ -6,15 +6,17 @@
   ?>
 
 
-<div class="container-fluid bg-light mt-5 border-top border-2 border-dark">
+<div class="container-fluid col-12 bg-light mt-5 border-top border-2 border-dark" style="width: 100%;">
     <div class="row mt-4">
       <div class="col-4">
-        <h2 class="h-font fw-bold fs-3 mb-2">HOTEL PARADISE</h2>
+        <h2 class="h-font fw-bold fs-3 mb-2"><?php echo $settings_r['site_title'] ?></h2>
         <p style="font-style:italic ;">
-          <br> Located in the prestigious downtown business district,
+          <!-- <br> Located in the prestigious downtown business district,
          Hotel Paradise is the foremost name of luxury. The hotel is beautifully designed 
          boasted with Millennium modern outlook with a touch of local culture. Featuring 226 luxury
-         rooms and suites, and restaurants offering exquisite cuisines.
+         rooms and suites, and restaurants offering exquisite cuisines. -->
+         <br>
+         <?php echo $settings_r['site_about'] ?>
         </p>
 
       </div>
@@ -45,9 +47,9 @@
         </a>
       </div>
     </div>
-  </div>
+</div>
 
-  <h3 class="text-center bg-dark text-white p-1 m-0 fs-6">© 2022 HOTEL PARADISE. All rights reserved.</h3>
+<h3 class="text-center bg-dark text-white p-1 m-0 fs-6">© 2022 HOTEL PARADISE. All rights reserved.</h3>
 
   <script>
 
