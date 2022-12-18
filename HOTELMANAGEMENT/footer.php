@@ -53,6 +53,8 @@
 
   <script>
 
+    // SIGN-UP FORM
+    
     let signup_form = document.getElementById('signup-form');
 
     signup_form.addEventListener('submit',(e)=>{
@@ -106,6 +108,52 @@
 
 
    });
+
+    // LOGIN FORM
+
+    let login_form = document.getElementById('login-form');
+
+    login_form.addEventListener('submit',(e)=>{
+      e.preventDefault();
+
+      let data = new FormData();
+
+      data.append('email_phone',login_form.elements['email_phone'].value);
+      data.append('pass',login_form.elements['pass'].value);
+      data.append('login','');
+
+      var myModal = document.getElementById('loginmodal');
+      var modal = bootstrap.Modal.getInstance(myModal); 
+      modal.hide();
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","login_signup.php",true);
+
+      xhr.onload = function(){
+        if(this.responseText == 'inv_email_phone'){
+          console.log("inv_email_phone");
+        }
+        else if(this.responseText == 'user_inactive'){
+          console.log("user_inactive");
+        }
+        else if(this.responseText == 'invalid_password'){
+          console.log("invalid_password");
+        }
+        else{
+          window.location = window.location.pathname;
+          
+        }
+        
+        
+      }
+
+      xhr.send(data);
+
+      
+
+
+   });
+    
 
 
 

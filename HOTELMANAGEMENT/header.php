@@ -37,18 +37,45 @@
         <li class="nav-item">
           <a class="nav-link active me-2" aria-current="page" href="about.php">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active me-2" aria-current="page" href="#">Help</a>
-        </li>
       </ul>
 
       <div class="d-flex">
-        <button type="button" class="btn btn-light shadow-none" style="border-color:black; border-width: 2px; margin-right: 5px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#loginmodal">
-            LOGIN
-          </button>
-          <button type="button" class="btn btn-light shadow-none" style="border-color:black; border-width: 2px; margin-right: 2px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#signupmodal">
-            SIGN UP
-          </button>
+        <?php
+          session_start();
+
+          if(isset($_SESSION['login']) && $_SESSION['login']==true){
+
+            echo<<<data
+              <div class="btn-group">
+                <button type="button" class="btn btn-light shadow-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                 $_SESSION[uName]
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                  <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                  <li><a class="dropdown-item" href="bookings.php">Bookings</a></li>
+                  <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
+                </ul>
+              </div>
+            data;
+          }
+
+          else{
+            echo<<<data
+              <button type="button" class="btn btn-light shadow-none" style="border-color:black; border-width: 2px; margin-right: 5px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#loginmodal">
+                LOGIN
+              </button>
+              <button type="button" class="btn btn-light shadow-none" style="border-color:black; border-width: 2px; margin-right: 2px; padding-top: 8px;" data-bs-toggle="modal" data-bs-target="#signupmodal">
+                SIGN UP
+              </button>
+            data;
+          }
+         
+          
+
+        ?>
+
+
+        
         
       </div>
     </div>
@@ -59,7 +86,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
 
-        <form>
+        <form id="login-form">
             <div class="modal-header">
                 <h5 class="modal-title align-items-center d-flex">
                     <i class="bi bi-person-check fs-3 me-2"></i> USER LOGIN
@@ -68,12 +95,12 @@
               </div>
               <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Email address<br> </label>
-                    <input type="email" class="form-control">
+                    <label class="form-label">Email / Phone<br> </label>
+                    <input type="text" name="email_phone" required class="form-control shadow-none">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password <br> </label>
-                    <input type="password" class="form-control">
+                    <input type="password" name="pass" required class="form-control shadow-none">
                   </div>
                   <br> 
                 <div class="align-items-center d-flex justify-content-between ">
