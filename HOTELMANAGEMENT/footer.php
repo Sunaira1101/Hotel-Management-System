@@ -75,6 +75,26 @@
       xhr.open("POST","login_signup.php",true);
 
       xhr.onload = function(){
+        if(this.responseText == 'password_mismatch'){
+          console.log("pass_mismatch");
+        }
+        else if(this.responseText == 'email_registered_already'){
+          console.log("email_registered_already");
+        }
+        else if(this.responseText == 'phone_registered_already'){
+          console.log("phone_registered_already");
+        }
+        // else if(this.responseText == 'mail_failed'){
+        //   console.log("mail_failed");
+        // }
+        else if(this.responseText == 'ins_failed'){
+          console.log("ins_failed");
+        }
+        else{
+          console.log("success reg email sent");
+          signup_form.reset();
+        }
+        
         
       }
 

@@ -2,47 +2,44 @@
   
   require('admin/extra/func.php');
   require('admin/extra/connect.php');
-  require("sendgrid/sendgrid-php.php");
+  //require("sendgrid/sendgrid-php.php");
 
-  function send_mail($email,$name,$token){
+  // function send_mail($uemail,$name,$token){
       
-      $email = new \SendGrid\Mail\Mail(); 
-      $email->setFrom("fahrin.sunaira@northsouth.edu", "HOTEL MANAGEMENT");
-      $email->setSubject("Account Verification Link");
+  //     $email = new \SendGrid\Mail\Mail(); 
+  //     $email->setFrom("fahrin.sunaira@northsouth.edu", "HOTEL MANAGEMENT");
+  //     $email->setSubject("Account Verification Link");
 
-      $email->addTo($email,$name);
+  //     $email->addTo($uemail,$name);
 
-      $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-      $email->addContent(
-          "text/html", 
-          "<strong>Click the link to confirm your email: </strong>
-          <br>
-          <a href='".SITE_URL."email_confirm.php?email=$email&token=$token"."'>
-            CLICK
-          </a>
-          "
-      );
-      
-      $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-      try {
-          $response = $sendgrid->send($email);
-          print $response->statusCode() . "\n";
-          print_r($response->headers());
-          print $response->body() . "\n";
-      } catch (Exception $e) {
-          echo 'Caught exception: '. $e->getMessage() ."\n";
-      }
+  //     $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
+  //     $email->addContent(
+  //         "text/html", 
+  //         "<strong>Click the link to confirm your email: </strong>
+  //         <br>
+  //         <a href='".SITE_URL."email_confirm.php?email=$uemail&token=$token"."'>
+  //           CLICK
+  //         </a>
+  //         "
+  //     );
 
-    }
-
-
+  //     $sendgrid = new \SendGrid(SENDGRID_API_KEY); 
+          
+  //         try{
+  //           $sendgrid->send($email);
+  //           return 1;
+  //         }
+  //         catch(Exception $e){
+  //           return 0;
+  //         }
+  // }
 
   if(isset($_POST['signup'])){
 
     $data = filteration($_POST);
 
     if($data['pass'] != $data['cpass']){
-        echo 'password not matching';
+        echo 'password_mismatch';
         exit;
     }
 
@@ -58,8 +55,27 @@
 
     //send confirmation link
 
-    $token = bin2hex(random_bytes(16));
-    send_mail($data['email'],$data['name'],$token);
+    // $token = bin2hex(random_bytes(16));
+
+    // if(!send_mail($data['email'],$data['name'],$token)){
+    //   echo 'mail_failed';
+    //   exit;
+    // }
+
+    $enc_pass = password_hash($data['pass'],PASSWORD_BCRYPT); //encrypt password
+
+    $query = "INSERT INTO `user_info`(`name`, `email`, `phonenum`, `dob`, `address`, `password`) VALUES (?,?,?,?,?,?)";
+
+    $values = [$data['name'],$data['email'],$data['phonenum'],$data['dob'],$data['address'],$enc_pass];
+
+    if(insert($query,$values,'ssssss')){
+      echo 1;
+    }
+    else{
+      echo 'ins_failed'; //insertion query
+    }
+
+
 
 
 
