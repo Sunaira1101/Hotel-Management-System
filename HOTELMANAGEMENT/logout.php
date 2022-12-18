@@ -1,6 +1,6 @@
 <?php
 
-require('extra/func.php');
+require('admin/extra/func.php');
 
 session_start();
 session_destroy();
