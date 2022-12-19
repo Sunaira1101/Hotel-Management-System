@@ -148,11 +148,18 @@
       }
 
       xhr.send(data);
-
-      
-
-
    });
+
+   //booking login confirmation
+
+   function checkLoginToBook(status,room_id){
+    if(status){
+      window.location.href='confirm_booking.php?id='+room_id;
+    }
+    else{
+      console.log('Please login to book room!');
+    }
+   }
     
 
 
