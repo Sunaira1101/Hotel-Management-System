@@ -122,24 +122,24 @@
                 </div>
                 <div class="col-6 mb-3">
                   <label class="form-label">Check-In</label>
-                  <input name="checkin" type="date" class="form-control shadow-none" required>
+                  <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none" required>
                 </div>
                 <div class="col-6 mb-3">
                   <label class="form-label">Check-Out</label>
-                  <input name="checkout" type="date" class="form-control shadow-none" required>
+                  <input name="checkout" onchange="check_availability()" type="date" class="form-control shadow-none" required>
                 </div>
                 <div class="col-12">
+                  
                   <h2 class="mb-3 text-danger fs-6 mt-4" id="pay_info">Please provide check-in check-out date!</h2>
+                  
                   <button name="pay_now" class="btn btn-secondary w-100 text-white shadow-none mb-1" disabled>Proceed To Payment</button>
+                
                 </div>
               </div>
             </form>
           </div>
         </div>  
       </div>
-
-    
-
     </div>
   </div>
   <br><br><br>
@@ -159,6 +159,38 @@
 <script>
 
   let booking_form = document.getElementById('booking_form');
+  let pay_info = document.getElementById('pay_info');
+
+  function check_availability(){
+
+    let checkin_val = booking_form.elements['checkin'].value;
+    let checkout_val = booking_form.elements['checkout'].value;
+
+    booking_form.elements['pay_now'].setAttribute('disabled',true);
+
+    if(checkin_val!='' && checkout_val!=''){
+
+      let data = new FormData();
+
+      data.append('check_availability','');
+      data.append('check_in',checkin_val);
+      data.append('check_out',checkout_val);
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","confirm_booking_fetch.php",true);
+
+      xhr.onload = function(){
+        let data = JSON.parse(this.responseText);
+        
+        
+      }
+
+      xhr.send(data);
+
+
+    }
+
+  }
 
 
 
