@@ -4,101 +4,43 @@
   require('../extra/connect.php');
   adminLogin();
 
-  if(isset($_POST['add_rooms'])){
+
+
+
+ 
+  if(isset($_POST['get_users'])){
     
-    $features = filteration(json_decode($_POST['features']));
-    $facilities = filteration(json_decode($_POST['facilities']));
-    $frm_data = filteration($_POST);
-   
-    $flag=0;
-
-    $q1 = "INSERT INTO `rooms`(`name`, `area`, `price`, `quantity`, `adult`, `children`, `description`) VALUES (?,?,?,?,?,?,?)";
-    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
-    
-    if(insert($q1,$values,'siiiiis')){
-      $flag=1;
-    }
-
-    $room_ID = mysqli_insert_id($db);
-    
-    $q2 = "INSERT INTO `room_facilities`(`room_ID`, `fac_ID`) VALUES (?,?)";
-
-    if($stmt = mysqli_prepare($db,$q2)){
-      foreach($facilities as $f){
-        mysqli_stmt_bind_param($stmt,'ii',$room_ID,$f);
-        mysqli_stmt_execute($stmt);
-      }
-      mysqli_stmt_close($stmt);
-    }
-    else{
-      $flag=0;
-      die('Query cannot be prepared - Insert');
-    }
-
-    $q3 = "INSERT INTO `room_features`(`room_ID`, `features_ID`) VALUES (?,?)";
-
-    if($stmt = mysqli_prepare($db,$q3)){
-      foreach($features as $f){
-        mysqli_stmt_bind_param($stmt,'ii',$room_ID,$f);
-        mysqli_stmt_execute($stmt);
-      }
-      mysqli_stmt_close($stmt);
-    }
-    else{
-      $flag=0;
-      die('Query cannot be prepared - Insert');
-    }
-
-    if($flag){
-      echo 1;
-    }
-    else{
-      echo 0;
-    }
-
-  }
-
-  if(isset($_POST['get_rooms'])){
-    $res = select("SELECT * FROM `rooms` WHERE `removed`=?",[0],'i');
+    $res = selectAll('user_info');
     $no=1;
 
     $data = "";
     
     while($row = mysqli_fetch_assoc($res)){
-      if($row['status']==1){
-        $status = "<button onclick='toggle_status($row[R_ID],0)' class='btn btn-dark btn-sm shadow-none'>ACTIVE</button>";
-      }
-      else{
-        $status = "<button onclick='toggle_status($row[R_ID],1)' class='btn btn-danger btn-sm shadow-none'>INACTIVE</button>";
-      }
+     
+      $del_btn = "<button type='button' onclick='remove_user($row[id])' class='btn btn-danger btn-sm shadow-none'>
+                    <i class='bi bi-trash'></i>
+                  </button>";
       
+      $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-dark btn-sm shadow-none'>ACTIVE</button>";
+
+      if(!$row['status']){
+        $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-danger btn-sm shadow-none'>INACTIVE</button>";
+      }
+
+      $date = date("d-m-Y",strtotime($row['datetime']));
+
       $data.="
         <tr class='align-middle'>
           <td>$no</td>
           <td>$row[name]</td>
-          <td>$row[area] sq.ft.</td>
-          <td>Tk. $row[price]</td>
-          <td>$row[quantity]</td>
-          <td>
-            <span class='badge rounded-pill bg-light text-dark'>
-              Adult: $row[adult]
-            </span><br>
-            <span class='badge rounded-pill bg-light text-dark'>
-              Children: $row[children]
-            </span><br>
-          </td>
+          <td>$row[email]</td>
+          <td>$row[phonenum]</td>
+          <td>$row[dob]</td>
+          <td>$row[address]</td>
+          <td>$date</td>
           <td>$status</td>
-          <td>
-            <button type='button' onclick='edit_rooms($row[R_ID])' class='btn btn-secondary btn-sm shadow-none' data-bs-toggle='modal' data-bs-target='#editRoom'>
-              <i class='bi bi-pencil-square'></i>
-            </button>
-            <button type='button' onclick=\"room_images($row[R_ID],'$row[name]')\" class='btn btn-info btn-sm shadow-none' data-bs-toggle='modal' data-bs-target='#room-images'>
-              <i class='bi bi-images'></i>
-            </button>
-            <button type='button' onclick='remove_room($row[R_ID])' class='btn btn-danger btn-sm shadow-none'>
-              <i class='bi bi-trash'></i>
-            </button>
-          </td>
+          <td>$del_btn</td>
+          
         </tr>
       ";
       $no++;
@@ -110,7 +52,7 @@
     
     $frm_data = filteration($_POST);
 
-    $q = "UPDATE `rooms` SET `status`=? WHERE `R_ID`=?";
+    $q = "UPDATE `user_info` SET `status`=? WHERE `id`=?";
     $v =  [$frm_data['value'],$frm_data['toggle_status']];
 
     if(update($q,$v,'ii')){
@@ -121,213 +63,13 @@
     }
   }
 
-  if(isset($_POST['get_one_room'])){
-    
+
+  if(isset($_POST['remove_user'])){
     $frm_data = filteration($_POST);
 
-    $res1 = select("SELECT * FROM `rooms` WHERE `R_ID`=?",[$frm_data['get_one_room']],'i');
-    $res2 = select("SELECT * FROM `room_features` WHERE `room_ID`=?",[$frm_data['get_one_room']],'i');
-    $res3 = select("SELECT * FROM `room_facilities` WHERE `room_ID`=?",[$frm_data['get_one_room']],'i');
+    $res = delete("DELETE FROM `user_info` WHERE `id`=?",[$frm_data['user_id']],'i');
 
-    $roomdata = mysqli_fetch_assoc($res1);
-    $features = [];
-    $facilities = [];
-
-    if(mysqli_num_rows($res2)>0){
-      while($row = mysqli_fetch_assoc($res2)){
-        array_push($features,$row['features_ID']);
-      }
-    }
-
-    if(mysqli_num_rows($res3)>0){
-      while($row = mysqli_fetch_assoc($res3)){
-        array_push($facilities,$row['fac_ID']);
-      }
-    }
-
-    $data = ["roomdata" => $roomdata, "features" => $features, "facilities" => $facilities];
-    $data = json_encode($data);
-    
-    echo $data;
-    
-    
-  }
-
-  if(isset($_POST['submit_edit_room'])){
-    
-    $features = filteration(json_decode($_POST['features']));
-    $facilities = filteration(json_decode($_POST['facilities']));
-    
-    $frm_data = filteration($_POST);
-    $flag=0;
-
-    $q1 = "UPDATE `rooms` SET `name`=?,`area`=?,`price`=?,`quantity`=?,`adult`=?,`children`=?,`description`=? WHERE `R_ID`=?";
-    $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc'],$frm_data['room_ID']];
-
-    if(update($q1,$values,'siiiiisi')){
-      $flag = 1;
-    }
-
-    $del_features = delete("DELETE FROM `room_features` WHERE `room_ID`=?", [$frm_data['room_ID']],'i');
-    $del_facilities = delete("DELETE FROM `room_facilities` WHERE `room_ID`=?", [$frm_data['room_ID']],'i');
-
-    if(!($del_features && $del_facilities)){
-      $flag = 0;
-    }
-
-    $q2 = "INSERT INTO `room_facilities`(`room_ID`, `fac_ID`) VALUES (?,?)";
-
-    if($stmt = mysqli_prepare($db,$q2)){
-      foreach($facilities as $f){
-        mysqli_stmt_bind_param($stmt,'ii',$frm_data['room_ID'],$f);
-        mysqli_stmt_execute($stmt);
-      }
-      $flag = 1;
-      mysqli_stmt_close($stmt);
-    }
-    else{
-      $flag=0;
-      die('Query cannot be prepared - Insert');
-    }
-
-    $q3 = "INSERT INTO `room_features`(`room_ID`, `features_ID`) VALUES (?,?)";
-
-    if($stmt = mysqli_prepare($db,$q3)){
-      foreach($features as $f){
-        mysqli_stmt_bind_param($stmt,'ii',$frm_data['room_ID'],$f);
-        mysqli_stmt_execute($stmt);
-      }
-      $flag = 1;
-      mysqli_stmt_close($stmt);
-    }
-    else{
-      $flag=0;
-      die('Query cannot be prepared - Insert');
-    }
-
-    if($flag){
-      echo 1;
-    }
-    else{
-      echo 0;
-    }
-
-
-
-
-
-
-
-  }
-
-  if(isset($_POST['add_image'])){
-    
-    $frm_data = filteration($_POST);
-
-    $img_res = uploadImage($_FILES['image'],ROOMS_FOLDER); //rname created in func.php
-
-    if($img_res == 'inv_img'){
-      echo $img_res;
-    }
-    else if($img_res == 'upd_failed'){
-      echo $img_res;
-    }
-    else{
-      $q = "INSERT INTO `room_images`(`room_id`, `image`) VALUES (?,?)";
-      $values = [$frm_data['room_id'],$img_res];
-      $res = insert($q,$values,'is');
-      echo $res;
-    }
-  }
-
-  if(isset($_POST['get_room_images'])){
-    
-    $frm_data = filteration($_POST);
-    $res = select("SELECT * FROM `room_images` WHERE `room_id`=?",[$frm_data['get_room_images']],'i');
-
-    $path = ROOMS_IMG_PATH;
-    
-    while($row = mysqli_fetch_assoc($res)){
-      
-      if($row['thumb']==1){
-        $thumb_btn = "<i class='bi bi-check-lg text-light bg-success px-2 py-1 rounded fs-5'></i>";
-      }
-      else{
-        $thumb_btn = "<button onclick='thumb_image($row[sr_no],$row[room_id])' class='btn btn-secondary btn-sm shadow-none'>
-        <i class='bi bi-check-lg'></i>
-        </button>";
-      }
-      
-      
-      echo <<<data
-        <tr class='align-middle'>
-          <td><img src='$path$row[image]' class='img-fluid'></td>
-          <td>$thumb_btn</td>
-          <td>
-          <button onclick='rem_image($row[sr_no],$row[room_id])' class='btn btn-danger btn-sm shadow-none'>
-            <i class='bi bi-trash'></i>DELETE
-          </button>
-          </td>
-        </tr>
-      
-      data;
-    }
-    
-  }
-
-  if(isset($_POST['rem_image'])){
-    $frm_data = filteration($_POST);
-    $values = [$frm_data['image_id'],$frm_data['room_id']];
-
-    $pre_q = "SELECT * FROM `room_images` WHERE `sr_no`=? AND `room_id`=?"; //pre query
-    $res = select($pre_q,$values,'ii');
-    $img = mysqli_fetch_assoc($res);
-
-    if(deleteImage($img['image'], ROOMS_FOLDER)){
-      $q = "DELETE FROM `room_images` WHERE `sr_no`=? AND `room_id`=?";
-      $res = delete($q, $values,'ii');
-      echo $res;
-
-    }
-    else{
-      echo 0;
-    }
-   
-  }
-
-  if(isset($_POST['thumb_image'])){
-    $frm_data = filteration($_POST);
-    
-    $pre_q = "UPDATE `room_images` SET `thumb`=? WHERE `room_id`=?";
-    $pre_v = [0,$frm_data['room_id']];
-    $pre_res = update($pre_q,$pre_v,'ii');
-
-    $q = "UPDATE `room_images` SET `thumb`=? WHERE `sr_no`=? AND `room_id`=?";
-    $v = [1,$frm_data['image_id'],$frm_data['room_id']];
-    $res = update($q,$v,'iii');
-
-    echo $res;
-
-
-
-
-  }
-
-  if(isset($_POST['remove_room'])){
-    $frm_data = filteration($_POST);
-
-    $res1 = select("SELECT * FROM `room_images` WHERE `room_id`=?",[$frm_data['room_id']],'i');
-
-    while($row = mysqli_fetch_assoc($res1)){
-      deleteImage($row['image'],ROOMS_FOLDER);
-    }
-
-    $res2 = delete("DELETE FROM `room_images` WHERE `room_id`=?",[$frm_data['room_id']],'i');
-    $res3 = delete("DELETE FROM `room_features` WHERE `room_ID`=?",[$frm_data['room_id']],'i');
-    $res4 = delete("DELETE FROM `room_facilities` WHERE `room_ID`=?",[$frm_data['room_id']],'i');
-    $res5 = update("UPDATE `rooms` SET `removed`=? WHERE `R_ID`=?",[1,$frm_data['room_id']],'ii');
-
-    if($res2 || $res3 || $res4 || $res5){
+    if($res){
       echo 1;
     }
     else{
@@ -341,79 +83,6 @@
 
 
 
-  // if(isset($_POST['remove_features'])){
-  //   $frm_data = filteration($_POST);
-  //   $values = [$frm_data['remove_features']];
-
-  //   $q = "DELETE FROM `features` WHERE `feature_ID`=?";
-  //   $res = delete($q, $values,'i');
-  //   echo $res;
-   
-  // }
-
-
-  // // Facilities section fetch
-
-  // if(isset($_POST['add_facilities'])){
-    
-  //   $frm_data = filteration($_POST);
-
-  //   $img_res = uploadImage($_FILES['icon'],FACILITIES_FOLDER); //rname created in func.php
-
-  //   if($img_res == 'inv_img'){
-  //     echo $img_res;
-  //   }
-  //   else if($img_res == 'upd_failed'){
-  //     echo $img_res;
-  //   }
-  //   else{
-  //     $q = "INSERT INTO `facilities`(`icon`, `name`, `description`) VALUES (?,?,?)";
-  //     $values = [$img_res,$frm_data['name'],$frm_data['description']];
-  //     $res = insert($q,$values,'sss');
-  //     echo $res;
-  //   }
-  // }
-
-  // if(isset($_POST['get_facilities'])){
-  //   $res = selectAll('facilities'); //database table selected
-  //   $no=1;
-  //   $path = FACILITIES_IMG_PATH;
-
-  //   while($row = mysqli_fetch_assoc($res)){
-     
-  //     echo <<<data
-  //      <tr class='align-middle'>
-  //       <td>$no</td>
-  //       <td><img src="$path$row[icon]" width="30px"></td>
-  //       <td>$row[name]</td>
-  //       <td>$row[description]</td>
-  //       <td>
-  //         <button type="button" onclick="remove_facilities($row[facilities_ID])" class="btn btn-danger btn-small shadow-none fs-6">
-  //         <i class="bi bi-trash3-fill"></i> Delete
-  //         </button>
-  //       </td>   
-  //      </tr>
-  //     data;
-  //     $no++;
-  //   }
-  // }
-
-  // if(isset($_POST['remove_facilities'])){
-  //   $frm_data = filteration($_POST);
-  //   $values = [$frm_data['remove_facilities']];
-
-  //   $pre_q = "SELECT * FROM `facilities` WHERE `facilities_ID`=?"; //pre query
-  //   $res = select($pre_q,$values,'i');
-  //   $img = mysqli_fetch_assoc($res);
-
-  //   if(deleteImage($img['icon'], FACILITIES_FOLDER)){
-  //     $q = "DELETE FROM `facilities` WHERE `facilities_ID`=?";
-  //     $res = delete($q, $values,'i');
-  //     echo $res;
-  //   }
-  //   else{
-  //     echo 0;
-  //   }
-  // }
+  
 
 ?>

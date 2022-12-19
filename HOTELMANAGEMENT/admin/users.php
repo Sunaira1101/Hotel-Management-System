@@ -31,12 +31,9 @@
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
             <div class="text-end mb-3">
-                <!-- <button type="button" class="btn btn-dark btn-small shadow-none" data-bs-toggle="modal" data-bs-target="#roomsSettings">
-                <i class="bi bi-person-plus-fill"></i> Add
-                </button> -->
               </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive" style="height: 400px;overflow-y:scroll;">
                 <table class="table table-hover border border-4 border-light" style="min-width: 1300px;">
                   <thead>
                     <tr class="bg-dark text-white">
@@ -91,52 +88,52 @@
 
 
 
-  //  function toggle_status(id,val){
+   function toggle_status(id,val){
     
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open("POST","fetch/rooms_fetch.php",true);
-  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/users_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-  //   xhr.onload = function(){
-  //     if(this.responseText == 1){
-  //         console.log('Status Changed');
-  //         get_rooms();
-  //       }
-  //       else{
-  //         console.log('Status Changing Failed!');
-  //       }  
-  //   }
+    xhr.onload = function(){
+      if(this.responseText == 1){
+          console.log('Status Changed');
+          get_users();
+        }
+        else{
+          console.log('Status Changing Failed!');
+        }  
+    }
 
-  //   xhr.send('toggle_status='+id+'&value='+val);
-  //  }
+    xhr.send('toggle_status='+id+'&value='+val);
+   }
 
 
 
-  //  function remove_room(room_id){
-  //   if(confirm("Do you want to delete this room?")){
-  //     let data = new FormData();
-  //     data.append('room_id',room_id); 
-  //     data.append('remove_room',''); 
+   function remove_user(user_id){
+    if(confirm("Do you want to remove this user?")){
+      let data = new FormData();
+      data.append('user_id',user_id); 
+      data.append('remove_user',''); 
 
-  //     let xhr = new XMLHttpRequest();
-  //     xhr.open("POST","fetch/rooms_fetch.php",true);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","fetch/users_fetch.php",true);
       
 
-  //     xhr.onload = function(){
+      xhr.onload = function(){
 
-  //     if(this.responseText == 1){
-  //       console.log('Room deleted');
-  //       get_rooms();
-  //       }
-  //       else{
-  //         console.log('Room not deleted');
-  //       }   
-  //     }
+      if(this.responseText == 1){
+        console.log('User Removed');
+        get_rooms();
+        }
+        else{
+          console.log('User Not Removed');
+        }   
+      }
       
-  //       xhr.send(data);
+        xhr.send(data);
 
-  //   }
-  //  }
+    }
+   }
 
 
   
