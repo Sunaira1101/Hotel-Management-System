@@ -170,6 +170,9 @@
 
     if(checkin_val!='' && checkout_val!=''){
 
+      pay_info.classList.add('d-none');
+      pay_info.classList.replace('text-dark','text-danger');
+      
       let data = new FormData();
 
       data.append('check_availability','');
@@ -181,6 +184,26 @@
 
       xhr.onload = function(){
         let data = JSON.parse(this.responseText);
+
+        if(data.status == 'check_in_out_equal'){
+          pay_info.innerText = "You cannot check-in check-out on the same day!";
+        }
+        else if(data.status == 'check_out_small'){
+          pay_info.innerText = "Check-out date earlier than check-in date!";
+        }
+        else if(data.status == 'check_in_small'){
+          pay_info.innerText = "Check-in date earlier date today!";
+        }
+        else if(data.status == 'unavailable'){
+          pay_info.innerText = "Room not available for this check-in date!";
+        }
+        else{
+          pay_info.innerHTML = "No. of days: " +data.days+"<br>Total Amount to pay: Tk."+data.payment;
+          pay_info.classList.replace('text-danger','text-dark');
+          booking_form.elements['pay_now'].removeAttribute('disabled');
+        }
+
+        pay_info.classList.remove('d-none');
         
         
       }
