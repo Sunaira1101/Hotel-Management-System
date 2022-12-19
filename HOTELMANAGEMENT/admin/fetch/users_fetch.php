@@ -77,6 +77,50 @@
     }
   }
 
+  if(isset($_POST['search_user'])){
+    
+    $frm_data = filteration($_POST);
+
+    $query = "SELECT * FROM `user_info` WHERE `name` LIKE ?";
+    
+    $res = select($query, ["%$frm_data[name]%"],'s');
+    $no=1;
+
+    $data = "";
+    
+    while($row = mysqli_fetch_assoc($res)){
+     
+      $del_btn = "<button type='button' onclick='remove_user($row[id])' class='btn btn-danger btn-sm shadow-none'>
+                    <i class='bi bi-trash'></i>
+                  </button>";
+      
+      $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-dark btn-sm shadow-none'>ACTIVE</button>";
+
+      if(!$row['status']){
+        $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-danger btn-sm shadow-none'>INACTIVE</button>";
+      }
+
+      $date = date("d-m-Y",strtotime($row['datetime']));
+
+      $data.="
+        <tr class='align-middle'>
+          <td>$no</td>
+          <td>$row[name]</td>
+          <td>$row[email]</td>
+          <td>$row[phonenum]</td>
+          <td>$row[dob]</td>
+          <td>$row[address]</td>
+          <td>$date</td>
+          <td>$status</td>
+          <td>$del_btn</td>
+          
+        </tr>
+      ";
+      $no++;
+    }
+    echo $data;
+  }
+
   
 
   

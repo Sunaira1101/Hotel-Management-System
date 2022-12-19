@@ -30,8 +30,11 @@
         
         <div class="card shadow border-0 mb-4">
           <div class="card-body">
+
             <div class="text-end mb-3">
-              </div>
+              <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Search For Users">
+
+            </div>
 
             <div class="table-responsive" style="height: 400px;overflow-y:scroll;">
                 <table class="table table-hover border border-4 border-light" style="min-width: 1300px;">
@@ -133,6 +136,19 @@
         xhr.send(data);
 
     }
+   }
+
+   function search_user(username){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","fetch/users_fetch.php",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+    xhr.onload = function(){
+      document.getElementById('users-data').innerHTML = this.responseText;
+    }
+
+    xhr.send('search_user&name='+username);
+
    }
 
 
