@@ -18,6 +18,11 @@
   if(!isset($_GET['id'])){
     redirect('room.php');
   }
+  else if(!(isset($_SESSION['login']) && $_SESSION['login']==true)){
+    redirect('room.php');
+  }
+
+  //filter to get room + user data
 
   $data = filteration($_GET);
   $room_res = select("SELECT * FROM `rooms` WHERE `R_ID`=? AND `status`=? AND `removed`=?",[$data['id'],1,0],'iii');
@@ -28,11 +33,19 @@
 
   $room_data = mysqli_fetch_assoc($room_res);
 
+  $_SESSION['room'] = [
+    "id" => $room_data['R_ID'],
+    "name" => $room_data['name'],
+    "price" => $room_data['price'],
+    "payment" => null,
+    "available" => false
+  ];
 
+  // print_r($_SESSION['room']);
+  // exit;
 
-
-
-
+  $user_res = select("SELECT * FROM `user_info` WHERE `id`=? LIMIT 1", [$_SESSION['uId']],"i");
+  $user_data = mysqli_fetch_assoc($user_res);
 
 ?>
 
@@ -47,185 +60,92 @@
     <div class="row">
 
       <div class="col-12 my-5 px-4">
-        <h2 class="fw-bolder font-two"> <u><?php echo $room_data['name'] ?></u><br></h2>
+        <h2 class="fw-bolder font-two"> <u>CONFIRM BOOKING</u><br></h2>
         <div style="font-size: 16px;">
           <a href="index.php" class="text-secondary text-decoration-none">HOME</a>
           <span> | </span>
           <a href="room.php" class=" text-secondary text-decoration-none">ROOMS</a>
+          <span> | </span>
+          <a href="#" class=" text-secondary text-decoration-none">CONFIRM</a>
         </div>
       </div>
 
       <div class="col-7 px-4">
-        <div id="roomImage" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <?php
-               
-               $room_img = ROOMS_IMG_PATH."thumbnail.jpg";
-                $img_q = mysqli_query($db, "SELECT * FROM `room_images` 
-                  WHERE `room_id`='$room_data[R_ID]'");
-      
-                if(mysqli_num_rows($img_q)>0){
-                  $active_class = 'active';
-                  
-                 while($img_res = mysqli_fetch_assoc($img_q)){
-                    echo"
-                    <div class='carousel-item $active_class'>
-                      <img src='".ROOMS_IMG_PATH.$img_res['image']."' class='d-block w-100'>
-                    </div>
-                    ";
-                    $active_class='';
-                 }  
-                }
-                else{
-                  echo"
-                  <div class='carousel-item active'>
-                    <img src='$room_img' class='d-block w-100'>
-                  </div>
-                  ";
-                }
-            ?>
-            
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#roomImage" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#roomImage" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
+       <?php
+         
+          $room_thumb = ROOMS_IMG_PATH."r1.jpg";
+          $thumb_q = mysqli_query($db, "SELECT * FROM `room_images` 
+            WHERE `room_id`='$room_data[R_ID]' AND `thumb`='1'");
+
+          if(mysqli_num_rows($thumb_q)>0){
+            $thumb_res = mysqli_fetch_assoc($thumb_q);
+            $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
+          }
+
+          echo<<<data
+            <div class="card p-3 shadow-sm rounded">
+              <img src="$room_thumb" class="img-fluid rounded mb-4">
+              <h2 class="fs-4">$room_data[name]</h2>
+              <h3 class="fs-5">Tk. $room_data[price] per night</h3> 
+            </div>
+          data;
+
+
+
+
+
+
+
+
+
+       ?>
       </div>
 
       <div class="col-5 px-4">
         <div class="card mb-4 shadow rounded-3">
           <div class="card-body">
-            <?php
 
-               echo<<<price
-                <h3 style="font-size: 16px; font-style: italic;">Tk. $room_data[price] per night</h3>
-               price;
-
-               echo<<<rating
-                <div class="ratings">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i> <br>
+            <form action="#" id="booking_form">
+              <h2 class="mb-3 fs-4">BOOKING DETAILS</h2>
+              <div class="row">
+                <div class="col-6 mb-3">
+                  <label class="form-label">Name</label>
+                  <input name="name" type="text" value="<?php echo $user_data['name'] ?>" class="form-control shadow-none" required>
                 </div>
-              rating;
-
-              $fea_q = mysqli_query($db,"SELECT f.name FROM `features` f 
-                INNER JOIN `room_features` rfea ON f.feature_ID = rfea.features_ID
-                WHERE rfea.room_ID = '$room_data[R_ID]'");
-
-              $features_data = "";
-                while($fea_row = mysqli_fetch_assoc($fea_q)){
-                  $features_data .="<span class='text-dark badge rounded-pill bg-light'>
-                   <li> <i>$fea_row[name]</i></li> 
-                  </span>";
-              } 
-              
-              echo<<<features
-                <div class="features mb-3">
-                  <h6 class="mb-1 mt-4 fw-bold">Features</h6>
-                  $features_data
+                <div class="col-6 mb-3">
+                  <label class="form-label">Phone Number</label>
+                  <input name="phonenum" type="number" value="<?php echo $user_data['phonenum'] ?>" class="form-control shadow-none" required>
                 </div>
-              features;
-
-              $fac_q = mysqli_query($db,"SELECT f.name FROM `facilities` f 
-                INNER JOIN `room_facilities` rfac ON f.facilities_ID = rfac.fac_ID
-                WHERE rfac.room_ID = '$room_data[R_ID]'");
-
-               $facilities_data = "";
-                 while($fac_row = mysqli_fetch_assoc($fac_q)){
-                   $facilities_data .="<span class='text-dark badge rounded-pill bg-light'>
-                     <li> <i>$fac_row[name]</i></li> 
-                    </span>";
-                 }
-
-                 echo<<<facilities
-                  <div class="facilities mb-3">
-                    <h6 class="mb-1 mt-3 fw-bold">Facilities</h6>
-                    $facilities_data
-                  </div>
-                 facilities;
-
-                 echo<<<guests
-                  <div class="guests mb-4">
-                    <h6 class="mb-1 mt-3 fw-bold">Guests</h6>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>$room_data[adult] adults</i></li> 
-                    </span>
-                    <span class="text-dark badge rounded-pill bg-light">
-                      <li> <i>$room_data[children] children</i></li> 
-                    </span>
-                  </div>
-                 guests;
-
-                 echo<<<area
-                  <div class="facilities mb-3">
-                    <h6 class="mb-1 mt-3 fw-bold">Area</h6>
-                    <span class='text-dark badge rounded-pill bg-light'>
-                     <li> <i>$room_data[area] sq.ft.</i></li> 
-                    </span>
-                  </div>
-                 area;
-
-                 $login=0;
-                 if(isset($_SESSION['login']) && $_SESSION['login']==true){
-                  $login=1;
-                 } 
-
-                 echo<<<book
-                  <button onclick='checkLoginToBook($login,$room_data[R_ID])' class='btn btn-dark w-100 text-white mb-2'>BOOK NOW</button>
-                 book;
-            ?>
+                <div class="col-12 mb-3">
+                  <label class="form-label">Address</label>
+                  <textarea name="address" class="form-control shadow-none" rows="2" required><?php echo $user_data['address'] ?></textarea>
+                </div>
+                <div class="col-6 mb-3">
+                  <label class="form-label">Check-In</label>
+                  <input name="checkin" type="date" class="form-control shadow-none" required>
+                </div>
+                <div class="col-6 mb-3">
+                  <label class="form-label">Check-Out</label>
+                  <input name="checkout" type="date" class="form-control shadow-none" required>
+                </div>
+                <div class="col-12">
+                  <h2 class="mb-3 text-danger fs-6 mt-4" id="pay_info">Please provide check-in check-out date!</h2>
+                  <button name="pay_now" class="btn btn-secondary w-100 text-white shadow-none mb-1" disabled>Proceed To Payment</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>  
       </div>
 
     
 
-      <div class="col-12 mt-4 px-4">
-        <div class="card mb-4 shadow rounded-3">
-            <div class="card-body">
-              <h2 class="mb-4 fs-4">Description</h2>
-              <p>
-                <?php echo $room_data['description'] ?>
-              </p>
-            </div>
-
-
-            <div class="card-body">
-              <h2 class="mb-4 fs-4">Reviews & Ratings</h2>
-              <h3 class="underline2"></h3>
-                <div class="d-flex align-items-center mb-3">
-                  <img src="images/reviews/r1.png" width="22px">
-                  <h2 class=" mb-1 ms-2 fs-5">Fahrin Sunaira</h2>
-                </div>
-              <p  style="color:rgb(11, 1, 21) ;">
-                 A great vacation indeed! 
-                <br> Everything was perfect, very good
-                facilities, and staffs were very well-mannered.
-                <br> Overall a very good stay. 
-              </p>
-
-              <div class="ratings">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i> <br><br>
-              </div>
-            </div>
-        </div>
-      </div>
-
     </div>
   </div>
   <br><br><br>
+  <br><br><br>
+  <br><br><br>
+
 
   
 
@@ -235,6 +155,18 @@
  
   
 <?php require('footer.php'); ?>
+
+<script>
+
+  let booking_form = document.getElementById('booking_form');
+
+
+
+
+
+
+
+</script>
 
 
 
