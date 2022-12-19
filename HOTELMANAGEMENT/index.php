@@ -188,9 +188,7 @@
             $login=0;
             if(isset($_SESSION['login']) && $_SESSION['login']==true){
               $login=1;
-            }
-            
-            
+            }     
             $book_btn = "<button onclick='checkLoginToBook($login,$room_data[R_ID])' class='btn btn-dark text-white shadow-none'>BOOK NOW</button>";
 
             

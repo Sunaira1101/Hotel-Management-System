@@ -173,8 +173,13 @@
                   </div>
                  area;
 
+                 $login=0;
+                 if(isset($_SESSION['login']) && $_SESSION['login']==true){
+                  $login=1;
+                 } 
+
                  echo<<<book
-                  <a href="#" class="btn btn-dark w-100 text-white mb-2">BOOK NOW</a>
+                  <button onclick='checkLoginToBook($login,$room_data[R_ID])' class='btn btn-dark w-100 text-white mb-2'>BOOK NOW</button>
                  book;
             ?>
           </div>

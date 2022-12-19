@@ -101,6 +101,14 @@
             $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
           }
 
+          $login=0;
+          if(isset($_SESSION['login']) && $_SESSION['login']==true){
+            $login=1;
+          }  
+          
+          $book_btn = "<button onclick='checkLoginToBook($login,$room_data[R_ID])' class='btn btn-dark w-100 text-white mb-2'>BOOK NOW</button>";
+
+          
           echo <<<data
             <div class="card mb-3">
               <div class="row g-0 p-4 align-items-center">
@@ -133,7 +141,7 @@
                 </div>
 
                 <div class="col-md-2">
-                    <a href="#" class="btn btn-dark w-100 text-white mb-2  ">BOOK NOW</a>
+                    $book_btn
                     <a href="room_details.php?id=$room_data[R_ID]" class="btn btn-outline-success w-100 text-black shadow ">More Details</a>
                 </div>
 
