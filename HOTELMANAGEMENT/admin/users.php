@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Rooms</title>
+    <title>Admin Panel - Users</title>
     <?php require('extra/links.php'); ?>
 
 </head>
@@ -23,7 +23,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-10 ms-auto p-4 ">
-        <h2 class="mb-2 fs-3">ROOMS</h2>
+        <h2 class="mb-2 fs-3">USERS</h2>
 
 
         <!-- Rooms Settings -->
