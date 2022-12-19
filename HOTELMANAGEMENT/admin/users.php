@@ -76,67 +76,67 @@
  
 
    
-   function get_rooms(){
+   function get_users(){
     
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/rooms_fetch.php",true);
+    xhr.open("POST","fetch/users_fetch.php",true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
     xhr.onload = function(){
-      document.getElementById('rooms-data').innerHTML = this.responseText;
+      document.getElementById('users-data').innerHTML = this.responseText;
     }
 
-    xhr.send('get_rooms');
+    xhr.send('get_users');
    }
 
 
 
-   function toggle_status(id,val){
+  //  function toggle_status(id,val){
     
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","fetch/rooms_fetch.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+  //   let xhr = new XMLHttpRequest();
+  //   xhr.open("POST","fetch/rooms_fetch.php",true);
+  //   xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 
-    xhr.onload = function(){
-      if(this.responseText == 1){
-          console.log('Status Changed');
-          get_rooms();
-        }
-        else{
-          console.log('Status Changing Failed!');
-        }  
-    }
+  //   xhr.onload = function(){
+  //     if(this.responseText == 1){
+  //         console.log('Status Changed');
+  //         get_rooms();
+  //       }
+  //       else{
+  //         console.log('Status Changing Failed!');
+  //       }  
+  //   }
 
-    xhr.send('toggle_status='+id+'&value='+val);
-   }
+  //   xhr.send('toggle_status='+id+'&value='+val);
+  //  }
 
-   
 
-   function remove_room(room_id){
-    if(confirm("Do you want to delete this room?")){
-      let data = new FormData();
-      data.append('room_id',room_id); 
-      data.append('remove_room',''); 
 
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST","fetch/rooms_fetch.php",true);
+  //  function remove_room(room_id){
+  //   if(confirm("Do you want to delete this room?")){
+  //     let data = new FormData();
+  //     data.append('room_id',room_id); 
+  //     data.append('remove_room',''); 
+
+  //     let xhr = new XMLHttpRequest();
+  //     xhr.open("POST","fetch/rooms_fetch.php",true);
       
 
-      xhr.onload = function(){
+  //     xhr.onload = function(){
 
-      if(this.responseText == 1){
-        console.log('Room deleted');
-        get_rooms();
-        }
-        else{
-          console.log('Room not deleted');
-        }   
-      }
+  //     if(this.responseText == 1){
+  //       console.log('Room deleted');
+  //       get_rooms();
+  //       }
+  //       else{
+  //         console.log('Room not deleted');
+  //       }   
+  //     }
       
-        xhr.send(data);
+  //       xhr.send(data);
 
-    }
-   }
+  //   }
+  //  }
 
 
   
@@ -157,7 +157,7 @@
 
 
    window.onload = function(){
-    get_rooms();
+    get_users();
    }
 
 
