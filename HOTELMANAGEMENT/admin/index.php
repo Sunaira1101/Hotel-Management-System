@@ -63,7 +63,13 @@
         $res = select($query, $values, "ss");
         //print_r($res);
         if($res-> num_rows == 1){
-            echo "got user";
+            //echo "got user";
+            $row = mysqli_fetch_assoc($res);
+            session_start();
+            $_SESSION['adminLogin']= true;
+            $_SESSION['adminID']= $row['sr_no'];
+            redirect('dashboard.php');
+
         }
         else{
             alert('error','invalid Entry- Login Failed');
