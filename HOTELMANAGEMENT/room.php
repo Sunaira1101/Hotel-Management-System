@@ -36,11 +36,14 @@
             </button>
               <div class="collapse navbar-collapse flex-column mt-3 align-items-stretch" id="optionsDropdown">
                 <div class="border bg-light p-4 mb-3 rounded">
-                  <h3 class="mb-3" style="font-size:16px;">CHECK AVAILABILITY</h3>
+                  <h3 class="d-flex align-items-center justify-content-between mb-3" style="font-size:16px;">
+                    <span>CHECK AVAILABILITY</span>
+                    <button id="chk_avail_btn" onclick="chk_avail_clear()" class="btn btn-sm text-secondary d-none shadow-none">Reset</button>
+                  </h3>
                   <label class="form-label">CHECK-IN</label>
-                      <input type="date" class="form-control">
+                      <input type="date" class="form-control shadow-none mb-3" id="checkin" onchange="chk_avail_filter()">
                   <label class="form-label">CHECK-OUT</label>
-                      <input type="date" class="form-control">
+                      <input type="date" class="form-control shadow-none mb-3" id="checkout" onchange="chk_avail_filter()">
                 
                  </div>
 
@@ -59,8 +62,8 @@
 
       <div class="col-9 px-4" id="rooms-data">
 
-       <?php
-         $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=?",[1,0],'ii');
+       <!--php tag start -->
+         <!-- $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=?",[1,0],'ii');
 
          while($room_data = mysqli_fetch_assoc($room_res)){
 
@@ -148,8 +151,9 @@
               </div>
           </div>
           data;
-         }
-       ?>
+         } -->
+         <!--php tag end -->
+       
       </div>
     </div>
   </div>
@@ -159,11 +163,19 @@
   <script>
 
     let rooms_data = document.getElementById('rooms-data');
+    let checkin = document.getElementById('checkin');
+    let checkout = document.getElementById('checkout');
+    let chk_avail_btn = document.getElementById('chk_avail_btn');
 
     function fetch_rooms(){
 
+      let chk_avail = JSON.stringify({
+        checkin: checkin.value,
+        checkout: checkout.value
+      })
+      
       let xhr = new XMLHttpRequest();
-      xhr.open("GET","rooms_filter.php",true);
+      xhr.open("GET","rooms_filter.php?fetch_rooms&chk_avail="+chk_avail,true);
 
       xhr.onprogress = function(){
 
@@ -175,11 +187,31 @@
       }
 
       xhr.send();
-
-
-
-
     }
+
+    function chk_avail_filter(){
+      if(checkin.value!='' && checkout.value!=''){
+        fetch_rooms();
+        chk_avail_btn.classList.remove('d-none');
+      }
+    }
+
+    function chk_avail_clear(){
+      checkin.value='';
+      checkout.value='';
+      chk_avail_btn.classList.add('d-none');
+      fetch_rooms();
+      
+      
+    }
+
+
+
+
+
+
+
+    fetch_rooms();
 
 
 
