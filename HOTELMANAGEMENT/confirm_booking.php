@@ -132,7 +132,7 @@
                   
                   <h2 class="mb-3 text-danger fs-6 mt-4" id="pay_info">Please provide check-in check-out date!</h2>
                   
-                  <button name="pay_now" class="btn btn-secondary w-100 text-white shadow-none mb-1" disabled>Proceed To Payment</button>
+                  <button name="pay_now" onclick="" class="btn btn-secondary w-100 text-white shadow-none mb-1" disabled>Proceed To Payment</button>
                 
                 </div>
               </div>
