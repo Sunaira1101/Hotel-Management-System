@@ -60,7 +60,19 @@ require('extra/db_con.php');
         $values = [$frm_data['admin_name'], $frm_data['admin_pass']];
 
         $res = select($query, $values, "ss");
-        print_r($res);
+        //print_r($res);
+        if($res-> num_rows == 1){
+            echo "got user";
+        }
+        else{
+            echo <<<alert
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>
+
+            alert;
+        }
         // echo "<h1>$frm_data[admin_name]</h1>";
         // echo "<h1>$frm_data[admin_pass]</h1>";
 
