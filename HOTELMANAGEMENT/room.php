@@ -57,7 +57,7 @@
       </nav>
     </div>
 
-      <div class="col-9 px-4">
+      <div class="col-9 px-4" id="rooms-data">
 
        <?php
          $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=?",[1,0],'ii');
@@ -157,6 +157,29 @@
 
 
   <script>
+
+    let rooms_data = document.getElementById('rooms-data');
+
+    function fetch_rooms(){
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("GET","rooms_filter.php",true);
+
+      xhr.onprogress = function(){
+
+      }
+
+      xhr.onload = function(){
+        rooms_data.innerHTML = this.responseText;
+
+      }
+
+      xhr.send();
+
+
+
+
+    }
 
 
 
