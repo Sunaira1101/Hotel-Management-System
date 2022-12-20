@@ -1,5 +1,6 @@
  <?php 
-require('extra/db_con.php');
+    require('extra/essentials.php');
+    require('extra/db_con.php');
 ?>    
 
 <!DOCTYPE html>
@@ -65,13 +66,7 @@ require('extra/db_con.php');
             echo "got user";
         }
         else{
-            echo <<<alert
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                 </div>
-
-            alert;
+            alert('error','invalid Entry- Login Failed');
         }
         // echo "<h1>$frm_data[admin_name]</h1>";
         // echo "<h1>$frm_data[admin_pass]</h1>";
