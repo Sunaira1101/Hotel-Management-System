@@ -1,5 +1,5 @@
  <?php 
-// require('extra/connect.php');
+require('extra/db_con.php');
 ?>    
 
 <!DOCTYPE html>
@@ -55,7 +55,17 @@
     if(isset($_POST['login']))
     {
         $frm_data = filter($_POST);
-        print_r($frm_data);
+
+        $query = "SELECT * FROM `admin_cred` WHERE  `admin_name`=? AND `admin_pass`= ?";
+        $values = [$frm_data['admin_name'], $frm_data['admin_pass']];
+
+        $res = select($query, $values, "ss");
+        print_r($res);
+        // echo "<h1>$frm_data[admin_name]</h1>";
+        // echo "<h1>$frm_data[admin_pass]</h1>";
+
+
+        // print_r($frm_data);
     }
 
     ?>
