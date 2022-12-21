@@ -48,10 +48,6 @@
         echo $result;
 
 
-
-
-
-
     }
 
 
