@@ -122,7 +122,6 @@
           ";
 
           $count_rooms++;
-
          }
 
          if($count_rooms>0){
