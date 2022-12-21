@@ -130,7 +130,6 @@
          else{
             echo"<h3 class='text-center text-danger'>No Rooms to show!</h3>";
          }
-
     }
 
 
