@@ -28,7 +28,6 @@
         $result = json_encode(["status"=>$status]);
     }
 
-
     if($status!=''){
         echo $result;
     }
