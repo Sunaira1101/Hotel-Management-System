@@ -46,7 +46,6 @@
         $result = json_encode(["status"=>'available', "days"=>$count_days, "payment"=>$payment]);
 
         echo $result;
-
     }
 
 
