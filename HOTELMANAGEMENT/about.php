@@ -37,7 +37,7 @@
         </p>
       </div>
       <div class="col-5 mb-4">
-        <img src="images/about/a1.jpg" width="100%">
+        <img src="images/about/aboutt.png" width="100%">
       </div>
     </div>
   </div>
