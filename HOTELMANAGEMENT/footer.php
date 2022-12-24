@@ -28,7 +28,7 @@
         <a href="facilities.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Facilities</a> <br>
         <a href="contact.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Contact Us</a> <br>
         <a href="about.php" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">About</a> <br>
-        <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Help</a> 
+        
 
       </div>
 
