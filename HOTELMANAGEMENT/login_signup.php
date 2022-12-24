@@ -2,37 +2,7 @@
   
   require('admin/extra/func.php');
   require('admin/extra/connect.php');
-  //require("sendgrid/sendgrid-php.php");
-
-  // function send_mail($uemail,$name,$token){
-      
-  //     $email = new \SendGrid\Mail\Mail(); 
-  //     $email->setFrom("fahrin.sunaira@northsouth.edu", "HOTEL MANAGEMENT");
-  //     $email->setSubject("Account Verification Link");
-
-  //     $email->addTo($uemail,$name);
-
-  //     $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-  //     $email->addContent(
-  //         "text/html", 
-  //         "<strong>Click the link to confirm your email: </strong>
-  //         <br>
-  //         <a href='".SITE_URL."email_confirm.php?email=$uemail&token=$token"."'>
-  //           CLICK
-  //         </a>
-  //         "
-  //     );
-
-  //     $sendgrid = new \SendGrid(SENDGRID_API_KEY); 
-          
-  //         try{
-  //           $sendgrid->send($email);
-  //           return 1;
-  //         }
-  //         catch(Exception $e){
-  //           return 0;
-  //         }
-  // }
+  
 
   if(isset($_POST['signup'])){
 
@@ -53,14 +23,7 @@
         exit;
     }
 
-    //send confirmation link
-
-    // $token = bin2hex(random_bytes(16));
-
-    // if(!send_mail($data['email'],$data['name'],$token)){
-    //   echo 'mail_failed';
-    //   exit;
-    // }
+    
 
     $enc_pass = password_hash($data['pass'],PASSWORD_BCRYPT); //encrypt password
 
