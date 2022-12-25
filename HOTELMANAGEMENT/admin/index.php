@@ -15,10 +15,10 @@ require('extra/connect.php');
 <style>
     .logininfo{          /*or div.logininfo */
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 70%;
+        left: 70%;
         transform: translate(-50%, -50%);
-        width: 400px;
+        width: 500px;
     }
 
     .pop:hover{
