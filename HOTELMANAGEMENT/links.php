@@ -3,3 +3,5 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+
+<!-- <a href="#" class="d-inline-block mb-2 px-5 text-dark text-decoration-none">Home</a> <br>-->
